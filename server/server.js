@@ -14,5 +14,4 @@ app.use(express.static(__dirname + '\\..\\client'));
 var port = 80;
 app.listen(port, function() {
   console.log('Listening on ' + port);
-  console.log(__dirname);
 });

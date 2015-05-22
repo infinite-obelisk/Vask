@@ -5,4 +5,3 @@ Viewers are able to see and answer all questions.  The questions are not only re
 
 In an educational environment an instructor can check up on the questions and gauge their understanding of the content.
 It is benefical for all students to see what questions came up while watching a video.  Reflecting and understanding questions and answers around a certain topic, solidifies the subject matter.
-
