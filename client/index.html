@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+  <title>Vask</title>
+  <script src="./build/react.min.js"></script>
+  <script src="./build/JSXTransformer.js"></script>
+</head>
+<body>
+  <div class="vask"></div>
+  <script type="text/jsx">
+    var Hello = React.createClass({
+      render: function() {
+        return <h1>Hello, {this.props.name}!</h1>;
+      }
+    });
+    React.render(<Hello name="World"/>, document.querySelector('.vask'));
+  </script>
+</body>
+</html>
