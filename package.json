@@ -1,0 +1,18 @@
+{
+  "name": "Vask",
+  "version": "0.1.0",
+  "description": "Video question-asking web app",
+  "main": "server.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/infinite-obilisk/vask.git"
+  },
+  "author": "Infinite Obilisk",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/infinite-obilisk/vask/issues"
+  },
+  "homepage": "https://github.com/infinite-obilisk/vask"
+}
