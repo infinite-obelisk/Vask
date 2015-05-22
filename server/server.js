@@ -1,7 +1,17 @@
-var app = require('./server_config.js');
+var express = require('express');
+var app = express();
 
-var port = 8080;
+app.use(express.static(__dirname + '/../client/'));
 
-app.listen(port);
+// This isn't necessary right now because express.static automatically
+// searches for the index.html file in the specified directory that was 
+// passed in as an argument.
+// app.get('/', function(request, response) {
+//   console.log('APP GET');
+//   response.sendFile(__dirname + '/../client/index.html');
+// });
 
-console.log('Listening on port...' + port);
+var port = 80;
+app.listen(port, function() {
+  console.log('Listening on ' + port);
+});
