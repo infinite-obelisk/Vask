@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 
-app.use(express.static(__dirname + '/../client/'));
+app.use(express.static(__dirname + '\\..\\client'));
 
 // This isn't necessary right now because express.static automatically
 // searches for the index.html file in the specified directory that was 
@@ -14,4 +14,5 @@ app.use(express.static(__dirname + '/../client/'));
 var port = 80;
 app.listen(port, function() {
   console.log('Listening on ' + port);
+  console.log(__dirname);
 });
