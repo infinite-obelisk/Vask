@@ -1,7 +1,11 @@
-var app = require('./server_config.js');
+var express = require('express');
+var app = express();
 
-var port = 8080;
+app.use(express.static(__dirname + '/../client/'));
+app.get('/', function(request, response) {
+  response.sendFile('app.js');
+});
 
-app.listen(port);
-
-console.log('Listening on port...' + port);
+app.listen(3000, function() {
+  console.log('Listening on 3000');
+});
