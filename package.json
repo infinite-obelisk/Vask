@@ -3,14 +3,28 @@
   "version": "0.1.0",
   "description": "Video question-asking web app",
   "main": "server.js",
-  "dependencies": {},
-  "devDependencies": {},
+  "dependencies": {
+    "bookshelf": "^0.8.1",
+    "chai": "^2.3.0",
+    "express": "^4.12.4",
+    "grunt-cli": "^0.1.13",
+    "material-ui": "^0.7.5",
+    "mocha": "^2.2.5",
+    "node-libs-browser": "^0.5.2",
+    "react": "^0.13.3",
+    "react-tap-event-plugin": "^0.1.7",
+    "sinon": "^1.14.1",
+    "webpack": "^1.9.8"
+  },
+  "devDependencies": {
+    "supertest": "^1.0.1"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/infinite-obilisk/vask.git"
   },
   "author": "Infinite Obilisk",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/infinite-obilisk/vask/issues"
   },
