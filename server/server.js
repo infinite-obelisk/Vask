@@ -1,3 +1,4 @@
+var db = require('./configMongoose');
 var express = require('express');
 var app = express();
 
