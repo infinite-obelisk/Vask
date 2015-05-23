@@ -50,7 +50,23 @@
       }
 
       function printTime() {
+        questionInfo = {
+          time: player.getCurrentTime(),
+          video: window.location.href,
+          text: 'sample question text',
+          username: 'username22'
+        };
+
       	console.log('time ', player.getCurrentTime());
+
+        $.ajax({
+          url: '/getquestions',
+          data: questionInfo,
+          success: function(data) {
+            console.log('success');
+            console.log(data);
+          },
+        });
       }
     </script>
 
