@@ -77,7 +77,7 @@ exports.getListings = function(req, res) {
 };
 
 exports.signUpUser = function(req, res) {
-  console.log('signUpUser', req.url);
+  console.log('signUpUser', req.body.username);
   var info = req.body;
   User.findOne({ username : info.username }, function(err, user) {
     if(err) {
@@ -85,6 +85,7 @@ exports.signUpUser = function(req, res) {
       res.status(500).send({errorMessage: 'error in searching database upon signup'});
     }
     else if( ! user ) {
+      console.log('making new user ' + info.username + ' ' + info.password);
       var newUser = new User({
         username : info.username,
         password : info.password
@@ -96,6 +97,7 @@ exports.signUpUser = function(req, res) {
           res.status(500).send({errorMessage: 'error in saving user info to Database'});
         } 
         else {
+          console.log('logging in user ' + info.username);
           res.status(302).send("Login");
         }
       });
