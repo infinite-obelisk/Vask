@@ -50,27 +50,45 @@
       }
 
       function printTime() {
-        questionInfo = {
-          time: player.getCurrentTime(),
-          video: window.location.href,
-          text: 'sample question text',
-          username: 'username22'
-        };
-
       	console.log('time ', player.getCurrentTime());
-
         $.ajax({
-          url: '/getquestions',
-          data: questionInfo,
-          success: function(data) {
-            console.log('success');
-            console.log(data);
-          },
+          url: "/addquestion",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({video : '1234', text : 'text', username : 'name', time : 50}),
+          statusCode: {
+            201: function (data) {
+              console.log('win');
+              console.log(data);
+            },
+            500: function (err) {
+              console.log('lose')
+            }
+          }
+        });
+      }
+
+      function test() {
+        console.log('test');
+        $.ajax({
+          url: "/getquestions?video=1234",
+          method: "GET",
+          contentType: "application/json",
+          statusCode: {
+            200: function (data) {
+              console.log('win');
+              console.log(data);
+            },
+            500: function (err) {
+              console.log('lose')
+            }
+          }
         });
       }
     </script>
 
     <button onclick="printTime();">Time</button>
+    <button onclick="test();">Test</button>
 
     <script>
       

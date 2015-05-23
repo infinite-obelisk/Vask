@@ -17,8 +17,12 @@ app.post('/addquestion', handlers.addQuestion);
 
 app.get('/getquestions', handlers.getQuestions);
 
+app.post('/signup', handlers.signUpUser);
+
+app.post('/login', handlers.login);
+
 // This isn't necessary right now because express.static automatically
-// searches for the index.html file in the specified directory that was 
+// searches for the index.html file in the specified directory that was
 // passed in as an argument.
 // app.get('/', function(request, response) {
 //   console.log('APP GET');
