@@ -22,7 +22,7 @@ exports.addQuestion = function (req, res) {
       }
       else {
         console.log('added question');
-        res.status(201).send('you posted to the database');
+        res.status(201).send({msg : 'you posted to the database'});
       }
 	});
 
