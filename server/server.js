@@ -1,8 +1,16 @@
 var db = require('./configMongoose');
 var express = require('express');
+var partials = require('express-partials');
+var bodyParser = require('body-parser');
+var multer  = require('multer');
+var session = require('express-session');
+var handlers = require('./request-handler');
+
 var app = express();
 
 app.use(express.static(__dirname + '/../client'));
+
+app.get('/favicon.ico', handlers.stub);
 
 // This isn't necessary right now because express.static automatically
 // searches for the index.html file in the specified directory that was 
@@ -12,7 +20,7 @@ app.use(express.static(__dirname + '/../client'));
 //   response.sendFile(__dirname + '/../client/index.html');
 // });
 
-var port = 8000;
+var port = 3000;
 app.listen(port, function() {
   console.log('Listening on ' + port);
 });
