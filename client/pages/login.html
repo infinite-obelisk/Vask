@@ -5,7 +5,37 @@
   </head>
   <body>
   	<h1>Login</h1>
+  	Name : <input id='username'/>
+  	<br/><br/>
+  	Pwd : <input type='password' id='password'/>
+  	<br/><br/>
+  	<button onclick="signup()">Login</button>
 
+    <script>
+
+      function signup() {
+      	var name = document.getElementById('username').value;
+      	var pwd = document.getElementById('password').value;
+      	console.log('login', name);
+        $.ajax({
+          url: "/login",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({ username : name, password : pwd}),
+          statusCode: {
+            201: function (data) {
+              console.log('win');
+              console.log(data);
+            },
+            500: function (err) {
+              console.log('lose')
+            }
+          }
+        });
+      }
+      
+
+    </script>
 
   </body>
 </html>
