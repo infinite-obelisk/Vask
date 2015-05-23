@@ -8,9 +8,14 @@ var handlers = require('./request-handler');
 
 var app = express();
 
+app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
 
 app.get('/favicon.ico', handlers.stub);
+
+app.post('/addquestion', handlers.addQuestion);
+
+app.get('/getquestions', handlers.getQuestions);
 
 // This isn't necessary right now because express.static automatically
 // searches for the index.html file in the specified directory that was 
