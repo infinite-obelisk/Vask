@@ -12,7 +12,7 @@ app.use(express.static(__dirname + '/../client'));
 //   response.sendFile(__dirname + '/../client/index.html');
 // });
 
-var port = 80;
+var port = 8000;
 app.listen(port, function() {
   console.log('Listening on ' + port);
 });
