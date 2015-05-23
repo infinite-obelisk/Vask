@@ -27,6 +27,7 @@
     "react-tools": "^0.13.3",
     "reactify": "^1.1.1",
     "sinon": "^1.14.1",
+    "url": "^0.10.3",
     "webpack": "^1.9.8"
   },
   "browserify": {

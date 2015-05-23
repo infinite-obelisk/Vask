@@ -1,6 +1,7 @@
 var url = require('url');
 var Question = require('./models/question');
-
+var User = require('./models/user');
+var utils = require('./utilities');
 
 exports.stub = function (req,res) {
   console.log('stub', req.url);
@@ -72,5 +73,69 @@ exports.getListings = function(req, res) {
               res.status(500).send({errorMessage: 'error in retrieving listings'});
           }
       })
+  });
+};
+
+exports.signUpUser = function(req, res) {
+  console.log('signUpUser', req.url);
+  var info = req.body;
+  User.findOne({ username : info.username }, function(err, user) {
+    if(err) {
+      console.log('error in checking database in sign up', err);
+      res.status(500).send({errorMessage: 'error in searching database upon signup'});
+    }
+    else if( ! user ) {
+      var newUser = new User({
+        username : info.username,
+        password : info.password
+      });
+
+      newUser.save(function(err, newUser) {
+        if(err) {
+          console.log('error in saving new user information to db');
+          res.status(500).send({errorMessage: 'error in saving user info to Database'});
+        } 
+        else {
+          res.status(302).send("Login");
+        }
+      });
+    }
+    else {
+      console.log('username is already taken!', user);
+      res.status(302).send('Sign Up');
+    }
+  });
+};
+
+exports.login = function(req, res) {
+  console.log('login', req.url)
+  var info = req.body;
+  User.findOne({username: info.username}, function(err, user) {
+    if(err) {
+      console.log('server issue in db query for login');
+      res.status(500).send({errorMessage: 'error in search of db upon login'});
+    } 
+    else if(user) {
+      user.comparePassword(info.password, function(err, match) {
+        if(err) {
+          console.log('error in comparison!', err);
+          res.status(500).send({errorMessage:'error in comparison of password'});
+        }
+        else {
+          if(match) {
+            utils.createSession(req,res,user);
+            console.log('successful login!');
+          } 
+          else {
+            console.log('password fail!');
+            res.status(302).send('Login');
+          }
+        }
+      });
+    }
+    else {
+      console.log('username does not exist')
+      res.status(302).send('Login');
+    }
   });
 };
