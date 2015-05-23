@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  </head>
+  <body>
+  	<h1>Signup NOW</h1>
+  	Name : <input id='username'/>
+  	<br/><br/>
+  	Pwd : <input type='password' id='password'/>
+  	<br/><br/>
+  	Pwd2 : <input type='password' id='password2'/>
+  	<br/><br/>
+  	<button onclick="signup()">YES, sign me up. NOW</button>
+
+    <script>
+
+      function signup() {
+      	var name = document.getElementById('username').value;
+      	var pwd = document.getElementById('password').value;
+      	var pwd2 = document.getElementById('password2').value;
+      	if (pwd!==pwd2) {
+      		alert('passwords different');
+      		return;
+      	}
+      	console.log('signup', name);
+        $.ajax({
+          url: "/signup",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({ username : name, password : pwd}),
+          statusCode: {
+            201: function (data) {
+              console.log('win');
+              console.log(data);
+            },
+            500: function (err) {
+              console.log('lose')
+            }
+          }
+        });
+      }
+      
+
+    </script>
+  </body>
+</html>
