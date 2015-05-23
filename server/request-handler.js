@@ -118,7 +118,8 @@ exports.login = function(req, res) {
       res.status(500).send({errorMessage: 'error in search of db upon login'});
     } 
     else if(user) {
-      user.comparePassword(info.password, function(err, match) {
+      console.log('user ' + user);
+      User.comparePassword(info.password, user.password, function(err, match) {
         if(err) {
           console.log('error in comparison!', err);
           res.status(500).send({errorMessage:'error in comparison of password'});

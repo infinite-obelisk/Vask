@@ -11,6 +11,13 @@ var app = express();
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
 
+app.use(session({
+  secret: 'be very quiet its a secret, WOOO!',
+  resave: false, // session store needs touch method for this to be ok
+  saveUninitialized : false
+  //cookie: { secure : true} // requires https
+}));
+
 app.get('/favicon.ico', handlers.stub);
 
 app.post('/addquestion', handlers.addQuestion);
