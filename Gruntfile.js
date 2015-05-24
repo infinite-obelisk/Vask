@@ -13,6 +13,9 @@ module.exports = function(grunt) {
       reactify: {
         //Will have to add a browserify for each. Gross, I know -Kir
         command: "browserify -t reactify uccviews/jsx/lectureView.js -o client/build/js/lectureView.js"
+      },
+      server: {
+        command: "node server/server.js"
       }
     },
     uglify: {
@@ -37,7 +40,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-exec');
 
-  grunt.registerTask('default', ['jshint']);
-  grunt.registerTask('reactifies', ['less', 'exec', 'uglify']);
+  grunt.registerTask('reactifies', ['less', 'exec:reactify', 'uglify']);
+  grunt.registerTask('default', ['reactifies', 'exec:server']);
 
 };
