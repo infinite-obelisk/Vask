@@ -4,13 +4,28 @@
   <title>Vask Video</title>
   <script src="../bower_components/react/react.min.js"></script>
   <script src="../bower_components/react/JSXTransformer.js"></script>
-  <link rel='stylesheet' type='text/css' href='http://fonts.googleapis.com/css?family=Roboto:400,300,500'>
+  <script>
+    var WebFontConfig = {
+      google: { families: [ 'Roboto:400,300,500:latin' ] }
+    };
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+  </script>
+  <link rel="stylesheet" type="text/css" href="/bower_components/mdi/css/materialdesignicons.min.css">
   <link rel="stylesheet" type="text/css" href="/build/css/material-ui.css">
 </head>
 <body>
+  <div class="nav-bar"></div>
   <div class="youtube-video"></div>
 
 
-  <script src="/build/js/lectureView.min.js"></script>
+  <script src="/build/js/lectureView.js"></script>
 </body>
 </html>
