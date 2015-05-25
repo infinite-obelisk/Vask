@@ -8,29 +8,36 @@ injectTapEventPlugin();
 
 var React = require('react');
 var mui = require('material-ui'),
-    Toolbar = mui.Toolbar,
-    ToolbarGroup = mui.ToolbarGroup,
+    AppBar = mui.AppBar,
     FontIcon = mui.FontIcon;
 
 var permanentsrc = "eyU3bRy2x44";
+var ThemeManager = new mui.Styles.ThemeManager();
+ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
-var YoutubeVideo = React.createClass(
-{
+var NavBar = React.createClass({
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  getChildContext:function() {
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    }
+  },
+  render: function(){
+    return (<AppBar title="Vask" />);
+  }
+});
+
+var YoutubeVideo = React.createClass({
   render: function(){
     return <iframe id="youtube" width="560" height="315" src={"https://www.youtube.com/embed/" + this.props.ytsrc} frameborder="0" allowfullscreen></iframe>;
   }
 });
 
-var NavBar = React.createClass({
+var QuestionEntry = React.createClass({
   render: function(){
-    return (<Toolbar>
-              <ToolbarGroup float="left">
-                <FontIcon className="mdi mdi-menu"/>
-              </ToolbarGroup>
-              <ToolbarGroup float="right">
-                <FontIcon className="mdi mdi-logout"/>
-              </ToolbarGroup>
-            </Toolbar>);
+    return <div></div>
   }
 });
 

@@ -40,7 +40,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-exec');
 
-  grunt.registerTask('reactifies', ['less', 'exec:reactify', 'uglify']);
+  grunt.registerTask('reactifies', ['exec:reactify']); //, 'uglify']);
   grunt.registerTask('default', ['reactifies', 'exec:server']);
 
 };

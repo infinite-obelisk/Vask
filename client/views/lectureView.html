@@ -18,12 +18,44 @@
       s.parentNode.insertBefore(wf, s);
     })();
   </script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/bower_components/mdi/css/materialdesignicons.min.css">
-  <link rel="stylesheet" type="text/css" href="/build/css/material-ui.css">
+  <style>
+   #ytCont {
+        position: relative;
+        height: auto;
+        padding-bottom: 50%;
+    }
+    #youtube {
+        border: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding: 10px;
+    }
+
+    .modal-backdrop {
+      z-index: 0;
+    }
+  </style>
 </head>
 <body>
+
   <div class="nav-bar"></div>
-  <div class="youtube-video"></div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-8 col-md-10 col-lg-10 col-sm-offset-3 col-md-offset-1 col-lg-offset-1">
+        <div class="youtube-video" id="ytCont"></div>
+
+        <div class="question-entry"></div>
+      </div>
+    </div>
+
+  </div>
+
 
 
   <script src="/build/js/lectureView.js"></script>
