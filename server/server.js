@@ -21,11 +21,10 @@ app.use(session({
 app.get('/favicon.ico', handlers.stub);
 
 app.post('/addquestion', handlers.addQuestion);
-
+app.post('/addanswer', handlers.addAnswer);
 app.get('/getquestions', handlers.getQuestions);
 
 app.post('/signup', handlers.signUpUser);
-
 app.post('/login', handlers.login);
 
 // This isn't necessary right now because express.static automatically
