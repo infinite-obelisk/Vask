@@ -85,10 +85,30 @@
           }
         });
       }
+
+      function test2() {
+        console.log('test2');
+        $.ajax({
+          url: "/addanswer",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({_id : '5563972c8934e4e424f3ef6d', text : 'answer'}),
+          statusCode: {
+            202: function (data) {
+              console.log('win');
+              console.log(data);
+            },
+            500: function (err) {
+              console.log('lose')
+            }
+          }
+        });
+      }
     </script>
 
     <button onclick="printTime();">Time</button>
     <button onclick="test();">Test</button>
+    <button onclick="test2();">Test2</button>
 
     <script>
       
