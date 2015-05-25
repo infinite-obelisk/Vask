@@ -16,7 +16,7 @@
     "express-session": "^1.11.1",
     "grunt-cli": "^0.1.13",
     "grunt-exec": "^0.4.6",
-    "material-ui": "^0.7.5",
+    "material-ui": "^0.8.0",
     "mocha": "^2.2.5",
     "mongodb": "~2.0.28",
     "mongoose": "~4.0.2",
