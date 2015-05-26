@@ -36,6 +36,8 @@ var NavBar = React.createClass({
 //   }
 // });
 
+// CUSTOM HTML WITH MATERIAL UI ELEMENTS
+// ----------------------
 // var Example = React.createClass({
 //   getInitialState: function(){
 //     return {votes: this.props.votes};
