@@ -1,15 +1,53 @@
  /** @jsx React.DOM */
 
-var React        = require('react');
+var React        = require('react'),
     RaisedButton = require('material-ui/lib/raised-button'),
     TextField 	 = require('material-ui/lib/text-field'),
     Paper        = require('material-ui/lib/paper'),
     ThemeManager = require('material-ui/lib/styles/theme-manager')(),
     Colors       = require('material-ui/lib/styles/colors'),
-    fakeData     = require('./fakeData.js');
+    fakeData     = require('./fakeData.js'),
+    $            = require('jquery/dist/jquery.js');
 
 
 var DynamicSearch = React.createClass({
+	addQuestion: function(){
+		$.ajax({
+		  url: "/addquestion",
+		  method: "POST",
+		  contentType: "application/json",
+		  data: JSON.stringify({video : '1234', text : 'text', username : 'name', time : 50}),
+		  statusCode: {
+		    201: function (data) {
+		      console.log('win');
+		      console.log(data);
+		    },
+		    500: function (err) {
+		      console.log('lose')
+		    }
+		  }
+		});
+	},
+	getQuestions: function(){
+		console.log('jQuery', $);
+		$.ajax({
+		  url: "/getquestions",
+		  method: "GET",
+		  contentType: "application/json",
+		  success: function(data){
+		    console.log( "Data received: ");
+		    console.dir( data );
+		  },
+	    error: function(XMLHttpRequest, textStatus, errorThrown) {
+	      console.error("Failed fetching the server");
+	      throw errorThrown;
+	    }
+		});
+	},
+	componentWillMount: function(){
+		console.log('Fetching questions..');
+		this.getQuestions()
+	},	
 	getInitialState: function(){
 		return {
 			count: 0,
