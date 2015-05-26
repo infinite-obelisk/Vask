@@ -91,11 +91,16 @@ var AskQuestionDialog = React.createClass({
       muiTheme: ThemeManager.getCurrentTheme()
     };
   },
+  clearForm: function(){
+    window.$('#question-title').val("");
+    window.$('#question-text').val("");
+  },
   closeDialog: function(){
     console.log("Ask Question Dialog Close");
     this.refs.AskQuestionDialog.dismiss();
   },
   submitQuestion: function(){
+    this.clearForm();
     console.log("Submit Question");
   },
   render: function(){
