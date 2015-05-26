@@ -8,9 +8,9 @@ injectTapEventPlugin();
 
 var React = require('react'),
     mui = require('material-ui'),
-    AppBar = mui.AppBar,
-    IconButton = mui.IconButton,
-    FontIcon = mui.FontIcon;
+    // YOU MUST ADD EACH MATERIAL UI COMPONENT BEFORE USE, AS SEEN BELOW:
+    AppBar = mui.AppBar;
+
 var ThemeManager = new mui.Styles.ThemeManager();
 ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
