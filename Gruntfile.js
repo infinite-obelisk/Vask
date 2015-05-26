@@ -12,7 +12,7 @@ module.exports = function(grunt) {
     exec: {
       reactify: {
         //Will have to add a browserify for each. Gross, I know -Kir
-        command: "browserify -t reactify uccviews/jsx/lectureView.js -o client/build/js/lectureView.js && browserify -t reactify uccviews/jsx/template.js -o client/build/js/template.js"
+        command: "browserify -t reactify uccviews/jsx/lectureView.js -o client/build/js/lectureView.js && browserify -t reactify uccviews/jsx/template.js -o client/build/js/template.js && browserify -t reactify uccviews/jsx/dynamicSearch.jsx -o client/build/js/dynamicSearch.js"
       },
       server: {
         command: "node server/server.js"
