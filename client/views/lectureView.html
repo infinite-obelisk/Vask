@@ -2,6 +2,7 @@
 <html>
 <head>
   <title>Vask Video</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   <script src="../bower_components/react/react.min.js"></script>
   <script src="../bower_components/react/JSXTransformer.js"></script>
   <script>
@@ -131,7 +132,7 @@
       }
     };
     function stopVideo() {
-      player.stopVideo();
+      window.player.stopVideo();
     };
     function printTime() {
       console.log('time ', player.getCurrentTime());
