@@ -21,7 +21,15 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/bower_components/mdi/css/materialdesignicons.min.css">
   <style>
-   #ytCont {
+    h4 {
+      color: #00bcd4;
+    }
+
+    a {
+      color: #ff4081;
+    }
+
+    #ytCont {
         position: relative;
         height: auto;
         padding-bottom: 50%;
@@ -39,6 +47,34 @@
     .modal-backdrop {
       z-index: 0;
     }
+
+    .question-text, .answer-text {
+      padding-top: 18px;
+    }
+
+    .voting {
+      padding-right: 0px;
+    }
+
+    .vote-button {
+      color: #9e9e9e !important;
+      font-weight: bold;
+    }
+
+    .votes {
+      margin: 0;
+    }
+
+    .profile-picture-container {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    .profile-picture {
+      padding-left: 0px;
+      width: 100%;
+      height: auto;
+    }
   </style>
 </head>
 <body>
@@ -51,12 +87,14 @@
         <div class="youtube-video" id="ytCont"></div>
 
         <div class="question-entry"></div>
+        <div class="answer-entry"></div>
+
+        <div class="questions-list">
+
+        </div>
       </div>
     </div>
-
   </div>
-
-
 
   <script src="/build/js/lectureView.js"></script>
 </body>
