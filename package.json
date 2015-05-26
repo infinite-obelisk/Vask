@@ -16,6 +16,7 @@
     "grunt": "^0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-exec": "^0.4.6",
+    "jquery": "^2.1.4",
     "material-ui": "^0.8.0",
     "mocha": "^2.2.5",
     "mongodb": "~2.0.28",
