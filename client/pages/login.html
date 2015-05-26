@@ -4,19 +4,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
   </head>
   <body>
-  	<h1>Login</h1>
-  	Name : <input id='username'/>
-  	<br/><br/>
-  	Pwd : <input type='password' id='password'/>
-  	<br/><br/>
-  	<button onclick="signup()">Login</button>
+    <h1>Login</h1>
+    Name : <input id='username'/>
+    <br/><br/>
+    Pwd : <input type='password' id='password'/>
+    <br/><br/>
+    <button onclick="signup()">Login</button>
 
     <script>
 
       function signup() {
-      	var name = document.getElementById('username').value;
-      	var pwd = document.getElementById('password').value;
-      	console.log('login', name);
+        var name = document.getElementById('username').value;
+        var pwd = document.getElementById('password').value;
+        console.log('login', name);
         $.ajax({
           url: "/login",
           method: "POST",

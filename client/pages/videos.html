@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="videos"></div>
+
+    <script>
+
+      function getVideos() {
+        console.log('getVideos', name);
+        $.ajax({
+          url: "/videos",
+          method: "GET",
+          contentType: "application/json",
+          data: JSON.stringify("getVideos"),
+          statusCode: {
+            201: function(data) {
+              console.log('win getVideos');
+              console.log(data);
+              var videos = JSON.parse(data);
+              for (var i = 0; i < videos.length; i++) {
+                $('.videos').append($('<div class="video">' + JSON.stringify(videos[i]) + '</div>'));
+              }
+            },
+            500: function(err) {
+              console.log('lose getVideos');
+            }
+          }
+        });
+      }
+      
+
+    </script>
+
+  </body>
+</html>

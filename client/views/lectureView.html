@@ -24,20 +24,16 @@
     h4 {
       color: #00bcd4;
     }
-
     a {
       color: #ff4081;
     }
-
     a:hover {
       text-decoration: none;
     }
-
     #ytcont {
         position: relative;
         height: auto;
     }
-
     #player {
       border: none;
       top: 0;
@@ -46,33 +42,26 @@
       height: 35vw;
       padding: 10px;
     }
-
     .modal-backdrop {
       z-index: 0;
     }
-
     .question-text, .answer-text {
       padding-top: 18px;
     }
-
     .voting {
       padding-right: 0px;
     }
-
     .vote-button {
       color: #9e9e9e !important;
       font-weight: bold;
     }
-
     .votes {
       margin: 0;
     }
-
     .profile-picture-container {
       display: table-cell;
       vertical-align: middle;
     }
-
     .profile-picture {
       padding-left: 0px;
       width: 100%;
@@ -109,7 +98,6 @@
     tag.src = "https://www.youtube.com/iframe_api";
     var firstScriptTag = document.getElementsByTagName('script')[0];
     firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
     // 3. This function creates an <iframe> (and YouTube player)
     //    after the API code downloads.
     var player;
@@ -124,12 +112,10 @@
         }
       });
     };
-
     // 4. The API will call this function when the video player is ready.
     function onPlayerReady(event) {
       event.target.playVideo();
     }
-
     // 5. The API calls this function when the player's state changes.
     //    The function indicates that when playing a video (state=1),
     //    the player should play for six seconds and then stop.
@@ -140,11 +126,9 @@
         done = true;
       }
     };
-
     function stopVideo() {
       player.stopVideo();
     };
-
     function printTime() {
       console.log('time ', player.getCurrentTime());
       $.ajax({
