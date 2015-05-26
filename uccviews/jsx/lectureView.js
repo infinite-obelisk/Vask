@@ -11,8 +11,6 @@ var mui = require('material-ui'),
     AppBar = mui.AppBar,
     IconButton = mui.IconButton,
     FontIcon = mui.FontIcon;
-
-var permanentsrc = "eyU3bRy2x44";
 var ThemeManager = new mui.Styles.ThemeManager();
 ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
@@ -27,12 +25,6 @@ var NavBar = React.createClass({
   },
   render: function(){
     return (<AppBar title="Vask" />);
-  }
-});
-
-var YoutubeVideo = React.createClass({
-  render: function(){
-    return <iframe id="youtube" width="560" height="315" src={"https://www.youtube.com/embed/" + this.props.ytsrc} frameborder="0" allowfullscreen></iframe>;
   }
 });
 
@@ -113,10 +105,6 @@ var Answer = React.createClass({
 
 React.render(<NavBar />,
   document.querySelector('.nav-bar')
-);
-
-React.render(<YoutubeVideo ytsrc = {permanentsrc} />,
-  document.querySelector('.youtube-video')
 );
 
 React.render(<Question votes="5" imgUrl="https://secure.gravatar.com/avatar/?s=100&r=g&d=mm" user="Anonymous" question="Can somebody explain the significant of Oxygen to me?" videoTime="3:42" questionTime="1 day ago"/>,
