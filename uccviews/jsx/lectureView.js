@@ -10,7 +10,10 @@ var React = require('react');
 var mui = require('material-ui'),
     AppBar = mui.AppBar,
     IconButton = mui.IconButton,
-    FontIcon = mui.FontIcon;
+    FontIcon = mui.FontIcon,
+    RaisedButton = mui.RaisedButton,
+    FlatButton = mui.FlatButton,
+    Dialog = mui.Dialog;
 var ThemeManager = new mui.Styles.ThemeManager();
 ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
@@ -18,13 +21,68 @@ var NavBar = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
   },
-  getChildContext:function() {
+  getChildContext: function(){
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     }
   },
   render: function(){
     return (<AppBar title="Vask" />);
+  }
+});
+
+var AskQuestionButton = React.createClass({
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  getChildContext: function(){
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    }
+  },
+  render: function(){
+    return (<RaisedButton onTouchTap={this.props.openModal} label="Ask a Question" primary={true} style={{"float": "right"}} />);
+  }
+});
+
+var AskQuestionDialog = React.createClass({
+  openModal: function(){
+    this.refs.AskQuestionDialog.show();
+  },
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  getChildContext: function(){
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    }
+  },
+  closeDialog: function(){
+    console.log("Ask Question Dialog Close");
+    this.refs.AskQuestionDialog.dismiss();
+  },
+  submitQuestion: function(){
+    console.log("Submit Question");
+  },
+  render: function(){
+    var actions = [
+      <FlatButton
+        key={1}
+        label="Cancel"
+        secondary={true}
+        onTouchTap={this.closeDialog} />,
+      <FlatButton
+        key={2}
+        label="Submit"
+        primary={true}
+        onTouchTap={this.submitQuestion} />
+    ];
+
+    return (<div>
+              <Dialog ref="AskQuestionDialog" title="Ask a Question" actions={actions} >This is the Dialog to ask questions.
+              </Dialog>
+              <AskQuestionButton openModal={this.openModal} />
+            </div>);
   }
 });
 
@@ -44,7 +102,7 @@ var Voting = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
   },
-  getChildContext: function() {
+  getChildContext: function(){
     return {
       muiTheme: ThemeManager.getCurrentTheme()
     }
@@ -105,6 +163,10 @@ var Answer = React.createClass({
 
 React.render(<NavBar />,
   document.querySelector('.nav-bar')
+);
+
+React.render(<AskQuestionDialog />,
+  document.querySelector('.ask-question')
 );
 
 React.render(<Question votes="5" imgUrl="https://secure.gravatar.com/avatar/?s=100&r=g&d=mm" user="Anonymous" question="Can somebody explain the significant of Oxygen to me?" videoTime="3:42" questionTime="1 day ago"/>,
