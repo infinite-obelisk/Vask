@@ -12,3 +12,8 @@ exports.createSession = function(request, response, user) {
         response.status(201).send(user);
     });
 };
+
+exports.stub = function (req,res) {
+  console.log('stub', req.url);
+  res.status(204).send();
+};

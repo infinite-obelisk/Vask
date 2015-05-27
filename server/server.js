@@ -4,7 +4,9 @@ var partials = require('express-partials');
 var bodyParser = require('body-parser');
 var multer  = require('multer');
 var session = require('express-session');
-var handlers = require('./request-handler');
+var questionHandler = require('./handlers/question-handler');
+var userHandler = require('./handlers/user-handler');
+var util = require('./utilities');
 
 var app = express();
 
@@ -18,14 +20,14 @@ app.use(session({
   //cookie: { secure : true} // requires https
 }));
 
-app.get('/favicon.ico', handlers.stub);
+app.get('/favicon.ico', util.stub);
 
-app.post('/addquestion', handlers.addQuestion);
-app.post('/addanswer', handlers.addAnswer);
-app.get('/getquestions', handlers.getQuestions);
+app.post('/addquestion', questionHandler.addQuestion);
+app.post('/addanswer', questionHandler.addAnswer);
+app.get('/getquestions', questionHandler.getQuestions);
 
-app.post('/signup', handlers.signUpUser);
-app.post('/login', handlers.login);
+app.post('/signup', userHandler.signUpUser);
+app.post('/login', userHandler.login);
 
 // This isn't necessary right now because express.static automatically
 // searches for the index.html file in the specified directory that was
