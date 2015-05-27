@@ -221,7 +221,7 @@ var AskQuestionForm = React.createClass({
               <TextField
                 hintText="Type more details about your question here!"
                 id="question-text"
-                multiline={true}
+                multiLine={true}
                 style={{"width": "95%"}}/>
             </div>);
   }
@@ -348,7 +348,7 @@ var Voting = React.createClass({
 var QuestionEntry = React.createClass({
   render: function(){
     return (<div
-              className="col-lg-10 col-md-10 col-sm-10 col-xs-10 question-text">
+              className="col-lg-9 col-md-9 col-sm-9 col-xs-9 question-text">
                 <a href="#">
                   <h4
                     className="media-heading user-name">
@@ -381,7 +381,7 @@ var Question = React.createClass({
     return (<div
               className="row question">
               <div
-                className="col-lg-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                className="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
                   <Voting
                     votes={this.props.votes} />
                   <ProfilePicture
@@ -399,7 +399,7 @@ var Question = React.createClass({
 var AnswerEntry = React.createClass({
   render: function(){
     return (<div
-              className="col-lg-9 col-md-9 col-sm-9 col-xs-9 answer-text">
+              className="col-lg-8 col-md-8 col-sm-8 col-xs-8 answer-text">
                 <a
                   href="#">
                     <h4
@@ -425,7 +425,7 @@ var Answer = React.createClass({
     return (<div
               className="row answer">
                 <div
-                  className="col-lg-2 col-md-2 col-sm-2 col-xs-2 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 text-center">
+                  className="col-lg-3 col-md-3 col-sm-3 col-xs-3 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 text-center">
                     <Voting
                       votes={this.props.votes} />
                     <ProfilePicture
@@ -436,6 +436,104 @@ var Answer = React.createClass({
                   answer={this.props.answer}
                   answerTime={this.props.answerTime}/>
             </div>);
+  }
+});
+
+var ViewQuestionAndAnswers = React.createClass({
+  render: function(){
+    return (<div>
+              <Question
+                votes={this.props.votes}
+                imgUrl={this.props.imgUrl}
+                user={this.props.user}
+                question={this.props.question}
+                videoTime={this.props.videoTime}
+                questionTime={this.props.questionTime}/>
+              {this.props.answers.map(function(answer){
+                return (<Answer
+                          key={answer.key}
+                          votes={answer.votes}
+                          imgUrl={answer.imgUrl}
+                          user={answer.user}
+                          answer={answer.answer}
+                          answerTime={answer.answerTime}/>
+                        );
+              })}
+            </div>);
+  }
+});
+
+var ViewQuestionDialog = React.createClass({
+  getInitialState: function(){
+    return {};
+  },
+  getQuestionData: function(){
+    var questionIdToBeFetched = this.props.questionID;
+    this.state.question = {
+      id: 42,
+      key: 1,
+      votes: 5,
+      imgUrl: "https://secure.gravatar.com/avatar/?s=100&r=g&d=mm",
+      user: "Anonymous",
+      question: "Can somebody explain the significance of Oxygen to me?",
+      videoTime: "3:42",
+      questionTime: "1 day ago",
+      answers: [
+        {
+          key: 1,
+          votes: 3,
+          imgUrl:"https://secure.gravatar.com/avatar/?s=100&r=g&d=mm",
+          user: "Anonymous",
+          answer: "You need oxygen to survive.",
+          answerTime: "12 hours ago"
+        }
+      ]
+    };
+  },
+  openModal: function(){
+    this.refs['ViewQuestionDialog' + this.state.question.id].show();
+  },
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  getChildContext: function(){
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  },
+  closeDialog: function(){
+    console.log("View Question Dialog Close");
+    this.refs['ViewQuestionDialog' + this.state.question.id].dismiss();
+  },
+  render: function(){
+    this.getQuestionData();
+    var actions = [
+      <FlatButton
+        key={1}
+        label="Close"
+        secondary={true}
+        onTouchTap={this.closeDialog} />
+    ];
+
+    return (<div>
+              <Dialog
+                ref={"ViewQuestionDialog" + this.state.question.id}
+                title="Question"
+                actions={actions} >
+                  <ViewQuestionAndAnswers
+                    votes={this.state.question.votes}
+                    imgUrl={this.state.question.imgUrl}
+                    user={this.state.question.user}
+                    question={this.state.question.question}
+                    videoTime={this.state.question.videoTime}
+                    questionTime={this.state.question.questionTime}
+                    answers={this.state.question.answers} />
+              </Dialog>
+            </div>);
+  },
+  componentDidMount: function(){
+    if(!window.questionDialogs){ window.questionDialogs = {}; }
+    window.questionDialogs[this.state.question.id] = this.refs["ViewQuestionDialog" + this.state.question.id];
   }
 });
 
@@ -453,21 +551,7 @@ getVideoData(function() {
   )
 });
 
-React.render(<Question
-                votes="5"
-                imgUrl="https://secure.gravatar.com/avatar/?s=100&r=g&d=mm"
-                user="Anonymous"
-                question="Can somebody explain the significance of Oxygen to me?"
-                videoTime="3:42"
-                questionTime="1 day ago"/>,
-  document.querySelector('.question-entry')
-);
-
-React.render(<Answer
-                votes="3"
-                imgUrl="https://secure.gravatar.com/avatar/?s=100&r=g&d=mm"
-                user="Anonymous"
-                answer="You need oxygen to survive."
-                answerTime="12 hours ago"/>,
-  document.querySelector('.answer-entry')
+//Example ViewQuestion
+React.render(<ViewQuestionDialog questionID={42} />,
+  document.querySelector('.view-question')
 );
