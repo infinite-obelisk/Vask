@@ -100,8 +100,29 @@ var AskQuestionDialog = React.createClass({
     this.refs.AskQuestionDialog.dismiss();
   },
   submitQuestion: function(){
-    this.clearForm();
     console.log("Submit Question");
+    $.ajax({
+          url: "/addquestion",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({
+            video : '1234', 
+            text : window.$('#question-text').val, 
+            username : 'name', 
+            time : Math.floor(window.player.getCurrentTime()), 
+            title : window.$('#question-title').val
+          }),
+          statusCode: {
+            201: function (data) {
+              console.log('win');
+              console.log(data);
+              this.clearForm();
+            },
+            500: function (err) {
+              console.log('lose')
+            }
+          }
+        });
   },
   render: function(){
     var actions = [
