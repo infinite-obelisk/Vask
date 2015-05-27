@@ -58,3 +58,5 @@ var NavBar = React.createClass({
 React.render(<NavBar />,
   document.querySelector('.nav-bar')
 );
+
+module.exports = NavBar;
