@@ -29,22 +29,17 @@ ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
 
 var LecturesList = React.createClass({
-	render: function() {
-		return (
-			 <div>
-        <LectureCatalog/>
-       </div>
-		);
-	}
-});
-
-var LectureCatalog = React.createClass({
+  getInitialState: function(){
+    return {
+      loaded: false,
+      content: fakeVideos
+    }
+  },
   test: function(){
     console.log('TESTING');
   },
   getContents: function(){
     var that = this;
-    console.log('jQuery', $);
     $.ajax({
       url: "/getquestions",
       method: "GET",
@@ -67,10 +62,13 @@ var LectureCatalog = React.createClass({
     this.getContents()
   },  
   render: function() {
+    var rows = this.state.content.map(function(content, i){
+      return <ContentRow data={content} key={i}/>
+    });
 		return (
 			<div>
 				<CatalogTitle/>
-        <ContentRow/>
+        {rows}
 			</div>
 		);
 	}
@@ -89,7 +87,10 @@ var CatalogTitle = React.createClass({
 var ContentRow = React.createClass({
 	render: function() {
 		return (
-			<div className="LectureRow"></div>
+      <div>
+        <div>{this.props.data.url}</div>
+  			<div>{this.props.data.description}</div>
+      </div>
 		);
 	}
 });
