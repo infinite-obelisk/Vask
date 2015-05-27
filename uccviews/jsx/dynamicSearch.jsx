@@ -11,22 +11,23 @@ var React        = require('react'),
 
 
 var DynamicSearch = React.createClass({
-	addQuestion: function(){
+	postQuestion: function(){
+		console.log('saving the question');
 		$.ajax({
 		  url: "/addquestion",
 		  method: "POST",
 		  contentType: "application/json",
-		  data: JSON.stringify({video : '1234', text : 'text', username : 'name', time : 50}),
-		  statusCode: {
-		    201: function (data) {
-		      console.log('win');
-		      console.log(data);
-		    },
-		    500: function (err) {
-		      console.log('lose')
-		    }
-		  }
+		  data: JSON.stringify({video : '20210', text : this.state.text, username : 'anonymous', time : 50}),
+  	  success: function(msg){
+  	    console.log( "Question successfuly posted:", msg);
+  	  },
+      error: function(XMLHttpRequest, textStatus, errorThrown) {
+        console.error("Failed saving the question");
+        throw errorThrown;
+      }
 		});
+		// clear the inputfield
+
 	},
 	getQuestions: function(){
 		console.log('jQuery', $);
@@ -68,7 +69,10 @@ var DynamicSearch = React.createClass({
 	render: function() {
 		return (
 			<div>
-				<SearchBar ref="search" onUserInput={this.handleUserInput}></SearchBar>
+				<SearchBar 
+					ref="search" 
+					onUserInput={this.handleUserInput}
+					postQuestion={this.postQuestion} />
 				<QuestionList 
 					text={this.state.text} 
 					count={this.state.count} 
@@ -104,11 +108,36 @@ var SearchBar = React.createClass({
 		);
 	},
 
+	clearInput: function(){
+		console.log('clear it!!');
+		// Clears the input field value
+		React.findDOMNode(this.refs.inp).children[1].value = "";
+	},
+
 	render: function() {
 		return (
 			<div>
 				<TextField hintText="Hint Text" ref="inp" onChange={this.handleChange}/>
-				<RaisedButton label="Search" primary={true}/>
+				<AskQuestion 
+					postQuestion={this.props.postQuestion} 
+					clearInp={this.clearInput} />
+			</div>
+		);
+	}
+});
+
+var AskQuestion = React.createClass({
+	handleClick: function(){
+		// triggers the postQuestion method
+		this.props.postQuestion()
+		// triggers the clearInput method
+		this.props.clearInp();
+
+	},
+	render: function() {
+		return (
+			<div>
+				<RaisedButton label="Ask Question" primary={true} onClick={this.handleClick} />
 			</div>
 		);
 	}
