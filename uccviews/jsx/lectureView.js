@@ -111,6 +111,7 @@ var ViewQuestionsList = React.createClass({
     };
   },
   render: function(){
+    //David: Not sure how to make this all work async. If you need help integrating your request with this render, please let me know and we'll work on it together.
     this.getQuestionsList();
     return (<div>
               {this.state.questions.map(function(question){
