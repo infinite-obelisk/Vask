@@ -127,7 +127,7 @@ var ViewQuestionsList = React.createClass({
 
 var ViewQuestionsDialog = React.createClass({
   openModal: function(){
-    this.refs.ViewQuestionDialog.show();
+    this.refs.ViewQuestionsDialog.show();
   },
   childContextTypes: {
     muiTheme: React.PropTypes.object
@@ -139,7 +139,7 @@ var ViewQuestionsDialog = React.createClass({
   },
   closeDialog: function(){
     console.log("Ask Question Dialog Close");
-    this.refs.ViewQuestionDialog.dismiss();
+    this.refs.ViewQuestionsDialog.dismiss();
   },
   submitQuestion: function(){
     this.clearForm();
@@ -156,7 +156,7 @@ var ViewQuestionsDialog = React.createClass({
 
     return (<div>
               <Dialog
-                ref="ViewQuestionDialog"
+                ref="ViewQuestionsDialog"
                 title="Questions for this lecture"
                 actions={actions} >
                   <ViewQuestionsList />
@@ -241,10 +241,10 @@ var AskQuestionDialog = React.createClass({
           method: "POST",
           contentType: "application/json",
           data: JSON.stringify({
-            video : '1234', 
-            text : window.$('#question-text').val, 
-            username : 'name', 
-            time : Math.floor(window.player.getCurrentTime()), 
+            video : '1234',
+            text : window.$('#question-text').val,
+            username : 'name',
+            time : Math.floor(window.player.getCurrentTime()),
             title : window.$('#question-title').val
           }),
           statusCode: {
