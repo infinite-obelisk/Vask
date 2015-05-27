@@ -101,6 +101,7 @@ var AskQuestionDialog = React.createClass({
   },
   submitQuestion: function(){
     console.log("Submit Question");
+    var self = this;
     $.ajax({
           url: "/addquestion",
           method: "POST",
@@ -116,7 +117,8 @@ var AskQuestionDialog = React.createClass({
             201: function (data) {
               console.log('win');
               console.log(data);
-              this.clearForm();
+              self.clearForm();
+              self.closeDialog();
             },
             500: function (err) {
               console.log('lose')
