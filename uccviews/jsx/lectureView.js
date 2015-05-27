@@ -439,6 +439,72 @@ var Answer = React.createClass({
   }
 });
 
+var ViewQuestionAndAnswers = React.createClass({
+  render: function(){
+    return (<div>
+              <Question
+                votes={this.props.votes}
+                imgUrl={this.props.imgUrl}
+                user={this.props.user}
+                question={this.props.question}
+                videoTime={this.props.videoTime}
+                questionTime={this.props.questionTime}/>
+              {this.state.answers.map(function(answer){
+                return (<Answer
+                          votes={answer.votes}
+                          imgUrl={answer.imgUrl}
+                          user={answer.user}
+                          answer={answer.answer}
+                          answerTime={answer.answerTime}/>
+                        );
+              })}
+            </div>);
+  }
+});
+
+var ViewQuestionDialog = React.createClass({
+  getQuestionData: function(){
+    return {}
+  },
+  openModal: function(){
+    this.refs.ViewQuestionDialog.show();
+  },
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  getChildContext: function(){
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  },
+  closeDialog: function(){
+    console.log("Ask Question Dialog Close");
+    this.refs.ViewQuestionDialog.dismiss();
+  },
+  submitQuestion: function(){
+    this.clearForm();
+    console.log("Submit Question");
+  },
+  render: function(){
+    var actions = [
+      <FlatButton
+        key={1}
+        label="Close"
+        secondary={true}
+        onTouchTap={this.closeDialog} />
+    ];
+
+    return (<div>
+              <Dialog
+                ref="ViewQuestionDialog"
+                title="Questions for this lecture"
+                actions={actions} >
+                  <ViewQuestionList />
+              </Dialog>
+            </div>);
+  }
+});
+
 React.render(<NavBar />,
   document.querySelector('.nav-bar')
 );
