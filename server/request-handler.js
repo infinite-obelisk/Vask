@@ -10,11 +10,14 @@ exports.stub = function (req,res) {
 
 exports.addQuestion = function (req, res) {
 	var info = req.body;
+  console.log('addQuestion ',info)
 	var newQuestion = new Question({
        video: info.video ,
        username: info.username,
        time: info.time,
        text: info.text,
+       title: info.title,
+       votes : 0,
        answers : []
 	});
 	newQuestion.save(function (err) {

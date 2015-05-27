@@ -6,6 +6,7 @@ var questionSchema = mongoose.Schema({
   time: { type: Number, required: true },
   title : { type : String},
   text: { type: String},
+  votes: { type : Number},
   answers : []
 
 });

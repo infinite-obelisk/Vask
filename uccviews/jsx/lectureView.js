@@ -18,6 +18,35 @@ var mui = require('material-ui'),
 var ThemeManager = new mui.Styles.ThemeManager();
 ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
+var getVideoData = function(cb) {
+  $.ajax({
+          url: "/getquestions?video=test2",
+          method: "GET",
+          contentType: "application/json",
+          statusCode: {
+            200: function (data) {
+              console.log('win');
+              console.log(data);
+              var qdata = [];
+              window.videoData = qdata;
+              data.result.forEach(function (item) {
+                qdata.push({
+                  question : item.title,
+                  questionId : item._id,
+                  questionUrl : '#',
+                  votes : item.votes,
+                  key : qdata.length + 1
+                })
+              })
+              cb();
+            },
+            500: function (err) {
+              console.log('lose')
+            }
+          }
+        });
+}
+
 var NavBar = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
@@ -85,22 +114,7 @@ var ViewQuestionsList = React.createClass({
     //TODO: Make a request to the server to get this data for real.
     // "key" is for react. Just count from 1 and up.
     // "questionURL" is included for the future potential of right clicking and opeing the link to the question directly in a new tab. Basically, don't worry about it now.
-    this.state.questions = [
-      {
-        question: "Can somebody explain the significance of Oxygen to me?",
-        questionId: 42,
-        questionUrl: "#",
-        votes: 5,
-        key: 1
-      },
-      {
-        question: "Who ate my teddy bear?",
-        questionId: 123,
-        questionUrl: "#",
-        votes: 1,
-        key: 2
-      }
-    ];
+    this.state.questions = window.videoData;
   },
   childContextTypes: {
     muiTheme: React.PropTypes.object
@@ -241,11 +255,11 @@ var AskQuestionDialog = React.createClass({
           method: "POST",
           contentType: "application/json",
           data: JSON.stringify({
-            video : '1234',
-            text : window.$('#question-text').val,
-            username : 'name',
-            time : Math.floor(window.player.getCurrentTime()),
-            title : window.$('#question-title').val
+            video : 'test2', 
+            text : window.$('#question-text').val(), 
+            username : 'name', 
+            time : Math.floor(window.player.getCurrentTime()), 
+            title : window.$('#question-title').val()
           }),
           statusCode: {
             201: function (data) {
@@ -433,9 +447,11 @@ React.render(<AskQuestionDialog />,
   document.querySelector('.ask-question')
 );
 
-React.render(<ViewQuestionsDialog />,
-  document.querySelector('.view-questions')
-);
+getVideoData(function() {
+  React.render(<ViewQuestionsDialog />,
+    document.querySelector('.view-questions')
+  )
+});
 
 React.render(<Question
                 votes="5"
