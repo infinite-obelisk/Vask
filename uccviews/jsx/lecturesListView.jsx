@@ -38,18 +38,20 @@ ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
 
 var LecturesList = React.createClass({
+  getDefaultProps: function(){
+    return {
+      source: '/getcontents'
+    }
+  },
   getInitialState: function(){
     return {
       loaded: false,
       content: fakeVideos
     }
   },
-  test: function(){
-    console.log('TESTING');
-  },
   getContents: function(){
     var that = this;
-    /*$.ajax({
+    $.ajax({
       url: "/getquestions",
       method: "GET",
       contentType: "application/json",
@@ -64,7 +66,7 @@ var LecturesList = React.createClass({
         console.error("Failed fetching the server");
         throw errorThrown;
       }
-    });*/
+    });
   },
   componentWillMount: function(){
     console.log('Fetching contents..');
