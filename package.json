@@ -10,6 +10,7 @@
     "bookshelf": "^0.8.1",
     "browserify-directory": "^1.0.0",
     "chai": "^2.3.0",
+    "cors": "^2.6.0",
     "express": "~4.12.3",
     "express-partials": "~0.3.0",
     "express-session": "^1.11.1",
