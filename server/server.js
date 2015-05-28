@@ -24,6 +24,7 @@ app.get('/favicon.ico', util.stub);
 
 app.post('/addquestion', questionHandler.addQuestion);
 app.post('/addanswer', questionHandler.addAnswer);
+app.post('/votequestion', questionHandler.votequestion);
 app.get('/getquestions', questionHandler.getQuestions);
 
 app.post('/signup', userHandler.signUpUser);
