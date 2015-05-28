@@ -60,7 +60,7 @@ exports.voteQuestion = function (req, res) {
   if (info.inc === 'down' || info.inc === -1 || info.inc === '-1') info.inc = -1; else info.inc = 1;
   Question.update({_id : info._id}, {'$inc':{'votes': info.inc}}, function (err, data){
     if (!err) {
-      res.status(202).send({msg : 'voted ', info.inc});
+      res.status(202).send({msg : 'voted ' + info.inc});
     } else {
       res.status(500).send({msg : 'error while inserting into db'});
     }

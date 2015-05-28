@@ -6,6 +6,7 @@ var multer  = require('multer');
 var session = require('express-session');
 var questionHandler = require('./handlers/question-handler');
 var userHandler = require('./handlers/user-handler');
+var contentHandler = require('./handlers/content-handler');
 var util = require('./utilities');
 
 var app = express();
@@ -24,8 +25,10 @@ app.get('/favicon.ico', util.stub);
 
 app.post('/addquestion', questionHandler.addQuestion);
 app.post('/addanswer', questionHandler.addAnswer);
-app.post('/votequestion', questionHandler.votequestion);
+app.post('/votequestion', questionHandler.voteQuestion);
 app.get('/getquestions', questionHandler.getQuestions);
+
+app.get('/getlectures', contentHandler.getLectures);
 
 app.post('/signup', userHandler.signUpUser);
 app.post('/login', userHandler.login);
