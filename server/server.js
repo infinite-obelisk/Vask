@@ -8,9 +8,10 @@ var questionHandler = require('./handlers/question-handler');
 var userHandler = require('./handlers/user-handler');
 var contentHandler = require('./handlers/content-handler');
 var util = require('./utilities');
+var cors = require('cors');
 
 var app = express();
-
+app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(__dirname + '/../client'));
 
