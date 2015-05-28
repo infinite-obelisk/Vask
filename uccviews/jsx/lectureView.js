@@ -35,6 +35,7 @@ var getVideoData = function(cb) {
                   questionId : item._id,
                   questionUrl : '#',
                   votes : item.votes,
+                  answers : item.answers;
                   key : qdata.length + 1
                 })
               })
@@ -469,6 +470,10 @@ var ViewQuestionDialog = React.createClass({
   },
   getQuestionData: function(){
     var questionIdToBeFetched = this.props.questionID;
+    var questionData = window.videoData.reduce(function(memo, question){
+      if (question.questionId === questionIdToBeFetched) return question;
+      return memo;
+    },null);
     this.state.question = {
       id: 42,
       key: 1,
