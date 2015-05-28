@@ -28,16 +28,19 @@ var getVideoData = function(cb) {
               console.log('win');
               console.log(data);
               var qdata = [];
+              window.qObject = {};
               window.videoData = qdata;
               data.result.forEach(function (item) {
-                qdata.push({
+                var question = {
                   question : item.title,
                   questionId : item._id,
                   questionUrl : '#',
                   votes : item.votes,
                   answers : item.answers,
                   key : qdata.length + 1
-                })
+                };
+                qdata.push(question);
+                window.qObject[item._id] = question;
               })
               cb();
             },
@@ -85,6 +88,9 @@ var ViewQuestionsButton = React.createClass({
 });
 
 var ViewQuestionsListItem = React.createClass({
+  openQuestionDialog: function(){
+    window.questionDialogs[this.props.questionId].show();
+  },
   render: function(){
     return (<div
               className="row">
@@ -98,7 +104,9 @@ var ViewQuestionsListItem = React.createClass({
                   style={{"paddingTop": "38px"}}>
                     <h4>
                       <a
-                        href={this.props.questionUrl}>
+                        className="question-link"
+                        href={this.props.questionUrl}
+                        onClick={this.openQuestionDialog}>
                           {this.props.question}
                       </a>
                     </h4>
@@ -112,9 +120,6 @@ var ViewQuestionsList = React.createClass({
     return {};
   },
   getQuestionsList: function(){
-    //TODO: Make a request to the server to get this data for real.
-    // "key" is for react. Just count from 1 and up.
-    // "questionURL" is included for the future potential of right clicking and opeing the link to the question directly in a new tab. Basically, don't worry about it now.
     this.state.questions = window.videoData;
   },
   childContextTypes: {
@@ -126,15 +131,19 @@ var ViewQuestionsList = React.createClass({
     };
   },
   render: function(){
-    //David: Not sure how to make this all work async. If you need help integrating your request with this render, please let me know and we'll work on it together.
     this.getQuestionsList();
     return (<div>
               {this.state.questions.map(function(question){
-                return (<ViewQuestionsListItem
-                          votes={question.votes}
-                          question={question.question}
-                          questionUrl={question.questionUrl}
-                          key={question.key} />);
+                return (<div>
+                          <ViewQuestionDialog
+                            questionId={question.questionId} />
+                          <ViewQuestionsListItem
+                            votes={question.votes}
+                            question={question.question}
+                            questionUrl={question.questionUrl}
+                            questionId={question.questionId}
+                            key={question.key} />
+                        </div>);
               })}
             </div>);
   }
@@ -256,10 +265,10 @@ var AskQuestionDialog = React.createClass({
           method: "POST",
           contentType: "application/json",
           data: JSON.stringify({
-            video : 'test2', 
-            text : window.$('#question-text').val(), 
-            username : 'name', 
-            time : Math.floor(window.player.getCurrentTime()), 
+            video : 'test2',
+            text : window.$('#question-text').val(),
+            username : 'name',
+            time : Math.floor(window.player.getCurrentTime()),
             title : window.$('#question-title').val()
           }),
           statusCode: {
@@ -469,34 +478,10 @@ var ViewQuestionDialog = React.createClass({
     return {};
   },
   getQuestionData: function(){
-    var questionIdToBeFetched = this.props.questionID;
-    var questionData = window.videoData.reduce(function(memo, question){
-      if (question.questionId === questionIdToBeFetched) return question;
-      return memo;
-    },null);
-    this.state.question = {
-      id: 42,
-      key: 1,
-      votes: 5,
-      imgUrl: "https://secure.gravatar.com/avatar/?s=100&r=g&d=mm",
-      user: "Anonymous",
-      question: "Can somebody explain the significance of Oxygen to me?",
-      videoTime: "3:42",
-      questionTime: "1 day ago",
-      answers: [
-        {
-          key: 1,
-          votes: 3,
-          imgUrl:"https://secure.gravatar.com/avatar/?s=100&r=g&d=mm",
-          user: "Anonymous",
-          answer: "You need oxygen to survive.",
-          answerTime: "12 hours ago"
-        }
-      ]
-    };
+    this.state.question = window.qObject[this.props.questionId];
   },
   openModal: function(){
-    this.refs['ViewQuestionDialog' + this.state.question.id].show();
+    this.refs['ViewQuestionDialog' + this.state.question.questionId].show();
   },
   childContextTypes: {
     muiTheme: React.PropTypes.object
@@ -508,7 +493,7 @@ var ViewQuestionDialog = React.createClass({
   },
   closeDialog: function(){
     console.log("View Question Dialog Close");
-    this.refs['ViewQuestionDialog' + this.state.question.id].dismiss();
+    this.refs['ViewQuestionDialog' + this.state.question.questionId].dismiss();
   },
   render: function(){
     this.getQuestionData();
@@ -522,7 +507,7 @@ var ViewQuestionDialog = React.createClass({
 
     return (<div>
               <Dialog
-                ref={"ViewQuestionDialog" + this.state.question.id}
+                ref={"ViewQuestionDialog" + this.state.question.questionId}
                 title="Question"
                 actions={actions} >
                   <ViewQuestionAndAnswers
@@ -538,7 +523,7 @@ var ViewQuestionDialog = React.createClass({
   },
   componentDidMount: function(){
     if(!window.questionDialogs){ window.questionDialogs = {}; }
-    window.questionDialogs[this.state.question.id] = this.refs["ViewQuestionDialog" + this.state.question.id];
+    window.questionDialogs[this.state.question.questionId] = this.refs["ViewQuestionDialog" + this.state.question.questionId];
   }
 });
 
@@ -553,10 +538,5 @@ React.render(<AskQuestionDialog />,
 getVideoData(function() {
   React.render(<ViewQuestionsDialog />,
     document.querySelector('.view-questions')
-  )
+  );
 });
-
-//Example ViewQuestion
-React.render(<ViewQuestionDialog questionID={42} />,
-  document.querySelector('.view-question')
-);
