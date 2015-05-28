@@ -120,9 +120,6 @@ var ViewQuestionsList = React.createClass({
     return {};
   },
   getQuestionsList: function(){
-    //TODO: Make a request to the server to get this data for real.
-    // "key" is for react. Just count from 1 and up.
-    // "questionURL" is included for the future potential of right clicking and opeing the link to the question directly in a new tab. Basically, don't worry about it now.
     this.state.questions = window.videoData;
   },
   childContextTypes: {
@@ -134,7 +131,6 @@ var ViewQuestionsList = React.createClass({
     };
   },
   render: function(){
-    //David: Not sure how to make this all work async. If you need help integrating your request with this render, please let me know and we'll work on it together.
     this.getQuestionsList();
     return (<div>
               {this.state.questions.map(function(question){
