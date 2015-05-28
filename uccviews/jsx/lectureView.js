@@ -90,6 +90,7 @@ var ViewQuestionsButton = React.createClass({
 
 var ViewQuestionsListItem = React.createClass({
   openQuestionDialog: function(){
+    this.props.parentDiagClose();
     window.questionDialogs[this.props.questionId].show();
   },
   render: function(){
@@ -133,17 +134,17 @@ var ViewQuestionsList = React.createClass({
   },
   render: function(){
     this.getQuestionsList();
+    var thiz = this;
     return (<div>
               {this.state.questions.map(function(question){
                 return (<div>
-                          <ViewQuestionDialog
-                            questionId={question.questionId} />
                           <ViewQuestionsListItem
                             votes={question.votes}
                             question={question.question}
                             questionUrl={question.questionUrl}
                             questionId={question.questionId}
-                            key={question.key} />
+                            key={question.key}
+                            parentDiagClose={thiz.props.parentDiagClose} />
                         </div>);
               })}
             </div>);
@@ -184,10 +185,30 @@ var ViewQuestionsDialog = React.createClass({
                 ref="ViewQuestionsDialog"
                 title="Questions for this lecture"
                 actions={actions} >
-                  <ViewQuestionsList />
+                  <ViewQuestionsList
+                    parentDiagClose={this.closeDialog}/>
               </Dialog>
               <ViewQuestionsButton
                 openModal={this.openModal} />
+            </div>);
+  }
+});
+
+var AllQuestionDialogs = React.createClass({
+  getInitialState: function(){
+    return {};
+  },
+  getQuestionsList: function(){
+    this.state.questions = window.videoData;
+  },
+  render: function(){
+    this.getQuestionsList();
+    return (<div>
+              {this.state.questions.map(function(question){
+                return (<ViewQuestionDialog
+                          questionId={question.questionId} />
+                        );
+              })}
             </div>);
   }
 });
@@ -587,7 +608,12 @@ React.render(<AskQuestionDialog />,
 );
 
 getVideoData(function() {
-  React.render(<ViewQuestionsDialog />,
-    document.querySelector('.view-questions')
+  React.render(<AllQuestionDialogs />,
+    document.querySelector('.question-dialogs'),
+    function(){
+      React.render(<ViewQuestionsDialog />,
+        document.querySelector('.view-questions')
+      );
+    }
   );
 });
