@@ -32,7 +32,7 @@ exports.addAnswer = function(req, res) {
   var answer = { text : info.text, votes : 0};
   Question.update({_id : info._id}, {'$push':{'answers': answer}}, function (err, data){
     if (!err) {
-      res.status(202).send({msg : 'answered'});
+      res.status(201).send({msg : 'answered'});
     } else {
       res.status(500).send({msg : 'error while inserting into db'});
     }

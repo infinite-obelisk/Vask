@@ -450,6 +450,27 @@ var AnswerForm = React.createClass({
     //TODO: Submit Answer AJAX
     var answerText = this.refs.answerText.getValue();
     var questionId = this.props.questionId;
+    $.ajax({
+          url: "/addanswer",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({
+            text : answerText,
+            _id : questionId
+          }),
+          statusCode: {
+            201: function (data) {
+              console.log('win');
+              console.log(data);
+              //self.clearForm();
+              //self.closeDialog();
+            },
+            500: function (err) {
+              console.log('lose')
+            }
+          }
+        });
+
   },
   childContextTypes: {
     muiTheme: React.PropTypes.object
