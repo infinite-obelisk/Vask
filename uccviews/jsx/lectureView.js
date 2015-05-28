@@ -35,7 +35,7 @@ var getVideoData = function(cb) {
                   questionId : item._id,
                   questionUrl : '#',
                   votes : item.votes,
-                  answers : item.answers;
+                  answers : item.answers,
                   key : qdata.length + 1
                 })
               })
