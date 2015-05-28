@@ -37,7 +37,8 @@ var getVideoData = function(cb) {
                   questionUrl : '#',
                   votes : item.votes,
                   answers : item.answers,
-                  key : qdata.length + 1
+                  key : qdata.length + 1,
+                  user: item.username || "Anonymous"
                 };
                 qdata.push(question);
                 window.qObject[item._id] = question;
@@ -358,7 +359,8 @@ var Voting = React.createClass({
 var QuestionEntry = React.createClass({
   render: function(){
     return (<div
-              className="col-lg-9 col-md-9 col-sm-9 col-xs-9 question-text">
+              className="col-lg-10 col-md-10 col-sm-10 col-xs-10"
+              style={{"paddingTop": "25px"}}>
                 <a href="#">
                   <h4
                     className="media-heading user-name">
@@ -387,11 +389,9 @@ var Question = React.createClass({
     return (<div
               className="row question">
               <div
-                className="col-lg-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                className="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
                   <Voting
                     votes={this.props.votes} />
-                  <ProfilePicture
-                    imgUrl={this.props.imgUrl}/>
               </div>
               <QuestionEntry
                 user={this.props.user}
@@ -405,7 +405,8 @@ var Question = React.createClass({
 var AnswerEntry = React.createClass({
   render: function(){
     return (<div
-              className="col-lg-8 col-md-8 col-sm-8 col-xs-8 answer-text">
+              className="col-lg-11 col-md-11 col-sm-11 col-xs-11 answer-text"
+              style={{"paddingTop": "25px"}}>
                 <a
                   href="#">
                     <h4
@@ -431,11 +432,9 @@ var Answer = React.createClass({
     return (<div
               className="row answer">
                 <div
-                  className="col-lg-3 col-md-3 col-sm-3 col-xs-3 col-lg-offset-1 col-md-offset-1 col-sm-offset-1 col-xs-offset-1 text-center">
+                  className="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
                     <Voting
                       votes={this.props.votes} />
-                    <ProfilePicture
-                      imgUrl={this.props.imgUrl}/>
                 </div>
                 <AnswerEntry
                   user={this.props.user}
@@ -515,8 +514,8 @@ var ViewQuestionAndAnswers = React.createClass({
                           key={answer.key}
                           votes={answer.votes}
                           imgUrl={answer.imgUrl}
-                          user={answer.user}
-                          answer={answer.answer}
+                          user={answer.user || "Anonymous"}
+                          answer={answer.text}
                           answerTime={answer.answerTime}/>
                         );
               })}
