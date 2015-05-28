@@ -461,7 +461,7 @@ var AnswerForm = React.createClass({
     return (<div>
               <TextField
                 hintText="Type your answer here..."
-                id="Answer-text"
+                className="answer-text"
                 multiLine={true}
                 style={{"width": "95%"}}/>
               <FlatButton
