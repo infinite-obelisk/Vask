@@ -130,11 +130,15 @@ var ViewQuestionsList = React.createClass({
     this.getQuestionsList();
     return (<div>
               {this.state.questions.map(function(question){
-                return (<ViewQuestionsListItem
-                          votes={question.votes}
-                          question={question.question}
-                          questionUrl={question.questionUrl}
-                          key={question.key} />);
+                return (<div>
+                          <ViewQuestionDialog
+                            questionId={question.questionId} />
+                          <ViewQuestionsListItem
+                            votes={question.votes}
+                            question={question.question}
+                            questionUrl={question.questionUrl}
+                            key={question.key} />
+                        </div>);
               })}
             </div>);
   }
@@ -256,10 +260,10 @@ var AskQuestionDialog = React.createClass({
           method: "POST",
           contentType: "application/json",
           data: JSON.stringify({
-            video : 'test2', 
-            text : window.$('#question-text').val(), 
-            username : 'name', 
-            time : Math.floor(window.player.getCurrentTime()), 
+            video : 'test2',
+            text : window.$('#question-text').val(),
+            username : 'name',
+            time : Math.floor(window.player.getCurrentTime()),
             title : window.$('#question-title').val()
           }),
           statusCode: {
@@ -555,8 +559,3 @@ getVideoData(function() {
     document.querySelector('.view-questions')
   )
 });
-
-//Example ViewQuestion
-React.render(<ViewQuestionDialog questionID={42} />,
-  document.querySelector('.view-question')
-);
