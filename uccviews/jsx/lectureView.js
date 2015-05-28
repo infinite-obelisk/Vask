@@ -448,6 +448,8 @@ var Answer = React.createClass({
 var AnswerForm = React.createClass({
   submitAnswer: function(){
     //TODO: Submit Answer AJAX
+    var answerText = this.refs.answerText.getValue();
+    var questionId = this.props.questionId;
   },
   childContextTypes: {
     muiTheme: React.PropTypes.object
@@ -461,12 +463,13 @@ var AnswerForm = React.createClass({
     return (<div>
               <TextField
                 hintText="Type your answer here..."
-                className="answer-text"
+                ref="answerText"
                 multiLine={true}
                 style={{"width": "95%"}}/>
               <FlatButton
                 label="Submit"
-                style={{"float": "right"}}/>
+                style={{"float": "right"}}
+                onClick={this.submitAnswer}/>
               <div
                 style={{"clear": "both"}}>
               </div>
