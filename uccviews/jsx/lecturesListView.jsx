@@ -2,35 +2,9 @@ var React    = require('react'),
 	  $        = require('jquery/dist/jquery.js'),
     TopBar   = require('./template.js'),
     mui      = require('material-ui'),
-    AppBar   = mui.AppBar;
+    AppBar   = mui.AppBar,
+    Loader   = require('./loader.jsx');
 
-
-var fakeVideos = [
-  {
-    url: "https://www.youtube.com/watch?v=Jh0er2pRcq8&list=PLUPi8Qj7uZ3QpsamMg8NvqI9QWv3bK974",
-    title: "Explore MEAN Stack at 2015",
-    subtitle: "Added 1 year ago",
-    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo kdjkwe qwkdkmkmqd kqwdjkqwdkq oqwdkqdwqm qodpqwkdokq oqwkdow owd wow ow owkdowklwdm wokw w lmwdlwm owoowldmo."
-  },  
-  {
-    url: "https://www.youtube.com/watch?v=1RMWS60gGUY&list=PLUPi8Qj7uZ3QpsamMg8NvqI9QWv3bK974&index=2",
-    title: "Building high quality services at Uber with Node.js",
-    subtitle: "Added 5 minutes ago",
-    description: "ed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium"
-  },
-  {
-    url: "https://www.youtube.com/watch?v=WOVmr6CjgNw&index=3&list=PLUPi8Qj7uZ3QpsamMg8NvqI9QWv3bK974",
-    title: "Comparing Node.js Frameworks: Express, Hapi, LoopBack, Sailsjs and Meteor",
-    subtitle: "Added 2 years ago",
-    description: "xcepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-  },
-  {
-    url: "https://www.youtube.com/watch?v=FVdH9YcB3Dg&list=PLUPi8Qj7uZ3QpsamMg8NvqI9QWv3bK974&index=5",
-    title: "Node.js Fundamentals",
-    subtitle: "Added 3 weeks ago",
-    description: " Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris"
-  },
-];
 
 // TopBar
 var ThemeManager = new mui.Styles.ThemeManager();
@@ -40,27 +14,30 @@ ThemeManager.setTheme(ThemeManager.types.LIGHT);
 var LecturesList = React.createClass({
   getDefaultProps: function(){
     return {
-      source: '/getcontents'
+      source: '/getlectures'
     }
   },
   getInitialState: function(){
     return {
       loaded: false,
-      content: fakeVideos
+      content: []
     }
   },
-  getContents: function(){
+  componentDidMount: function(){
+    console.log('Fetching contents..');
     var that = this;
     $.ajax({
-      url: "/getquestions",
+      url: this.props.source,
       method: "GET",
       contentType: "application/json",
       success: function(data){
-        console.log( "Data received: ");
-        console.dir( data );
-
-        console.log('this',that.test());
-
+        console.log( "Data received: " + data);
+        setInterval(function(){
+          that.setState({
+            loaded: true,
+            content: data.result
+          });  
+        }, 2000);
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
         console.error("Failed fetching the server");
@@ -68,19 +45,20 @@ var LecturesList = React.createClass({
       }
     });
   },
-  componentWillMount: function(){
-    console.log('Fetching contents..');
-    this.getContents()
-  },  
   render: function() {
     var rows = this.state.content.map(function(content, i){
       return <ContentRow data={content} key={i}/>
     });
     return (
-      <div className="container">
-        <CatalogTitle/>
-        {rows}
-      </div>
+      <Loader loaded={this.state.loaded}>
+        <div className="container">
+          
+            <CatalogTitle/>
+            {rows}
+          
+        </div>
+      </Loader>
+      
     );
   }
 });
