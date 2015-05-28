@@ -375,11 +375,7 @@ var QuestionEntry = React.createClass({
                     <span
                       className="question-time">
                          {this.props.questionTime}
-                    </span>&nbsp;|&nbsp;
-                    <a
-                      href="#">
-                         Answer
-                    </a>
+                    </span>
                   </small>
                 </p>
             </div>);
@@ -449,6 +445,35 @@ var Answer = React.createClass({
   }
 });
 
+var AnswerForm = React.createClass({
+  submitAnswer: function(){
+    //TODO: Submit Answer AJAX
+  },
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  getChildContext: function(){
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  },
+  render: function(){
+    return (<div>
+              <TextField
+                hintText="Type your answer here..."
+                id="Answer-text"
+                multiLine={true}
+                style={{"width": "95%"}}/>
+              <FlatButton
+                label="Submit"
+                style={{"float": "right"}}/>
+              <div
+                style={{"clear": "both"}}>
+              </div>
+            </div>);
+  }
+});
+
 var ViewQuestionAndAnswers = React.createClass({
   render: function(){
     return (<div>
@@ -459,6 +484,8 @@ var ViewQuestionAndAnswers = React.createClass({
                 question={this.props.question}
                 videoTime={this.props.videoTime}
                 questionTime={this.props.questionTime}/>
+              <AnswerForm
+                questionId={this.props.questionId}/>
               {this.props.answers.map(function(answer){
                 return (<Answer
                           key={answer.key}
@@ -515,6 +542,7 @@ var ViewQuestionDialog = React.createClass({
                     imgUrl={this.state.question.imgUrl}
                     user={this.state.question.user}
                     question={this.state.question.question}
+                    questionId={this.state.question.questionId}
                     videoTime={this.state.question.videoTime}
                     questionTime={this.state.question.questionTime}
                     answers={this.state.question.answers} />
