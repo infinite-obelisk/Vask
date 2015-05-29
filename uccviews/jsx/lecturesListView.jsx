@@ -3,6 +3,7 @@ var React    = require('react'),
     TopBar   = require('./template.js'),
     mui      = require('material-ui'),
     AppBar   = mui.AppBar,
+    Snackbar   = mui.Snackbar,
     Loader   = require('./loader.jsx');
 
 
@@ -24,6 +25,7 @@ var LecturesList = React.createClass({
     }
   },
   componentDidMount: function(){
+
     console.log('Fetching contents..');
     var that = this;
     $.ajax({
@@ -32,12 +34,12 @@ var LecturesList = React.createClass({
       contentType: "application/json",
       success: function(data){
         console.log( "Data received: " + data);
-        setInterval(function(){
+        setTimeout(function(){
           that.setState({
             loaded: true,
             content: data.result
           });  
-        }, 2000);
+        }, 1000);
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) {
         console.error("Failed fetching the server");
@@ -52,10 +54,8 @@ var LecturesList = React.createClass({
     return (
       <Loader loaded={this.state.loaded}>
         <div className="container">
-          
             <CatalogTitle/>
             {rows}
-          
         </div>
       </Loader>
       
@@ -74,7 +74,29 @@ var CatalogTitle = React.createClass({
 });
 
 var ContentRow = React.createClass({
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  getChildContext: function(){
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  },
+  //Somewhere in our code
+  _handleAction: function() {
+    //We can add more code to this function, but for now we'll just include an alert.
+    alert("We removed the event from your calendar.");
+  },
+  showSnackbar: function(){
+    console.log('Show the f***** snackbar, HAHAHHA');
+    console.dir(Snackbar);
+    // Snackbar.show();
+  },
+
   render: function() {
+    console.log(this.props.data._id);
+    var link = "/" + this.props.data._id;
+
     return (
       <div className="contentBox row">
         <hr/>
@@ -83,7 +105,7 @@ var ContentRow = React.createClass({
         </div>
         
         <div className="col-lg-9 col-md-8 col-sm-7">
-          <div className="ct-title">{this.props.data.title}</div>
+          <div className="ct-title"><a href={link} onClick={this.showSnackbar}>{this.props.data.title}</a></div>
           <div className="ct-subtitle">{this.props.data.subtitle}</div>
           <div className="ct-description">{this.props.data.description}</div>
         </div>
