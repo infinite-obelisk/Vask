@@ -78,47 +78,67 @@ var PopupQuestion = React.createClass({
   mixins: [MaterialMixin],
   getInitialState: function(){
     return {
+      playerLoaded: false,
       newQuestion: false
     }
   },
-  componentDidMount: function(){
+  checkPopupQuestions: function(){
 
     var getPlayerCurrentTime = function(){
-      return window.player.getCurrentTime();
+      return Math.floor(window.player.getCurrentTime());
     };
 
-    var checkQuestOnThisTime = function(){
+    var checkQuestOnThisTime = function(reactScope){
+      var currentTime = getPlayerCurrentTime();
       var questions = window.qObject;
       if(questions){
         for (var question in questions) {
-          console.log("question:",question);
+          var questionTime = window.qObject[question].time;
+          console.log('questionTime',questionTime);
+          console.log('currentTime',currentTime);
+          if (questionTime === currentTime) {
+            console.log('refs Alert', reactScope.refs.alert);
+            // show question popup!
+            reactScope.refs.alert.show();
+            // close the popup after 5 seconds
+            setTimeout(reactScope.refs.alert.dismiss.bind(this), 5000);
+          }
         }
-      } else {
-        checkQuestOnThisTime();
-      }
+      } 
     };
 
+    checkQuestOnThisTime(this);
+  },
+  componentDidMount: function(){
+
     // check whether the player is loded
-    var playerIsLoaded = function(callback){
+    var playerIsLoaded = function(reactScope){
       // checks if the player object is loaded
       if (window.player) {
         // checks if the player API is loaded
         if (window.player.getCurrentTime === undefined) {
           console.log('API is not ready yet');
           // if it's not, try again
-          setTimeout(playerIsLoaded.bind(this, callback), 500);
+          setTimeout(playerIsLoaded.bind(this, reactScope), 500);
         } else {
-          // Invoke the callback
+          // Update the state of the component
           console.log('readyyy');
-          callback();
+          reactScope.setState({
+            playerLoaded: true
+          });
+          reactScope.checkPopupQuestions();
+          console.log('STATE UPDATED', reactScope.state);
         }
       } else {
         // if it's not, try again
         console.log('Failed :( .. No player');
-        setTimeout(playerIsLoaded.bind(this, callback), 1000);
+        console.log('this REACT', this);
+        setTimeout(playerIsLoaded.bind(this, reactScope), 1000);
       }
     };
-    playerIsLoaded(getPlayerCurrentTime); 
+    console.log('OUTSIDE FUNCTION', this); 
+    playerIsLoaded(this);
+
 
   },
   _handleAction: function(){
@@ -130,7 +150,6 @@ var PopupQuestion = React.createClass({
           ref="alert"
           message="Event added to your calendar"
           action="Answer it"
-          openOnMount="true"
           onActionTouchTap={this._handleAction}/>
     );
   }
