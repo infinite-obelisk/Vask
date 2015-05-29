@@ -19,9 +19,15 @@ exports.getUserInfo = function(request, response) {
   var defaultNeededInfo = ['username'];
   var neededUserInfo = request.body.neededUserInfo || defaultNeededInfo;
   console.log('session username', request.session.user.username);
-  var userInfo = neededUserInfo.map(function(info) {
-    return request.session.user[info];
-  });
+  
+  var userInfo = {};
+  for (var i = 0; i < neededUserInfo.length; i++) {
+    var infoName = neededUserInfo[i];
+    userInfo[infoName] = request.session.user[infoName];
+  }
+  // var userInfo = neededUserInfo.map(function(info) {
+  //   return request.session.user[info];
+  // });
   response.send(userInfo);
 };
 
