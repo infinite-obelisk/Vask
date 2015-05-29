@@ -11,8 +11,31 @@ var React    = require('react'),
 var ThemeManager = new mui.Styles.ThemeManager();
 ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
+var MaterialMixin = {
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  getChildContext: function(){
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  }
+}
+
 
 var LecturesList = React.createClass({
+  mixins: [MaterialMixin],
+  //Somewhere in our code
+  _handleAction: function() {
+    //We can add more code to this function, but for now we'll just include an alert.
+    alert("We removed the event from your calendar.");
+  },
+  showSnackbar: function(){
+    console.log('Show the f***** snackbar, HAHAHHA');
+    // console.dir(Snackbar);
+    // Snackbar.show();
+  },
+
   getDefaultProps: function(){
     return {
       source: '/getlectures'
@@ -27,6 +50,7 @@ var LecturesList = React.createClass({
   componentDidMount: function(){
 
     console.log('Fetching contents..');
+    console.log('SNACKBAR', this.refs.alert);
     var that = this;
     $.ajax({
       url: this.props.source,
@@ -52,13 +76,21 @@ var LecturesList = React.createClass({
       return <ContentRow data={content} key={i}/>
     });
     return (
-      <Loader loaded={this.state.loaded}>
-        <div className="container">
-            <CatalogTitle/>
-            {rows}
-        </div>
-      </Loader>
-      
+      <div>
+        <Snackbar
+          ref="alert"
+          message="Event added to your calendar"
+          action="undo"
+          openOnMount="true"
+          onActionTouchTap={this._handleAction}/>
+
+        <Loader loaded={this.state.loaded}>
+          <div className="container">
+              <CatalogTitle/>
+              {rows}
+          </div>
+        </Loader>
+      </div>
     );
   }
 });
@@ -74,25 +106,6 @@ var CatalogTitle = React.createClass({
 });
 
 var ContentRow = React.createClass({
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-  getChildContext: function(){
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
-  },
-  //Somewhere in our code
-  _handleAction: function() {
-    //We can add more code to this function, but for now we'll just include an alert.
-    alert("We removed the event from your calendar.");
-  },
-  showSnackbar: function(){
-    console.log('Show the f***** snackbar, HAHAHHA');
-    console.dir(Snackbar);
-    // Snackbar.show();
-  },
-
   render: function() {
     console.log(this.props.data._id);
     var link = "/" + this.props.data._id;
@@ -105,7 +118,7 @@ var ContentRow = React.createClass({
         </div>
         
         <div className="col-lg-9 col-md-8 col-sm-7">
-          <div className="ct-title"><a href={link} onClick={this.showSnackbar}>{this.props.data.title}</a></div>
+          <div className="ct-title"><a href={link}>{this.props.data.title}</a></div>
           <div className="ct-subtitle">{this.props.data.subtitle}</div>
           <div className="ct-description">{this.props.data.description}</div>
         </div>

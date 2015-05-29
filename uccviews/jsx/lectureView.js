@@ -14,7 +14,8 @@ var mui = require('material-ui'),
     RaisedButton = mui.RaisedButton,
     FlatButton = mui.FlatButton,
     Dialog = mui.Dialog,
-    TextField = mui.TextField;
+    TextField = mui.TextField,
+    Snackbar   = mui.Snackbar;
 var ThemeManager = new mui.Styles.ThemeManager();
 ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
@@ -41,6 +42,7 @@ var getVideoData = function(cb) {
                   question : item.title,
                   questionId : item._id,
                   questionUrl : '#',
+                  time: item.time,
                   votes : item.votes,
                   key : qdata.length + 1,
                   user: item.username || "Anonymous",
@@ -59,6 +61,62 @@ var getVideoData = function(cb) {
         });
 }
 
+// ==================== Snackbar - PopupQuestion ==================== //
+var MaterialMixin = {
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  getChildContext: function(){
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  }
+}
+
+// Snackbar (question alert)
+var PopupQuestion = React.createClass({
+  mixins: [MaterialMixin],
+  getInitialState: function(){
+    return {
+      newQuestion: false
+    }
+  },
+  componentDidMount: function(){
+
+    var getTimeQuestion = function(){
+      if (window.player) {
+        if (window.player.getCurrentTime === undefined) {
+          setTimeout(getTimeQuestion, 500);
+        } else {
+          var actualTime = Math.floor(window.player.getCurrentTime());
+          console.log('video time', actualTime);
+        }
+      } else {
+        console.log('Failed :( .. No player');
+        setTimeout(getTimeQuestion, 1000);
+      }
+    };
+    getTimeQuestion(); 
+
+  },
+  _handleAction: function(){
+    alert("We removed the event from your calendar.");
+  },
+  render: function() {
+    return (
+        <Snackbar
+          ref="alert"
+          message="Event added to your calendar"
+          action="Answer it"
+          openOnMount="true"
+          onActionTouchTap={this._handleAction}/>
+    );
+  }
+});
+
+
+
+// ================================================================= //
 var NavBar = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
@@ -203,6 +261,7 @@ var ViewQuestionsDialog = React.createClass({
 });
 
 var AllQuestionDialogs = React.createClass({
+
   getInitialState: function(){
     return {};
   },
@@ -212,6 +271,7 @@ var AllQuestionDialogs = React.createClass({
   render: function(){
     this.getQuestionsList();
     return (<div>
+              <PopupQuestion />
               {this.state.questions.map(function(question){
                 return (<ViewQuestionDialog
                           questionId={question.questionId} />
