@@ -34,6 +34,7 @@ var getVideoData = function(cb) {
               data.result.forEach(function (item) {
                 var answers = item.answers.map(function(answer){
                   answer.answerTime = formatTime(answer.createdAt, dateTime);
+                  answer.questionId = item._id;
                   return answer;
                 });
                 var question = {
@@ -105,7 +106,8 @@ var ViewQuestionsListItem = React.createClass({
                 <div
                   className="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
                     <Voting
-                      votes={this.props.votes}/>
+                      votes={this.props.votes}
+                      questionId={this.props.questionId} />
                 </div>
                 <div
                   className="col-lg-11 col-md-11 col-sm-11 col-xs-11"
@@ -354,6 +356,28 @@ var ProfilePicture = React.createClass({
 });
 
 var Voting = React.createClass({
+  voteUp: function(){
+    console.log("vote up");
+    var isAnswer = !!this.props.answerIndex;
+    var answerIndex = this.props.answerIndex;
+    var questionId = this.props.questionId;
+    if(isAnswer){
+
+    } else {
+
+    }
+  },
+  voteDown: function(){
+    console.log("vote down");
+    var isAnswer = !!this.props.answerIndex;
+    var answerIndex = this.props.answerIndex;
+    var questionId = this.props.questionId;
+    if(isAnswer){
+
+    } else {
+
+    }
+  },
   getInitialState: function(){
     return {votes: this.props.votes};
   },
@@ -370,14 +394,16 @@ var Voting = React.createClass({
               className="media-left voting">
                 <IconButton
                   iconClassName="mdi mdi-chevron-up vote-button"
-                  tooltip="Vote Up" />
+                  tooltip="Vote Up"
+                  onClick={this.voteUp} />
                 <p
                   className="votes">
                     <span>{this.state.votes}</span>
                 </p>
                 <IconButton
                   iconClassName="mdi mdi-chevron-down vote-button"
-                  tooltip="Vote Down"/>
+                  tooltip="Vote Down"
+                  onClick={this.voteDown} />
             </div>
             );
   }
@@ -418,7 +444,8 @@ var Question = React.createClass({
               <div
                 className="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
                   <Voting
-                    votes={this.props.votes} />
+                    votes={this.props.votes}
+                    questionId={this.props.questionId} />
               </div>
               <QuestionEntry
                 user={this.props.user}
@@ -461,7 +488,8 @@ var Answer = React.createClass({
                 <div
                   className="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
                     <Voting
-                      votes={this.props.votes} />
+                      votes={this.props.votes}
+                      questionId={this.props.questionId} />
                 </div>
                 <AnswerEntry
                   user={this.props.user}
@@ -533,17 +561,20 @@ var ViewQuestionAndAnswers = React.createClass({
                 user={this.props.user}
                 question={this.props.question}
                 videoTime={this.props.videoTime}
-                questionTime={this.props.questionTime}/>
+                questionTime={this.props.questionTime}
+                questionId={this.props.questionId}/>
               <AnswerForm
                 questionId={this.props.questionId}/>
-              {this.props.answers.map(function(answer){
+              {this.props.answers.map(function(answer, index){
                 return (<Answer
                           key={answer.key}
                           votes={answer.votes}
                           imgUrl={answer.imgUrl}
                           user={answer.user || "Anonymous"}
                           answer={answer.text}
-                          answerTime={answer.answerTime}/>
+                          answerTime={answer.answerTime}
+                          answerIndex={index}
+                          questionId={answer.questionId}/>
                         );
               })}
             </div>);
