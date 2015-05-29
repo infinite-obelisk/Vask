@@ -362,9 +362,46 @@ var Voting = React.createClass({
     var answerIndex = this.props.answerIndex;
     var questionId = this.props.questionId;
     if(isAnswer){
-
+      console.log('vote answer');
+      $.ajax({
+          url: "/voteanswer",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({
+            inc : 1,
+            _id : questionId,
+            idx : answerIndex
+          }),
+          statusCode: {
+            201: function (data) {
+              console.log('win');
+              console.log(data);
+              },
+            500: function (err) {
+              console.log('lose')
+            }
+          }
+        });
     } else {
-
+      console.log('question up vote');
+      $.ajax({
+          url: "/votequestion",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({
+            inc : 1,
+            _id : questionId
+          }),
+          statusCode: {
+            201: function (data) {
+              console.log('win');
+              console.log(data);
+              },
+            500: function (err) {
+              console.log('lose')
+            }
+          }
+        });
     }
   },
   voteDown: function(){
@@ -373,8 +410,45 @@ var Voting = React.createClass({
     var answerIndex = this.props.answerIndex;
     var questionId = this.props.questionId;
     if(isAnswer){
-
+      console.log('vote answer');
+      $.ajax({
+          url: "/voteanswer",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({
+            inc : -1,
+            _id : questionId,
+            idx : answerIndex
+          }),
+          statusCode: {
+            201: function (data) {
+              console.log('win');
+              console.log(data);
+              },
+            500: function (err) {
+              console.log('lose')
+            }
+          }
+        });
     } else {
+      $.ajax({
+          url: "/votequestion",
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify({
+            inc : -1,
+            _id : questionId
+          }),
+          statusCode: {
+            201: function (data) {
+              console.log('win');
+              console.log(data);
+              },
+            500: function (err) {
+              console.log('lose')
+            }
+          }
+        }); 
 
     }
   },

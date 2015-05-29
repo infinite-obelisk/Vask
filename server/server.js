@@ -41,6 +41,7 @@ app.get('/favicon.ico', util.stub);
 app.post('/addquestion', questionHandler.addQuestion);
 app.post('/addanswer', questionHandler.addAnswer);
 app.post('/votequestion', questionHandler.voteQuestion);
+app.post('/voteanswer', questionHandler.voteAnswer);
 app.get('/getquestions', questionHandler.getQuestions);
 
 app.get('/getlectures', contentHandler.getLectures);
