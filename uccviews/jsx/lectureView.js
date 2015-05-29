@@ -15,7 +15,8 @@ var mui = require('material-ui'),
     FlatButton = mui.FlatButton,
     Dialog = mui.Dialog,
     TextField = mui.TextField,
-    Snackbar   = mui.Snackbar;
+    Snackbar   = mui.Snackbar,
+    $          = require('jquery');
 var ThemeManager = new mui.Styles.ThemeManager();
 ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
@@ -87,9 +88,9 @@ var PopupQuestion = React.createClass({
   // If the popup is closed, invoke the the checkPopupQuestions 
   // func to display new questions..
   popupWatcher: function(){
-    console.log('watcher loaded');
-    if (this.state.playerLoaded && !this.state.popupOpened) {
-      console.log('check popup questions invoked');
+    // console.log('watcher loaded');
+    if (this.state.playerLoaded && this.state.popupOpened === false) {
+      // console.log('check popup questions invoked',this.state.popupOpened);
       this.checkPopupQuestions()
     } else {
       console.log('popup is open.. invoking the watcher in 0.5 seconds');
@@ -99,13 +100,13 @@ var PopupQuestion = React.createClass({
 
   checkPlayerStats: function(){
     if (window.player.getPlayerState() === -1) {
-      console.log('player paused');
+      // console.log('player paused');
       return 'paused'
     } else if (window.player.getPlayerState() === 1) {
-      console.log('player playing');
+      // console.log('player playing');
       return 'playing'
     } else if (window.player.getPlayerState() === 3) {
-      console.log('player buffering');
+      // console.log('player buffering');
       return 'buffering'
     }
   },
@@ -122,8 +123,8 @@ var PopupQuestion = React.createClass({
       if(questions){
         for (var question in questions) {
           var questionTime = window.qObject[question].time;
-          console.log('questionTime',questionTime);
-          console.log('currentTime',currentTime);
+          // console.log('questionTime',questionTime);
+          // console.log('currentTime',currentTime);
           if (questionTime === currentTime) {
             // checks if the player is playing
             if (reactScope.checkPlayerStats() === 'playing') {
@@ -144,11 +145,11 @@ var PopupQuestion = React.createClass({
                   // update the state
                   this.setState({ popupOpened: false });
                   // invoke the watcher to check new questions
-                  console.log('watcher activated', this.state);
+                  // console.log('watcher activated', this.state);
                   this.popupWatcher();
                 }
                 // close the popup after 5 seconds passing the callback
-                setTimeout(closePopup.bind(reactScope), 5000);
+                setTimeout(closePopup.bind(reactScope), 6000);
                 // breake the loop 
                 return;
               }
@@ -157,7 +158,7 @@ var PopupQuestion = React.createClass({
           }
         };
         // if theres no question at this point, invoke the watcher
-        setTimeout(reactScope.popupWatcher.bind(this), 500);
+        setTimeout(reactScope.popupWatcher.bind(this), 850);
 
       } 
     };
@@ -446,6 +447,7 @@ var AskQuestionDialog = React.createClass({
   },
   submitQuestion: function(){
     console.log("Submit Question");
+    console.log("Time question", Math.floor(window.player.getCurrentTime()));
     var self = this;
     $.ajax({
           url: "/addquestion",
