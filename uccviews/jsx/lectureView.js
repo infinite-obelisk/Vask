@@ -79,6 +79,7 @@ var PopupQuestion = React.createClass({
   getInitialState: function(){
     return {
       playerLoaded: false,
+      playerState: undefined,
       popupOpened: false,
       question: false
     }
@@ -95,6 +96,20 @@ var PopupQuestion = React.createClass({
       setTimeout(this.popupWatcher.bind(this), 500);
     }
   },
+
+  checkPlayerStats: function(){
+    if (window.player.getPlayerState() === -1) {
+      console.log('player paused');
+      return 'paused'
+    } else if (window.player.getPlayerState() === 1) {
+      console.log('player playing');
+      return 'playing'
+    } else if (window.player.getPlayerState() === 3) {
+      console.log('player buffering');
+      return 'buffering'
+    }
+  },
+
   checkPopupQuestions: function(){
 
     var getPlayerCurrentTime = function(){
@@ -110,28 +125,35 @@ var PopupQuestion = React.createClass({
           console.log('questionTime',questionTime);
           console.log('currentTime',currentTime);
           if (questionTime === currentTime) {
-            console.log('refs Alert', reactScope.refs.alert);
-            // update the state of the component (message)
-            reactScope.setState({
-              question: window.qObject[question].question,
-              popupOpened: true
-            });
-            // show question popup!
-            reactScope.refs.alert.show();
-            // callback to close the popup and update the state
-            var closePopup = function(){
-              // closes the popup
-              this.refs.alert.dismiss();
-              // update the state
-              this.setState({ popupOpened: false });
-              // invoke the watcher to check new questions
-              console.log('watcher activated', this.state);
-              this.popupWatcher();
+            // checks if the player is playing
+            if (reactScope.checkPlayerStats() === 'playing') {
+              // check if the popup is opened
+              if (!reactScope.state.popupOpened) {
+                console.log('refs Alert', reactScope.refs.alert);
+                // update the state of the component (message)
+                reactScope.setState({
+                  question: window.qObject[question].question,
+                  popupOpened: true
+                });
+                // show question popup!
+                reactScope.refs.alert.show();
+                // callback to close the popup and update the state
+                var closePopup = function(){
+                  // closes the popup
+                  this.refs.alert.dismiss();
+                  // update the state
+                  this.setState({ popupOpened: false });
+                  // invoke the watcher to check new questions
+                  console.log('watcher activated', this.state);
+                  this.popupWatcher();
+                }
+                // close the popup after 5 seconds passing the callback
+                setTimeout(closePopup.bind(reactScope), 5000);
+                // breake the loop 
+                return;
+              }
             }
-            // close the popup after 5 seconds passing the callback
-            setTimeout(closePopup.bind(reactScope), 5000);
-            // breake the loop 
-            return;
+
           }
         };
         // if theres no question at this point, invoke the watcher
@@ -157,7 +179,8 @@ var PopupQuestion = React.createClass({
           // Update the state of the component
           console.log('readyyy');
           reactScope.setState({
-            playerLoaded: true
+            playerLoaded: true,
+            playerState: reactScope.checkPlayerStats()
           });
           reactScope.checkPopupQuestions();
           console.log('STATE UPDATED', reactScope.state);
