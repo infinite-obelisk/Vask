@@ -11,6 +11,7 @@ exports.addQuestion = function (req, res) {
        text: info.text,
        title: info.title,
        votes : 0,
+       createdAt : new Date().getTime(),
        answers : []
 	});
 	newQuestion.save(function (err) {
@@ -29,7 +30,7 @@ exports.addQuestion = function (req, res) {
 exports.addAnswer = function(req, res) {
   var info = req.body;
   console.log('adding answer ', info);
-  var answer = { text : info.text, votes : 0};
+  var answer = { text : info.text, votes : 0, createdAt : new Date().getTime()};
   Question.update({_id : info._id}, {'$push':{'answers': answer}}, function (err, data){
     if (!err) {
       res.status(201).send({msg : 'answered'});

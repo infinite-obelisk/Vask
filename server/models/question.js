@@ -7,6 +7,7 @@ var questionSchema = mongoose.Schema({
   title : { type : String},
   text: { type: String},
   votes: { type : Number},
+  createdAt : { type : Number},
   answers : []
 
 });
