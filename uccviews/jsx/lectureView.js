@@ -30,15 +30,21 @@ var getVideoData = function(cb) {
               var qdata = [];
               window.qObject = {};
               window.videoData = qdata;
+              var dateTime = new Date().getTime();
               data.result.forEach(function (item) {
+                var answers = item.answers.map(function(answer){
+                  answer.answerTime = formatTime(answer.createdAt, dateTime);
+                  return answer;
+                });
                 var question = {
                   question : item.title,
                   questionId : item._id,
                   questionUrl : '#',
                   votes : item.votes,
-                  answers : item.answers,
                   key : qdata.length + 1,
-                  user: item.username || "Anonymous"
+                  user: item.username || "Anonymous",
+                  questionTime : formatTime(item.createdAt, dateTime),
+                  answers : answers
                 };
                 qdata.push(question);
                 window.qObject[item._id] = question;
