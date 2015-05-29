@@ -1,18 +1,53 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-  <head>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  </head>
+<head>
+  <title>Vask Login</title>
+  <script src="../bower_components/react/react.min.js"></script>
+  <script src="../bower_components/react/JSXTransformer.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script>
+    var WebFontConfig = {
+      google: { families: [ 'Roboto:400,300,500:latin' ] }
+    };
+    (function() {
+      var wf = document.createElement('script');
+      wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js';
+      wf.type = 'text/javascript';
+      wf.async = 'true';
+      var s = document.getElementsByTagName('script')[0];
+      s.parentNode.insertBefore(wf, s);
+    })();
+  </script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/bower_components/mdi/css/materialdesignicons.min.css">
+  <style>
+  .signup {
+    display: none;
+  }
+  </style>
+</head>
   <body>
-    <h1>Login</h1>
-    Name : <input id='username'/>
-    <br/><br/>
-    Pwd : <input type='password' id='password'/>
-    <br/><br/>
-    <button onclick="signup()">Login</button>
+    <div class="nav-bar"></div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-8 col-md-10 col-lg-10 col-sm-offset-3 col-md-offset-1 col-lg-offset-1">
+
+          <h1 class="text-center login">Login</h1>
+          <h1 class="text-center signup">Sign Up</h1>
+          <div class="signin-signup-form"></div>
+          <div class="signup-extra signup"></div>
+          <div class="login-button login"></div>
+          <div class="signup-button signup"></div>
+          <div class="switch-button"></div>
+        </div>
+      </div>
+    </div>
+
+
 
     <script>
-
       function signup() {
         var name = document.getElementById('username').value;
         var pwd = document.getElementById('password').value;
@@ -33,9 +68,9 @@
           }
         });
       }
-      
+
 
     </script>
-
+    <script src="/build/js/signinSignup.js"></script>
   </body>
 </html>
