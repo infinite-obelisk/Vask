@@ -16,7 +16,8 @@ exports.createSession = function(request, response, user) {
 exports.getUserInfo = function(request, response) {
   // If the user doesn't request any specific info that they need,
   // we'll just send them some default information like their username
-  var neededUserInfo = request.body.neededUserInfo || ['username'];
+  var defaultNeededInfo = ['username'];
+  var neededUserInfo = request.body.neededUserInfo || defaultNeededInfo;
   console.log('session username', request.session.user.username);
   var userInfo = neededUserInfo.map(function(info) {
     return request.session.user[info];
