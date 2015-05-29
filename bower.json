@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "dependencies": {
-    "react": "~0.13.3"
+    "react": "~0.13.3",
+    "mdi": "~1.0.62-beta"
   }
 }
