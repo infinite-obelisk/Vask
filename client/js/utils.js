@@ -5,5 +5,9 @@ var formatTime = function (objTime, dateTime) {
   diff = Math.floor(diff/60);
   if (diff < 60) return diff + ' minutes ago';
   diff = Math.floor(diff/60);
-  return diff + ' hours ago';
+  if (diff === 1) return '1 hour ago';
+  if (diff < 24) return diff + ' hours ago';
+  diff = Math.floor(diff/24);
+  if (diff === 1) return 'yesterday';
+  return diff + ' days ago';
 }

@@ -61,7 +61,30 @@ exports.voteQuestion = function (req, res) {
   if (info.inc === 'down' || info.inc === -1 || info.inc === '-1') info.inc = -1; else info.inc = 1;
   Question.update({_id : info._id}, {'$inc':{'votes': info.inc}}, function (err, data){
     if (!err) {
-      res.status(202).send({msg : 'voted ' + info.inc});
+      res.status(201).send({msg : 'voted ' + info.inc});
+    } else {
+      res.status(500).send({msg : 'error while inserting into db'});
+    }
+  }); 
+}
+
+exports.voteAnswer = function (req, res) {
+  var info = req.body;
+  console.log('voteAnswer', info);
+  if (info.inc === 'down' || info.inc === -1 || info.inc === '-1') info.inc = -1; else info.inc = 1;
+  Question.findOne({_id : info._id}, function (err, question) {
+    question.answers[info.idx].votes += info.inc;
+    question.markModified('answers');
+    question.save(function (err) {
+      console.log('saving');
+      if (err) console.log(err);
+    });
+  });
+  res.status(201).send({msg : 'voted ' + info.inc});
+  return; 
+  Question.update({_id : info._id}, {'$inc':{'votes': info.inc}}, function (err, data){
+    if (!err) {
+      res.status(201).send({msg : 'voted ' + info.inc});
     } else {
       res.status(500).send({msg : 'error while inserting into db'});
     }
