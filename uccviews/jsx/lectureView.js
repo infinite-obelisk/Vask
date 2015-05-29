@@ -79,7 +79,7 @@ var PopupQuestion = React.createClass({
   getInitialState: function(){
     return {
       playerLoaded: false,
-      newQuestion: false
+      question: false
     }
   },
   checkPopupQuestions: function(){
@@ -98,6 +98,8 @@ var PopupQuestion = React.createClass({
           console.log('currentTime',currentTime);
           if (questionTime === currentTime) {
             console.log('refs Alert', reactScope.refs.alert);
+            // update the state of the component (message)
+            reactScope.setState({question: window.qObject[question].question})
             // show question popup!
             reactScope.refs.alert.show();
             // close the popup after 5 seconds
@@ -148,7 +150,7 @@ var PopupQuestion = React.createClass({
     return (
         <Snackbar
           ref="alert"
-          message="Event added to your calendar"
+          message={this.state.question}
           action="Answer it"
           onActionTouchTap={this._handleAction}/>
     );
