@@ -79,7 +79,20 @@ var PopupQuestion = React.createClass({
   getInitialState: function(){
     return {
       playerLoaded: false,
+      popupOpened: false,
       question: false
+    }
+  },
+  // If the popup is closed, invoke the the checkPopupQuestions 
+  // func to display new questions..
+  popupWatcher: function(){
+    console.log('watcher loaded');
+    if (this.state.playerLoaded && !this.state.popupOpened) {
+      console.log('check popup questions invoked');
+      this.checkPopupQuestions()
+    } else {
+      console.log('popup is open.. invoking the watcher in 0.5 seconds');
+      setTimeout(this.popupWatcher.bind(this), 500);
     }
   },
   checkPopupQuestions: function(){
@@ -99,13 +112,31 @@ var PopupQuestion = React.createClass({
           if (questionTime === currentTime) {
             console.log('refs Alert', reactScope.refs.alert);
             // update the state of the component (message)
-            reactScope.setState({question: window.qObject[question].question})
+            reactScope.setState({
+              question: window.qObject[question].question,
+              popupOpened: true
+            });
             // show question popup!
             reactScope.refs.alert.show();
-            // close the popup after 5 seconds
-            setTimeout(reactScope.refs.alert.dismiss.bind(this), 5000);
+            // callback to close the popup and update the state
+            var closePopup = function(){
+              // closes the popup
+              this.refs.alert.dismiss();
+              // update the state
+              this.setState({ popupOpened: false });
+              // invoke the watcher to check new questions
+              console.log('watcher activated', this.state);
+              this.popupWatcher();
+            }
+            // close the popup after 5 seconds passing the callback
+            setTimeout(closePopup.bind(reactScope), 5000);
+            // breake the loop 
+            return;
           }
-        }
+        };
+        // if theres no question at this point, invoke the watcher
+        setTimeout(reactScope.popupWatcher.bind(this), 500);
+
       } 
     };
 
