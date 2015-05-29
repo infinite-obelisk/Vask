@@ -73,7 +73,7 @@ var MaterialMixin = {
     };
   }
 }
-
+  
 // Snackbar (question alert)
 var PopupQuestion = React.createClass({
   mixins: [MaterialMixin],
@@ -82,7 +82,8 @@ var PopupQuestion = React.createClass({
       playerLoaded: false,
       playerState: undefined,
       popupOpened: false,
-      question: false
+      question: false,
+      questionId: null
     }
   },
   // If the popup is closed, invoke the the checkPopupQuestions 
@@ -134,6 +135,7 @@ var PopupQuestion = React.createClass({
                 // update the state of the component (message)
                 reactScope.setState({
                   question: window.qObject[question].question,
+                  questionId: question,
                   popupOpened: true
                 });
                 // show question popup!
@@ -199,7 +201,8 @@ var PopupQuestion = React.createClass({
 
   },
   _handleAction: function(){
-    alert("We removed the event from your calendar.");
+    // open the dialog of the current opened message
+    window.questionDialogs[this.state.questionId].show();
   },
   render: function() {
     return (
