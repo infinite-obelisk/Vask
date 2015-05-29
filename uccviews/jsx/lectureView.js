@@ -83,20 +83,42 @@ var PopupQuestion = React.createClass({
   },
   componentDidMount: function(){
 
-    var getTimeQuestion = function(){
-      if (window.player) {
-        if (window.player.getCurrentTime === undefined) {
-          setTimeout(getTimeQuestion, 500);
-        } else {
-          var actualTime = Math.floor(window.player.getCurrentTime());
-          console.log('video time', actualTime);
+    var getPlayerCurrentTime = function(){
+      return window.player.getCurrentTime();
+    };
+
+    var checkQuestOnThisTime = function(){
+      var questions = window.qObject;
+      if(questions){
+        for (var question in questions) {
+          console.log("question:",question);
         }
       } else {
-        console.log('Failed :( .. No player');
-        setTimeout(getTimeQuestion, 1000);
+        checkQuestOnThisTime();
       }
     };
-    getTimeQuestion(); 
+
+    // check whether the player is loded
+    var playerIsLoaded = function(callback){
+      // checks if the player object is loaded
+      if (window.player) {
+        // checks if the player API is loaded
+        if (window.player.getCurrentTime === undefined) {
+          console.log('API is not ready yet');
+          // if it's not, try again
+          setTimeout(playerIsLoaded.bind(this, callback), 500);
+        } else {
+          // Invoke the callback
+          console.log('readyyy');
+          callback();
+        }
+      } else {
+        // if it's not, try again
+        console.log('Failed :( .. No player');
+        setTimeout(playerIsLoaded.bind(this, callback), 1000);
+      }
+    };
+    playerIsLoaded(getPlayerCurrentTime); 
 
   },
   _handleAction: function(){
