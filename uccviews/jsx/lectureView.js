@@ -42,7 +42,7 @@ var getVideoData = function(cb) {
                   questionUrl : '#',
                   votes : item.votes,
                   key : qdata.length + 1,
-                  user: item.username || "Anonymous"
+                  user: item.username || "Anonymous",
                   questionTime : formatTime(item.createdAt, dateTime),
                   answers : answers
                 };
