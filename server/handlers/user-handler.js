@@ -2,6 +2,29 @@ var url = require('url');
 var User = require('./../models/user');
 var utils = require('./../utilities');
 
+exports.isLoggedIn = function(request) {
+  console.log(request.session.user)
+  if(request.session) {
+    return !!request.session.user;
+  }
+  return false;
+};
+
+exports.checkUser =  function(request, response, next) {
+  console.log('checking user');
+  if (!exports.isLoggedIn(request)) {
+    if (request.url.toLowerCase() !== '/login') {
+      console.log('not logged in! redirect');
+      response.redirect('/login');
+    } else {
+      response.redirect('/testvideo');
+    }
+  } else {
+    console.log('check user callback time! (user/sess valid!)')
+    next();
+  }
+};
+
 exports.signUpUser = function(req, res) {
   console.log('signUpUser', req.body.username);
   var info = req.body;
@@ -35,7 +58,7 @@ exports.signUpUser = function(req, res) {
   });
 };
 
-exports.login = function(req, res) {
+exports.login = function(req, res, next) {
   console.log('login', req.url)
   var info = req.body;
   User.findOne({username: info.username}, function(err, user) {

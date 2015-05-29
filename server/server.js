@@ -53,6 +53,9 @@ app.get('/signup', function(req, res){
 app.get('/login', function(req, res){
   res.sendFile(path.resolve(__dirname + '/../client/pages/login.html'));
 });
+app.get('/testvideo', userHandler.checkUser, function(req, res){
+  res.sendFile(path.resolve(__dirname + '/../client/views/lectureView.html'));
+});
 
 // This isn't necessary right now because express.static automatically
 // searches for the index.html file in the specified directory that was
