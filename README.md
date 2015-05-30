@@ -11,3 +11,6 @@ It is benefical for all students to see what questions came up while watching a 
 When a user is posting a new question, they make a POST to '/addquestion'.
 The user sends the question's video, video time, question text, and the username for the user who posted the question.
 Information in POST to '/addquestion': video, time, text, username
+
+<youtube-video-url-ending> is the "AAAAAaBcDe" part for the youtube video at "https://www.youtube.com/watch?v=AAAAAaBcDe"
+Video url: "/?video=<youtube-video-url-ending>"
