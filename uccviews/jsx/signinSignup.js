@@ -99,10 +99,13 @@ var Login = React.createClass({
     }
   },
   render: function(){
-    return (<RaisedButton
-            label="Login"
-            primary={true}
-            onClick={this.signin}/>);
+    return (<div
+              className="login">
+                <RaisedButton
+                  label="Login"
+                  primary={true}
+                  onClick={this.signin}/>
+            </div>);
   }
 });
 
@@ -141,10 +144,13 @@ var Signup = React.createClass({
     }
   },
   render: function(){
-    return (<RaisedButton
-            label="Sign Up"
-            primary={true}
-            onClick={this.signup}/>);
+    return (<div
+              className="signup">
+                <RaisedButton
+                  label="Sign Up"
+                  primary={true}
+                  onClick={this.signup}/>
+            </div>);
   }
 });
 
