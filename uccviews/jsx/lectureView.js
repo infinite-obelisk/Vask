@@ -46,7 +46,7 @@ var PopupQuestion = React.createClass({
       questionId: null
     }
   },
-  // If the popup is closed, invoke the the checkPopupQuestions 
+  // If the popup is closed, invoke the the checkPopupQuestions
   // func to display new questions..
   popupWatcher: function(){
     // console.log('watcher loaded');
@@ -112,7 +112,7 @@ var PopupQuestion = React.createClass({
                 }
                 // close the popup after 5 seconds passing the callback
                 setTimeout(closePopup.bind(reactScope), 6000);
-                // breake the loop 
+                // breake the loop
                 return;
               }
             }
@@ -122,7 +122,7 @@ var PopupQuestion = React.createClass({
         // if theres no question at this point, invoke the watcher
         setTimeout(reactScope.popupWatcher.bind(this), 850);
 
-      } 
+      }
     };
 
     checkQuestOnThisTime(this);
@@ -155,7 +155,7 @@ var PopupQuestion = React.createClass({
         setTimeout(playerIsLoaded.bind(this, reactScope), 1000);
       }
     };
-    console.log('OUTSIDE FUNCTION', this); 
+    console.log('OUTSIDE FUNCTION', this);
     playerIsLoaded(this);
 
 
@@ -591,7 +591,8 @@ var Answer = React.createClass({
                   className="col-lg-1 col-md-1 col-sm-1 col-xs-1 text-center">
                     <Voting
                       votes={this.props.votes}
-                      questionId={this.props.questionId} />
+                      questionId={this.props.questionId}
+                      answerIndex={this.props.answerIndex} />
                 </div>
                 <AnswerEntry
                   user={this.props.user}
