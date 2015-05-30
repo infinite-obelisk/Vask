@@ -701,20 +701,23 @@ var ViewQuestionDialog = React.createClass({
     ];
 
     return (<div>
-              <Dialog
-                ref={"ViewQuestionDialog" + this.state.question.questionId}
-                title="Question"
-                actions={actions} >
-                  <ViewQuestionAndAnswers
-                    votes={this.state.question.votes}
-                    imgUrl={this.state.question.imgUrl}
-                    user={this.state.question.user}
-                    question={this.state.question.question}
-                    questionId={this.state.question.questionId}
-                    videoTime={this.state.question.videoTime}
-                    questionTime={this.state.question.questionTime}
-                    answers={this.state.question.answers} />
-              </Dialog>
+              <div
+                className="dialog-box">
+                  <Dialog
+                    ref={"ViewQuestionDialog" + this.state.question.questionId}
+                    title="Question"
+                    actions={actions} >
+                      <ViewQuestionAndAnswers
+                        votes={this.state.question.votes}
+                        imgUrl={this.state.question.imgUrl}
+                        user={this.state.question.user}
+                        question={this.state.question.question}
+                        questionId={this.state.question.questionId}
+                        videoTime={this.state.question.videoTime}
+                        questionTime={this.state.question.questionTime}
+                        answers={this.state.question.answers} />
+                  </Dialog>
+              </div>
             </div>);
   },
   componentDidMount: function(){
