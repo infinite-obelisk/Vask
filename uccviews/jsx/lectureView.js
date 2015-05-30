@@ -20,47 +20,7 @@ var mui = require('material-ui'),
 var ThemeManager = new mui.Styles.ThemeManager();
 ThemeManager.setTheme(ThemeManager.types.LIGHT);
 
-var getVideoData = function(cb) {
-  $.ajax({
-          url: "/getquestions?video=test2",
-          method: "GET",
-          contentType: "application/json",
-          statusCode: {
-            200: function (data) {
-              console.log('win');
-              console.log(data);
-              var qdata = [];
-              window.qObject = {};
-              window.videoData = qdata;
-              var dateTime = new Date().getTime();
-              data.result.forEach(function (item) {
-                var answers = item.answers.map(function(answer){
-                  answer.answerTime = formatTime(answer.createdAt, dateTime);
-                  answer.questionId = item._id;
-                  return answer;
-                });
-                var question = {
-                  question : item.title,
-                  questionId : item._id,
-                  questionUrl : '#',
-                  time: item.time,
-                  votes : item.votes,
-                  key : qdata.length + 1,
-                  user: item.username || "Anonymous",
-                  questionTime : formatTime(item.createdAt, dateTime),
-                  answers : answers
-                };
-                qdata.push(question);
-                window.qObject[item._id] = question;
-              })
-              cb();
-            },
-            500: function (err) {
-              console.log('lose')
-            }
-          }
-        });
-}
+
 
 // ==================== Snackbar - PopupQuestion ==================== //
 var MaterialMixin = {
@@ -451,30 +411,7 @@ var AskQuestionDialog = React.createClass({
   submitQuestion: function(){
     console.log("Submit Question");
     console.log("Time question", Math.floor(window.player.getCurrentTime()));
-    var self = this;
-    $.ajax({
-          url: "/addquestion",
-          method: "POST",
-          contentType: "application/json",
-          data: JSON.stringify({
-            video : 'test2',
-            text : window.$('#question-text').val(),
-            username : 'name',
-            time : Math.floor(window.player.getCurrentTime()),
-            title : window.$('#question-title').val()
-          }),
-          statusCode: {
-            201: function (data) {
-              console.log('win');
-              console.log(data);
-              self.clearForm();
-              self.closeDialog();
-            },
-            500: function (err) {
-              console.log('lose')
-            }
-          }
-        });
+    addQuestion.bind(this)();   
   },
   render: function(){
     var actions = [
@@ -525,45 +462,10 @@ var Voting = React.createClass({
     var questionId = this.props.questionId;
     if(isAnswer){
       console.log('vote answer');
-      $.ajax({
-          url: "/voteanswer",
-          method: "POST",
-          contentType: "application/json",
-          data: JSON.stringify({
-            inc : 1,
-            _id : questionId,
-            idx : answerIndex
-          }),
-          statusCode: {
-            201: function (data) {
-              console.log('win');
-              console.log(data);
-              },
-            500: function (err) {
-              console.log('lose')
-            }
-          }
-        });
+      voteQuestion(questionId,1,answerIndex);
     } else {
       console.log('question up vote');
-      $.ajax({
-          url: "/votequestion",
-          method: "POST",
-          contentType: "application/json",
-          data: JSON.stringify({
-            inc : 1,
-            _id : questionId
-          }),
-          statusCode: {
-            201: function (data) {
-              console.log('win');
-              console.log(data);
-              },
-            500: function (err) {
-              console.log('lose')
-            }
-          }
-        });
+      voteQuestion(questionId,1);
     }
   },
   voteDown: function(){
@@ -573,45 +475,9 @@ var Voting = React.createClass({
     var questionId = this.props.questionId;
     if(isAnswer){
       console.log('vote answer');
-      $.ajax({
-          url: "/voteanswer",
-          method: "POST",
-          contentType: "application/json",
-          data: JSON.stringify({
-            inc : -1,
-            _id : questionId,
-            idx : answerIndex
-          }),
-          statusCode: {
-            201: function (data) {
-              console.log('win');
-              console.log(data);
-              },
-            500: function (err) {
-              console.log('lose')
-            }
-          }
-        });
+      voteQuestion(questionId,-1,answerIndex);
     } else {
-      $.ajax({
-          url: "/votequestion",
-          method: "POST",
-          contentType: "application/json",
-          data: JSON.stringify({
-            inc : -1,
-            _id : questionId
-          }),
-          statusCode: {
-            201: function (data) {
-              console.log('win');
-              console.log(data);
-              },
-            500: function (err) {
-              console.log('lose')
-            }
-          }
-        }); 
-
+      voteQuestion(questionId,-1);
     }
   },
   getInitialState: function(){
@@ -740,26 +606,7 @@ var AnswerForm = React.createClass({
     //TODO: Submit Answer AJAX
     var answerText = this.refs.answerText.getValue();
     var questionId = this.props.questionId;
-    $.ajax({
-          url: "/addanswer",
-          method: "POST",
-          contentType: "application/json",
-          data: JSON.stringify({
-            text : answerText,
-            _id : questionId
-          }),
-          statusCode: {
-            201: function (data) {
-              console.log('win');
-              console.log(data);
-              //self.clearForm();
-              //self.closeDialog();
-            },
-            500: function (err) {
-              console.log('lose')
-            }
-          }
-        });
+    addAnswer(questionId, answerText);
 
   },
   childContextTypes: {
