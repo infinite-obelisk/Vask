@@ -22,7 +22,7 @@ app.use(session({
 }));
 
 app.get('/', function(req, res){
-  res.sendFile(path.resolve(__dirname + '/../client/views/lecturesListView.html'));
+  res.sendFile(path.resolve(__dirname + '/../client/views/main.html'));
 });
 
 app.use('/lecture/:id', function(req, res){
