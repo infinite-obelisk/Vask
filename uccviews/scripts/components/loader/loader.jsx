@@ -1,21 +1,13 @@
 'use strict'
 
-var React = require('react'),
-    mui = require('material-ui'),
-    CircularProgress = mui.CircularProgress;
-
-var ThemeManager = new mui.Styles.ThemeManager();
-ThemeManager.setTheme(ThemeManager.types.LIGHT);
+var React             = require('react'),
+    mui               = require('material-ui'),
+    CircularProgress  = mui.CircularProgress,
+    MaterialMixin     = require('../../mixins/material-ui.js');
 
 var Loader = React.createClass({
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-  getChildContext: function(){
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
-  },
+  mixins: [MaterialMixin],
+
   render: function() {
     console.log('this.props',this.props);
     if(!this.props.loaded){

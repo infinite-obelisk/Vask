@@ -8,6 +8,23 @@ var React             = require('react'),
     LectureRow        = require('./lectureRow.jsx'),
     MaterialMixin     = require('../../mixins/material-ui.js');
 
+
+// TopBar
+// var ThemeManager = new mui.Styles.ThemeManager();
+// ThemeManager.setTheme(ThemeManager.types.LIGHT);
+
+// var MaterialMixin = {
+//   childContextTypes: {
+//     muiTheme: React.PropTypes.object
+//   },
+//   getChildContext: function(){
+//     return {
+//       muiTheme: ThemeManager.getCurrentTheme()
+//     };
+//   }
+// }
+
+
 var LecturesList = React.createClass({
   mixins: [MaterialMixin],
 
