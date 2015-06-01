@@ -3,13 +3,13 @@
 var React             = require('react'),
     lectureActions    = require('../../actions/lectures'),
     lecturesStore     = require('../../stores/lectures'),
-    Loader            = require('../loader/loader'),
-    LecturesListTitle = require('lecturesListTitle'),
-    LectureRow        = require('lectureRow');
+    Loader            = require('../loader/loader.jsx'),
+    LecturesListTitle = require('./lecturesListTitle.jsx'),
+    LectureRow        = require('./lectureRow.jsx');
 
 var LecturesList = React.createClass({
   mixins: [MaterialMixin],
- 
+
   getInitialState: function(){
     return {
       loaded: false,
@@ -37,6 +37,7 @@ var LecturesList = React.createClass({
 
 
   render: function() {
+    console.log('State of the lectures -->', this.state.lectures);
     var rows = [];
     if (this.state.lectures !== undefined) {
       rows = this.state.lectures.map(function(lecture, i){

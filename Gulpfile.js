@@ -6,7 +6,7 @@ var gulp        = require('gulp'),
 // COMPILES JSX --> JS
 gulp.task('scripts', function () {
 
-  gulp.src(['uccviews/main.jsx'])
+  gulp.src(['uccviews/scripts/main.jsx'])
       .pipe(browserify({
           debug: true,
           transform: [ 'reactify' ]
@@ -20,7 +20,7 @@ gulp.task('server', shell.task([
 ]))
 
 gulp.task('watch', ['scripts'], function(){
-  gulp.watch('./uccviews/jsx/*.jsx', ['scripts']);
+  gulp.watch('./uccviews/scripts/components/**/*.jsx', ['scripts']);
 }); 
 
 gulp.task('default', ['scripts', 'server', 'watch']); 

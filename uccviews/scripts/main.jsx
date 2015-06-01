@@ -1,6 +1,6 @@
 var React       = require('react'),
     RouterMixin = require('react-mini-router').RouterMixin,
-    LectureList = require('./jsx/lecturesListView.jsx');
+    LecturesList = require('./components/lecturesList/lecturesList.jsx');
 
 var App = React.createClass({
 
@@ -18,7 +18,7 @@ var App = React.createClass({
     lecturesList: function() {
         return (
             <div>
-                <LectureList/>
+                <LecturesList/>
             </div>
         );
     },

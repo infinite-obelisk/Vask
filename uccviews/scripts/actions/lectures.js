@@ -18,7 +18,7 @@ module.exports = {
 	getLectures: function(){
 		var self = this;
 		// Request the API for the data (lectures)
-		request.get('/getlectures'),
+		request.get('/getlectures')
 			   .type('application/json')
 			   .set({
 			   	'X-Requested-With': 'XMLHttpRequest'

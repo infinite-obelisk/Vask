@@ -1,5 +1,5 @@
 'use strict';
 
-var module.exports = {
+module.exports = {
 	'SET_LECTURES': 'SET_LECTURES'
 };
