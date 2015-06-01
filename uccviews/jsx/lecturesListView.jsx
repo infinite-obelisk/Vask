@@ -108,7 +108,7 @@ var CatalogTitle = React.createClass({
 var ContentRow = React.createClass({
   render: function() {
     console.log(this.props.data._id);
-    var link = "/" + this.props.data._id;
+    var link = "/lectures/" + this.props.data._id;
 
     return (
       <div className="contentBox row">
@@ -127,5 +127,5 @@ var ContentRow = React.createClass({
   }
 });
 
-React.render(<LecturesList/>, document.getElementById('react-mount'));
+module.exports = LecturesList;
 
