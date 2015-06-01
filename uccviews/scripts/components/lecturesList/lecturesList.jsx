@@ -9,33 +9,20 @@ var React             = require('react'),
     MaterialMixin     = require('../../mixins/material-ui.js');
 
 
-// TopBar
-// var ThemeManager = new mui.Styles.ThemeManager();
-// ThemeManager.setTheme(ThemeManager.types.LIGHT);
-
-// var MaterialMixin = {
-//   childContextTypes: {
-//     muiTheme: React.PropTypes.object
-//   },
-//   getChildContext: function(){
-//     return {
-//       muiTheme: ThemeManager.getCurrentTheme()
-//     };
-//   }
-// }
-
-
 var LecturesList = React.createClass({
   mixins: [MaterialMixin],
 
   getInitialState: function(){
     return {
       loaded: false,
-      lectures: lectureActions.getLectures()
+      lectures: undefined
     }
   },
 
   componentDidMount: function(){
+    this.setState({
+      lectures: lectureActions.getLectures()
+    });
     // Add the listener
     // We use _ onChange because it's a method
     lecturesStore.addChangeListener(this._onChange);
