@@ -7,6 +7,7 @@ var Dispatcher = require('../dispatcher/dispatcher'),
 
 module.exports = {
 
+	// When ready, dispatch the lectures to the store
 	setLectures: function(lectures){
 		Dispatcher.handleViewAction({
 			actionType: lecturesConstants.SET_LECTURES,
@@ -16,6 +17,7 @@ module.exports = {
 
 	getLectures: function(){
 		var self = this;
+		// Request the API for the data (lectures)
 		request.get('/getlectures'),
 			   .type('application/json')
 			   .set({

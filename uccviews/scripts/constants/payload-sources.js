@@ -1,7 +1,5 @@
 'use strict';
 
-var PayloadSources = {
+var module.exports = {
 	'VIEW_ACTION': 'VIEW_ACTION'
 };
-
-module.exports = PayloadSources;

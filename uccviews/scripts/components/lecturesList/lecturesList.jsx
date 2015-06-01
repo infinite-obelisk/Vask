@@ -1,30 +1,18 @@
 'use strict'
 
-var React = require('react'),
-    lectureActions = require('../actions/lectures'),
-    lecturesStore = require('../stores/lectures');
+var React             = require('react'),
+    lectureActions    = require('../../actions/lectures'),
+    lecturesStore     = require('../../stores/lectures'),
+    Loader            = require('../loader/loader'),
+    LecturesListTitle = require('lecturesListTitle'),
+    LectureRow        = require('lectureRow');
 
 var LecturesList = React.createClass({
   mixins: [MaterialMixin],
-  //Somewhere in our code
-  _handleAction: function() {
-    //We can add more code to this function, but for now we'll just include an alert.
-    alert("We removed the event from your calendar.");
-  },
-  showSnackbar: function(){
-    console.log('Show the f***** snackbar, HAHAHHA');
-    // console.dir(Snackbar);
-    // Snackbar.show();
-  },
-
-  getDefaultProps: function(){
-    return {
-      source: '/getlectures'
-    }
-  },
-
+ 
   getInitialState: function(){
     return {
+      loaded: false,
       lectures: lectureActions.getLectures()
     }
   },
@@ -49,21 +37,17 @@ var LecturesList = React.createClass({
 
 
   render: function() {
-    var rows = this.state.content.map(function(content, i){
-      return <ContentRow data={content} key={i}/>
-    });
+    var rows = [];
+    if (this.state.lectures !== undefined) {
+      rows = this.state.lectures.map(function(lecture, i){
+        return <LectureRow data={lecture} key={i}/>
+      });
+    }
     return (
       <div>
-        <Snackbar
-          ref="alert"
-          message="Event added to your calendar"
-          action="undo"
-          openOnMount="true"
-          onActionTouchTap={this._handleAction}/>
-
         <Loader loaded={this.state.loaded}>
           <div className="container">
-              <CatalogTitle/>
+              <LecturesListTitle/>
               {rows}
           </div>
         </Loader>

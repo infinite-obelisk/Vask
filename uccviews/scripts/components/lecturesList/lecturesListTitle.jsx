@@ -2,7 +2,7 @@
 
 var React = require('react');
 
-var CatalogTitle = React.createClass({
+var LectureListTitle = React.createClass({
   render: function() {
     return (
       <div>
@@ -12,4 +12,4 @@ var CatalogTitle = React.createClass({
   }
 });
 
-module.exports = CatalogTitle;
+module.exports = LectureListTitle;

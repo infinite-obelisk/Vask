@@ -1,4 +1,4 @@
-var React = require('react'),
+var React       = require('react'),
     RouterMixin = require('react-mini-router').RouterMixin,
     LectureList = require('./jsx/lecturesListView.jsx');
 
@@ -29,7 +29,7 @@ var App = React.createClass({
 		    return found;
 	    });
 
-        return <TodoList list={list} root={'/lists/' + id}/>;
+        // return <TodoList list={list} root={'/lists/' + id}/>;
     },
 
     notFound: function(path) {
