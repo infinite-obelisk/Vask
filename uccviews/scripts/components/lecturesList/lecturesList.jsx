@@ -1,6 +1,7 @@
 'use strict'
 
-var React = require('react');
+var React = require('react'),
+    lectureActions = require('../actions/lectures');
 
 var LecturesList = React.createClass({
   mixins: [MaterialMixin],
@@ -22,11 +23,16 @@ var LecturesList = React.createClass({
   },
   getInitialState: function(){
     return {
-      loaded: false,
-      content: []
+      loaded: lectureActions.getLectures()
     }
   },
   componentDidMount: function(){
+
+    // ---------Refactoring-------
+
+    
+
+    //---------------------------
 
     console.log('Fetching contents..');
     console.log('SNACKBAR', this.refs.alert);
