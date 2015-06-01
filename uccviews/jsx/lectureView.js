@@ -175,8 +175,6 @@ var PopupQuestion = React.createClass({
   }
 });
 
-
-
 // ================================================================= //
 var NavBar = React.createClass({
   childContextTypes: {
