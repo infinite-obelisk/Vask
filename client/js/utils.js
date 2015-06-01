@@ -9,7 +9,13 @@ var formatTime = function (objTime, dateTime) {
   if (diff < 24) return diff + ' hours ago';
   diff = Math.floor(diff/24);
   if (diff === 1) return 'yesterday';
-  return diff + ' days ago';
+  if (diff < 30) return diff + ' days ago'
+  diff = Math.floor(diff/30);
+  if (diff === 1) return 'last month';
+  if (diff < 12) return diff + ' months ago';
+  diff = Math.floor(diff/365);
+  if (diff < 2 ) return 'last year'
+  return diff + ' years ago';
 }
 
 var getVideoData = function(cb) {
