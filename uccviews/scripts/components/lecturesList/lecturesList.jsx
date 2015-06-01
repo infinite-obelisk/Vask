@@ -5,7 +5,8 @@ var React             = require('react'),
     lecturesStore     = require('../../stores/lectures'),
     Loader            = require('../loader/loader.jsx'),
     LecturesListTitle = require('./lecturesListTitle.jsx'),
-    LectureRow        = require('./lectureRow.jsx');
+    LectureRow        = require('./lectureRow.jsx'),
+    MaterialMixin     = require('../../mixins/material-ui.js');
 
 var LecturesList = React.createClass({
   mixins: [MaterialMixin],

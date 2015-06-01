@@ -16,14 +16,17 @@ module.exports = {
 	},
 
 	getLectures: function(){
-		var self = this;
+		var self = this,
+			url = '/getlectures';
 		// Request the API for the data (lectures)
-		request.get('/getlectures')
-			   .type('application/json')
-			   .set({
-			   	'X-Requested-With': 'XMLHttpRequest'
-			   })
-			   .end(function(res){
+		request.get(url)
+			   .set('Accept', 'application/json')
+			   .end(function(err, res){
+			   	if (err) { 
+			   		console.log('Failed fetching the server'); 
+			   		throw err;
+			   	}
+			   	console.log('response from the server', res);
 			   	if(res.ok){
 			   		// get the data from the response
 			   		var lectures = res.body.result;
@@ -32,7 +35,7 @@ module.exports = {
 
 			   	} else {
 			   		// thow the error
-			   		console.log('Failed fetching the contents from the server')
+			   		console.log('Response is not ok');
 			   	}
 			   });
 	}

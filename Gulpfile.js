@@ -24,3 +24,5 @@ gulp.task('watch', ['scripts'], function(){
 }); 
 
 gulp.task('default', ['scripts', 'server', 'watch']); 
+
+gulp.task('compile', ['scripts', 'server']); 

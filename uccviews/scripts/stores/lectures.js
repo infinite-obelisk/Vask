@@ -3,7 +3,8 @@
 var Dispatcher        = require('../dispatcher/dispatcher'),
 	EventEmitter      = require('events').EventEmitter,
 	assign            = require('object-assign'),
-	lecturesConstants = require('../constants/lectures'); 
+	lecturesConstants = require('../constants/lectures'),
+	mui               = require('material-ui');
 
 // Define the object that will contain the data (lectures) 
 var _lectures;
@@ -37,7 +38,6 @@ var LecturesStore = assign(EventEmitter.prototype, {
 
 // Subscribe this store to recieve payloads from the dispatcher
 LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
-
 	// Grab the action
 	var action = payload.action;
 
@@ -45,7 +45,7 @@ LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
 	switch(action.actionType) {
 		case lecturesConstants.SET_LECTURES: 
 			_lectures = action.lectures;
-			this.emitChange();
+			LecturesStore.emitChange();
 			break;
 	}
 });
