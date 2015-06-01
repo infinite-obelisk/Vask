@@ -1,5 +1,5 @@
 var url = require('url');
-
+var Content = require('../models/content');
 
 var fakeVideos = [
   {
@@ -37,5 +37,30 @@ var fakeVideos = [
 ];
 
 exports.getLectures = function (req, res) {
-	res.status(200).send({result : fakeVideos});
+	//res.status(200).send({result : fakeVideos});
+  Content.find({}, function(err, contents) {
+    if (!err) {
+      if (contents.length) res.status(200).send({result: contents});
+      else res.status(200).send({result: fakeVideos}); 
+    } else {
+      console.log(err);
+      res.status(500).send({msg: 'Error fetching content'});
+    }
+  })
+}
+
+exports.addLecture = function (req, res) {
+  var info = req.body;
+  console.log('addLecture ',info);
+  var newLecture = new Content(info);
+  newLecture.save(function (err) {
+    if (err) {
+      console.log('error in saving lecture ',err);
+      res.status(500).send({msg :'error in saving lecture to the database'});
+
+    } else {
+      console.log('added lecture');
+      res.status(201).send({msg : 'you posted a lecture to the db'});
+    }
+  })
 }
