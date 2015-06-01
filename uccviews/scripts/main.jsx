@@ -1,9 +1,10 @@
-var React       = require('react'),
-    RouterMixin = require('react-mini-router').RouterMixin,
-    LecturesList = require('./components/lecturesList/lecturesList.jsx'),
-    mui      = require('material-ui'),
-    AppBar   = mui.AppBar,
-    MaterialMixin     = require('./mixins/material-ui.js');
+var React           = require('react'),
+    RouterMixin     = require('react-mini-router').RouterMixin,
+    LecturesList    = require('./components/lecturesList/lecturesList.jsx'),
+    mui             = require('material-ui'),
+    AppBar          = mui.AppBar,
+    MaterialMixin   = require('./mixins/material-ui.js'),
+    LectureView     = require('./components/lectureView/LectureView.jsx');
 
 var App = React.createClass({
 
@@ -29,7 +30,9 @@ var App = React.createClass({
 
     lectureView: function(url) {
         console.log('URL',url);
-        return <div>{url}</div>;
+        return (
+            <LectureView shortUrl={url}/>
+            )
 	    // var list = this.state.lists.reduce(function(found, list) {
 		   //  if (list.id == id) { return list; }
 		   //  return found;

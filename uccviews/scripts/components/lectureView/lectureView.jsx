@@ -25,7 +25,7 @@ var LectureView = React.createClass({
     lecturesStore.addChangeListener(this._onChange);
 
     this.setState({
-      questions: lectureActions.getQuestions(this.props.videoId);
+      questions: lectureActions.getQuestions(this.props.videoId)
     });
   },
 
@@ -37,7 +37,7 @@ var LectureView = React.createClass({
   _onChange: function(){
     this.setState({
       loaded: true,
-      lectures: lecturesStore.getQuestions()
+      lectures: lecturesStore.getQuestions(this.props.shortUrl)
     });
   },
 
