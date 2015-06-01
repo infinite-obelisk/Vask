@@ -1,7 +1,8 @@
 'use strict'
 
 var React = require('react'),
-    lectureActions = require('../actions/lectures');
+    lectureActions = require('../actions/lectures'),
+    lecturesStore = require('../stores/lectures');
 
 var LecturesList = React.createClass({
   mixins: [MaterialMixin],
@@ -21,41 +22,32 @@ var LecturesList = React.createClass({
       source: '/getlectures'
     }
   },
+
   getInitialState: function(){
     return {
-      loaded: lectureActions.getLectures()
+      lectures: lectureActions.getLectures()
     }
   },
+
   componentDidMount: function(){
+    // Add the listener
+    // We use _ onChange because it's a method
+    lecturesStore.addChangeListener(this._onChange);
+  },
 
-    // ---------Refactoring-------
+  componentWillUnmount: function(){
+    // Remove the listener
+    lecturesStore.removeChangeListener(this._onChange);
+  },
 
-    
-
-    //---------------------------
-
-    console.log('Fetching contents..');
-    console.log('SNACKBAR', this.refs.alert);
-    var that = this;
-    $.ajax({
-      url: this.props.source,
-      method: "GET",
-      contentType: "application/json",
-      success: function(data){
-        console.log( "Data received: " + data);
-        setTimeout(function(){
-          that.setState({
-            loaded: true,
-            content: data.result
-          });  
-        }, 1000);
-      },
-      error: function(XMLHttpRequest, textStatus, errorThrown) {
-        console.error("Failed fetching the server");
-        throw errorThrown;
-      }
+  _onChange: function(){
+    this.setState({
+      loaded: true,
+      lectures: lecturesStore.getLectures()
     });
   },
+
+
   render: function() {
     var rows = this.state.content.map(function(content, i){
       return <ContentRow data={content} key={i}/>
