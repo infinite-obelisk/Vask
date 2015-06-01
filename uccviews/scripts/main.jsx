@@ -1,15 +1,18 @@
 var React       = require('react'),
     RouterMixin = require('react-mini-router').RouterMixin,
-    LecturesList = require('./components/lecturesList/lecturesList.jsx');
+    LecturesList = require('./components/lecturesList/lecturesList.jsx'),
+    mui      = require('material-ui'),
+    AppBar   = mui.AppBar,
+    MaterialMixin     = require('./mixins/material-ui.js');
 
 var App = React.createClass({
 
     routes: {
         '/': 'lecturesList',
-        '/contents/:url': 'lectures'
+        '/lectures/:url': 'lectureView'
     },
 
-    mixins: [RouterMixin],
+    mixins: [RouterMixin, MaterialMixin],
 
     render: function() {
         return <div>{this.renderCurrentRoute()}</div>;
@@ -18,16 +21,19 @@ var App = React.createClass({
     lecturesList: function() {
         return (
             <div>
+                <AppBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
                 <LecturesList/>
             </div>
         );
     },
 
-    lectures: function(id) {
-	    var list = this.state.lists.reduce(function(found, list) {
-		    if (list.id == id) { return list; }
-		    return found;
-	    });
+    lectureView: function(url) {
+        console.log('URL',url);
+        return <div>{url}</div>;
+	    // var list = this.state.lists.reduce(function(found, list) {
+		   //  if (list.id == id) { return list; }
+		   //  return found;
+	    // });
 
         // return <TodoList list={list} root={'/lists/' + id}/>;
     },
