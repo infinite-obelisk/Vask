@@ -3,28 +3,30 @@
 var React             = require('react'),
     lectureActions    = require('../../actions/lectures'),
     lecturesStore     = require('../../stores/lectures'),
+    askQuestion       = require('./askQuestion.jsx'),
+    viewQuestion      = require('./viewQuestion.jsx'),
+    viewAllQuestions  = require('./viewAllQuestions.jsx'),
     Loader            = require('../loader/loader.jsx'),
-    LecturesListTitle = require('./lecturesListTitle.jsx'),
-    LectureRow        = require('./lectureRow.jsx'),
     MaterialMixin     = require('../../mixins/material-ui.js');
 
-var LecturesList = React.createClass({
+
+var LectureView = React.createClass({
   mixins: [MaterialMixin],
 
   getInitialState: function(){
     return {
-      loaded: false,
-      lectures: undefined
+      loaded: false
     }
   },
 
   componentDidMount: function(){
-    this.setState({
-      lectures: lectureActions.getLectures()
-    });
     // Add the listener
     // We use _ onChange because it's a method
     lecturesStore.addChangeListener(this._onChange);
+
+    this.setState({
+      questions: lectureActions.getQuestions(this.props.videoId);
+    });
   },
 
   componentWillUnmount: function(){
@@ -35,25 +37,17 @@ var LecturesList = React.createClass({
   _onChange: function(){
     this.setState({
       loaded: true,
-      lectures: lecturesStore.getLectures()
+      lectures: lecturesStore.getQuestions()
     });
   },
 
-
-  render: function() {
-    console.log('State of the lectures -->', this.state.lectures);
-    var rows = [];
-    if (this.state.lectures !== undefined) {
-      rows = this.state.lectures.map(function(lecture, i){
-        return <LectureRow data={lecture} key={i}/>
-      });
-    }
+  render: function(){
+    console.log('State of the questions -->', this.state.questions);
     return (
       <div>
         <Loader loaded={this.state.loaded}>
           <div className="container">
-              <LecturesListTitle/>
-              {rows}
+              <h1>Something</h1>
           </div>
         </Loader>
       </div>
@@ -61,4 +55,4 @@ var LecturesList = React.createClass({
   }
 });
 
-module.exports = LecturesList;
+module.exports = LectureView;

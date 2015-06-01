@@ -6,8 +6,9 @@ var Dispatcher        = require('../dispatcher/dispatcher'),
 	lecturesConstants = require('../constants/lectures'),
 	mui               = require('material-ui');
 
-// Define the object that will contain the data (lectures) 
+// Define the object that will contain the data (lectures)
 var _lectures;
+var _questions;
 
 // Pattern to define the variable that will inform a new change
 var CHANGE_EVENT = 'change'
@@ -19,7 +20,7 @@ var CHANGE_EVENT = 'change'
 var LecturesStore = assign(EventEmitter.prototype, {
 	// Inform the view that something changed
 	emitChange: function(){
-		// Emit the change 
+		// Emit the change
 		this.emit(CHANGE_EVENT);
 	},
 
@@ -33,6 +34,10 @@ var LecturesStore = assign(EventEmitter.prototype, {
 
 	getLectures: function(){
 		return _lectures;
+	},
+
+	getQuestions: function(){
+		return _questions;
 	}
 });
 
@@ -43,8 +48,12 @@ LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
 
 	// Check whether the action can be used by the store
 	switch(action.actionType) {
-		case lecturesConstants.SET_LECTURES: 
+		case lecturesConstants.SET_LECTURES:
 			_lectures = action.lectures;
+			LecturesStore.emitChange();
+			break;
+		case lecturesConstants.SET_QUESTIONS:
+			_questions = action.questions;
 			LecturesStore.emitChange();
 			break;
 	}

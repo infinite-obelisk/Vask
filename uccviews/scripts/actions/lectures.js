@@ -3,7 +3,7 @@
 var Dispatcher = require('../dispatcher/dispatcher'),
 	assign     = require('object-assign'),
 	request    = require('superagent'),
-	lecturesConstants = require('../constants/lectures'); 
+	lecturesConstants = require('../constants/lectures');
 
 module.exports = {
 
@@ -15,6 +15,13 @@ module.exports = {
 		});
 	},
 
+	setQuestions: function(questions){
+		Dispatcher.handleViewAction({
+			actionType: lecturesConstants.SET_QUESTIONS,
+			questions: questions
+		});
+	},
+
 	getLectures: function(){
 		var self = this,
 			url = '/getlectures';
@@ -22,8 +29,8 @@ module.exports = {
 		request.get(url)
 			   .set('Accept', 'application/json')
 			   .end(function(err, res){
-			   	if (err) { 
-			   		console.log('Failed fetching the server'); 
+			   	if (err) {
+			   		console.log('Failed fetching the server');
 			   		throw err;
 			   	}
 			   	console.log('response from the server', res);
@@ -38,6 +45,29 @@ module.exports = {
 			   		console.log('Response is not ok');
 			   	}
 			   });
-	}
+	},
 
+	getQuestions: function(videoId){
+		var thiz = this,
+			url = "/getquestions?video=" + videoId;
+
+		request.get(url)
+					 .set('Accept', 'application/json')
+				   .end(function(err, res){
+				   	if (err) {
+				   		console.log('Failed fetching the server');
+				   		throw err;
+				   	}
+				   	console.log('response from the server', res);
+				   	if(res.ok){
+				   		// get the data from the response
+				   		var questions = res.body.result;
+				   		// send the data to dispatcher
+				   		thiz.setQuestions(questions);
+				   	} else {
+				   		// throw the error
+				   		console.log('Response is not ok');
+				   	}
+				   });
+	}
 }

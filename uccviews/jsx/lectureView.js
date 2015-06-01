@@ -175,8 +175,6 @@ var PopupQuestion = React.createClass({
   }
 });
 
-
-
 // ================================================================= //
 var NavBar = React.createClass({
   childContextTypes: {
@@ -463,6 +461,7 @@ var Voting = React.createClass({
     var isAnswer = !!this.props.answerIndex;
     var answerIndex = this.props.answerIndex;
     var questionId = this.props.questionId;
+    this.setState({votes: (this.props.votes + 1)});
     if(isAnswer){
       console.log('vote answer');
       voteQuestion(questionId,1,answerIndex);
@@ -476,6 +475,7 @@ var Voting = React.createClass({
     var isAnswer = !!this.props.answerIndex;
     var answerIndex = this.props.answerIndex;
     var questionId = this.props.questionId;
+    this.setState({votes: (this.props.votes - 1)});
     if(isAnswer){
       console.log('vote answer');
       voteQuestion(questionId,-1,answerIndex);
