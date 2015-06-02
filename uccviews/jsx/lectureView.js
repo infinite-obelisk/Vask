@@ -16,6 +16,8 @@ var mui = require('material-ui'),
     Dialog = mui.Dialog,
     TextField = mui.TextField,
     Snackbar   = mui.Snackbar,
+    LeftNav = mui.LeftNav,
+    MenuItem = mui.MenuItem,
     $          = require('jquery');
 var ThemeManager = new mui.Styles.ThemeManager();
 ThemeManager.setTheme(ThemeManager.types.LIGHT);
@@ -176,6 +178,52 @@ var PopupQuestion = React.createClass({
 });
 
 // ================================================================= //
+
+menuItems = [
+  { route: 'get-started', text: 'Get Started' },
+  { route: 'customization', text: 'Customization' },
+  { route: 'components', text: 'Components' },
+  { type: MenuItem.Types.SUBHEADER, text: 'Resources' },
+  { 
+     type: MenuItem.Types.LINK, 
+     payload: 'https://github.com/callemall/material-ui', 
+     text: 'GitHub' 
+  },
+  { 
+     text: 'Disabled', 
+     disabled: true 
+  },
+  { 
+     type: MenuItem.Types.LINK, 
+     payload: 'https://www.google.com', 
+     text: 'Disabled Link', 
+     disabled: true 
+  },
+];
+
+var LeftNavBar = React.createClass({
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  getChildContext: function(){
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  },
+  getInitialState: function() {
+    return {
+      open: true
+    }
+  },
+  toggleSide: function() {
+    console.log('toggled: ', this.state.open);
+    this.setState({open: !this.state.open});
+  },
+  render: function(){
+    return (this.state.open ? <LeftNav menuItems={menuItems} /> : <div></div>);
+  }
+});
+
 var NavBar = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
@@ -185,9 +233,25 @@ var NavBar = React.createClass({
       muiTheme: ThemeManager.getCurrentTheme()
     };
   },
+  componentDidMount: function() {
+    this.refs.topBar.addEventListener('click', function() {
+      console.log('clicked on nav bar to display the side bar');
+      this.refs.leftNav.toggleSide();
+    });
+  },
+  _handleClick: function(){
+    console.log('nav bar clicked');
+    this.refs.leftNav.toggleSide();
+  },
   render: function(){
-    return (<AppBar
-              title="Vask" />);
+    return (
+      <div>
+        <LeftNavBar ref="leftNav" />
+        <div onClick={this._handleClick}>
+          <AppBar title="Vask" ref="topBar" />
+        </div>
+      </div>
+    );
   }
 });
 
@@ -728,6 +792,10 @@ var ViewQuestionDialog = React.createClass({
 
 React.render(<NavBar />,
   document.querySelector('.nav-bar')
+);
+
+React.render(<LeftNavBar />,
+  document.querySelector('.left-bar')
 );
 
 React.render(<AskQuestionDialog />,
