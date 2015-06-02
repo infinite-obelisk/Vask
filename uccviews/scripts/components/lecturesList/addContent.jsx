@@ -5,6 +5,7 @@ var React         = require('react'),
     FlatButton    = mui.FlatButton,
     RaisedButton  = mui.RaisedButton,
     Dialog        = mui.Dialog,
+    ContentForm   = require('./contentForm.jsx'),
 	  MaterialMixin = require('../../mixins/material-ui.js');
 
 
@@ -56,6 +57,7 @@ var AddContent = React.createClass({
                 title="Send your content"
                 actions={customActions}
                 modal={this.state.modal}>
+                <ContentForm/>
               </Dialog>
 
               <RaisedButton 
