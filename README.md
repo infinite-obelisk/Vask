@@ -18,7 +18,11 @@ Video url: "/?video=(youtube-video-url-ending)"
 # How to start the test server
 
 Make sure you're in the root directory.
+
 bower install
+
 npm install
+
 grunt reactifies
+
 gulp compile
