@@ -14,3 +14,11 @@ Information in POST to '/addquestion': video, time, text, username
 
 (youtube-video-url-ending) is the "AAAAAaBcDe" part for the youtube video at "https://www.youtube.com/watch?v=AAAAAaBcDe"
 Video url: "/?video=(youtube-video-url-ending)"
+
+# How to start the test server
+
+Make sure you're in the root directory.
+bower install
+npm install
+grunt reactifies
+gulp compile
