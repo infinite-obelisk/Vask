@@ -5,7 +5,8 @@ var contentSchema = mongoose.Schema({
   shortUrl: { type: String, required: true},
   title : { type : String},
   subtitle : { type : String},
-  description : { type : String}
+  description : { type : String},
+  author : { type : mongoose.Schema.Types.ObjectId }
 });
 
 var Content = mongoose.model('Content', contentSchema);
