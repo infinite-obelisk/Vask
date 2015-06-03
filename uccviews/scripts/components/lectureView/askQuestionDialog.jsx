@@ -1,21 +1,15 @@
 var React             = require('react'),
     AskQuestionForm   = require('./askQuestionElements/askQuestionForm.jsx'),
     AskQuestionButton = require('./askQuestionElements/askQuestionButton.jsx'),
+    MaterialMixin     = require('../../mixins/material-ui.js'),
     mui               = require('material-ui'),
     FlatButton        = mui.FlatButton,
     Dialog            = mui.Dialog;
 
 var AskQuestionDialog = React.createClass({
+  mixins: [MaterialMixin],
   openModal: function(){
     this.refs.AskQuestionDialog.show();
-  },
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-  getChildContext: function(){
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
   },
   clearForm: function(){
     window.$('#question-title').val("");
@@ -52,7 +46,10 @@ var AskQuestionDialog = React.createClass({
                   <AskQuestionForm />
               </Dialog>
               <AskQuestionButton
-                openModal={this.openModal} />
+                openModal={this.openModal}
+                stopVideo={this.props.stopVideo} />
             </div>);
   }
 });
+
+module.exports = AskQuestionDialog;

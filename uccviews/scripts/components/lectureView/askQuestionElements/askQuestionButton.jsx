@@ -1,19 +1,16 @@
-var React        = require('react'),
-    mui          = require('material-ui'),
-    RaisedButton = mui.RaisedButton;
+var React                = require('react'),
+    injectTapEventPlugin = require("react-tap-event-plugin");
+    MaterialMixin        = require('./../../../mixins/material-ui.js'),
+    mui                  = require('material-ui'),
+    RaisedButton         = mui.RaisedButton;
+
+injectTapEventPlugin();
 
 var AskQuestionButton = React.createClass({
+  mixins: [MaterialMixin],
   handleButtonClick: function(){
-    window.stopVideo.call(window);
+    this.props.stopVideo();
     this.props.openModal();
-  },
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-  getChildContext: function(){
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
   },
   render: function(){
     return (<RaisedButton

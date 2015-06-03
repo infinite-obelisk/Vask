@@ -3,9 +3,9 @@
 var React               = require('react'),
     lectureActions      = require('../../actions/lectures'),
     lecturesStore       = require('../../stores/lectures'),
-    askQuestion         = require('./askQuestion.jsx'),
-    viewQuestionDialog  = require('./viewQuestionDialog.jsx'),
-    viewQuestionsDialog = require('./viewQuestionsDialog.jsx'),
+    AskQuestionDialog         = require('./askQuestionDialog.jsx'),
+    ViewQuestionDialog  = require('./viewQuestionDialog.jsx'),
+    ViewQuestionsDialog = require('./viewQuestionsDialog.jsx'),
     Loader              = require('../loader/loader.jsx'),
     MaterialMixin       = require('../../mixins/material-ui.js'),
     YouTube             = require('react-youtube');
@@ -43,8 +43,12 @@ var LectureView = React.createClass({
     });
   },
 
-  onPlayerReady: function(event) {
+  onPlayerReady: function(event){
     event.target.playVideo();
+  },
+
+  stopVideo: function(){
+    this.refs.player._internalPlayer.stopVideo();
   },
 
   render: function(){
@@ -67,6 +71,11 @@ var LectureView = React.createClass({
                               ref="player"
                               onReady={this.onPlayerReady} />
                         </div>
+                    </div>
+                    <div
+                      className="row">
+                        <AskQuestionDialog
+                          stopVideo={this.stopVideo}/>
                     </div>
                 </div>
             </div>
