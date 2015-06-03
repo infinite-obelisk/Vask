@@ -12,7 +12,7 @@ var ContentForm = React.createClass({
 
   getInitialState: function(){
     return {
-      error2Text: 'This field is required.'
+      error2Text: ''
     }
   },
 
@@ -25,17 +25,21 @@ var ContentForm = React.createClass({
     return (
             <div>
               <TextField
-                hintText="Title"
+                floatingLabelText="Content Title"
+                style={{"width": "95%", "height": "110px"}}
                 errorText={this.state.error2Text}
                 onChange={this._handleError2InputChange}
                 defaultValue="" />
               <TextField
-                hintText="Description"
+                floatingLabelText="Content Description"
+                multiLine={true}
+                style={{"width": "95%", "height": "110px"}}
                 errorText={this.state.error2Text}
                 onChange={this._handleError2InputChange}
                 defaultValue="" />              
               <TextField
-                hintText="Video URL"
+                floatingLabelText="Video URL"
+                style={{"width": "95%", "height": "110px"}}
                 errorText={this.state.error2Text}
                 onChange={this._handleError2InputChange}
                 defaultValue="" />
