@@ -145,24 +145,6 @@
     function stopVideo() {
       window.player.stopVideo();
     };
-    function printTime() {
-      console.log('time ', player.getCurrentTime());
-      $.ajax({
-        url: "/addquestion",
-        method: "POST",
-        contentType: "application/json",
-        data: JSON.stringify({video : '1234', text : 'text', username : 'name', time : 50}),
-        statusCode: {
-          201: function (data) {
-            console.log('win');
-            console.log(data);
-          },
-          500: function (err) {
-            console.log('lose');
-          }
-        }
-      });
-    };
   </script>
 </body>
 </html>
