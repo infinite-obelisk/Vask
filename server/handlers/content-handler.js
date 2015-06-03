@@ -38,6 +38,7 @@ var fakeVideos = [
 
 exports.getLectures = function (req, res) {
 	//res.status(200).send({result : fakeVideos});
+  var search = req.query.search;
   Content.find({}, function(err, contents) {
     if (!err) {
       if (contents.length) res.status(200).send({result: contents});
