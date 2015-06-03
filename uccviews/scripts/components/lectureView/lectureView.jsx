@@ -1,13 +1,13 @@
 'use strict'
 
-var React             = require('react'),
-    lectureActions    = require('../../actions/lectures'),
-    lecturesStore     = require('../../stores/lectures'),
-    askQuestion       = require('./askQuestion.jsx'),
-    viewQuestion      = require('./viewQuestion.jsx'),
-    viewAllQuestions  = require('./viewAllQuestions.jsx'),
-    Loader            = require('../loader/loader.jsx'),
-    MaterialMixin     = require('../../mixins/material-ui.js');
+var React               = require('react'),
+    lectureActions      = require('../../actions/lectures'),
+    lecturesStore       = require('../../stores/lectures'),
+    askQuestion         = require('./askQuestion.jsx'),
+    viewQuestionDialog  = require('./viewQuestionDialog.jsx'),
+    viewQuestionsDialog = require('./viewQuestionsDialog.jsx'),
+    Loader              = require('../loader/loader.jsx'),
+    MaterialMixin       = require('../../mixins/material-ui.js');
 
 
 var LectureView = React.createClass({
@@ -23,7 +23,6 @@ var LectureView = React.createClass({
     // Add the listener
     // We use _ onChange because it's a method
     lecturesStore.addChangeListener(this._onChange);
-
     this.setState({
       questions: lectureActions.getQuestions(this.props.videoId)
     });
