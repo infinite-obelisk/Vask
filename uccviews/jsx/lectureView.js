@@ -201,29 +201,6 @@ menuItems = [
   },
 ];
 
-var LeftNavBar = React.createClass({
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-  getChildContext: function(){
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
-  },
-  getInitialState: function() {
-    return {
-      open: true
-    }
-  },
-  toggleSide: function() {
-    console.log('toggled: ', this.state.open);
-    this.setState({open: !this.state.open});
-  },
-  render: function(){
-    return (this.state.open ? <LeftNav menuItems={menuItems} /> : <div></div>);
-  }
-});
-
 var NavBar = React.createClass({
   childContextTypes: {
     muiTheme: React.PropTypes.object
@@ -241,14 +218,14 @@ var NavBar = React.createClass({
   },
   _handleClick: function(){
     console.log('nav bar clicked');
-    this.refs.leftNav.toggleSide();
+    this.refs.leftNav.toggle();
   },
   render: function(){
     return (
       <div>
-        <LeftNavBar ref="leftNav" />
-        <div onClick={this._handleClick}>
-          <AppBar title="Vask" ref="topBar" />
+        <LeftNav ref="leftNav" menuItems={menuItems} docked={false} />
+        <div>
+          <AppBar onLeftIconButtonTouchTap={this._handleClick} title="Vask" ref="topBar" />
         </div>
       </div>
     );
