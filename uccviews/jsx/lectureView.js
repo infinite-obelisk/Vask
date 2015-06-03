@@ -180,14 +180,18 @@ var PopupQuestion = React.createClass({
 // ================================================================= //
 
 menuItems = [
-  { route: 'get-started', text: 'Get Started' },
-  { route: 'customization', text: 'Customization' },
-  { route: 'components', text: 'Components' },
+  {
+    type: MenuItem.Types.LINK,
+    payload: '/',
+    text: 'Vask Home'
+  },
+  { route: '/profile', text: 'Profile' },
+  { route: '/search', text: 'Find a Course/Video' },
   { type: MenuItem.Types.SUBHEADER, text: 'Resources' },
   { 
      type: MenuItem.Types.LINK, 
-     payload: 'https://github.com/callemall/material-ui', 
-     text: 'GitHub' 
+     payload: 'https://youtube.com', 
+     text: 'Youtube' 
   },
   { 
      text: 'Disabled', 
@@ -196,8 +200,8 @@ menuItems = [
   { 
      type: MenuItem.Types.LINK, 
      payload: 'https://www.google.com', 
-     text: 'Disabled Link', 
-     disabled: true 
+     text: 'Google', 
+     disabled: false
   },
 ];
 
