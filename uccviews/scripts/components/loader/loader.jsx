@@ -9,7 +9,7 @@ var Loader = React.createClass({
   mixins: [MaterialMixin],
 
   render: function() {
-    console.log('this.props',this.props);
+    // console.log('this.props',this.props);
     if(!this.props.loaded){
       return (
         <div style={{"marginRight": "auto",'position':'relative', 'left':'43%', 'margin-top':'10%'}}>

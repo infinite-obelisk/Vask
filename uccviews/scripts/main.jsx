@@ -15,6 +15,10 @@ var App = React.createClass({
 
     routes: {
         '/': 'coursesList',
+        '/courses': 'coursesList',
+        '/lectures': 'lecturesList',
+        '/courses/create': 'newCourse',
+        '/lectures/create': 'newLecture',
         '/lectures/:url': 'lectureView'
     },
 
@@ -54,6 +58,19 @@ var App = React.createClass({
 
         // return <TodoList list={list} root={'/lists/' + id}/>;
     },
+
+    newCourse: function(){
+        return (
+            <h1>New COURSE page</h1>
+        );
+    },
+
+    newLecture: function(){
+        return (
+            <h1>New LECTURE page</h1>
+        );
+    },
+
 
     notFound: function(path) {
         return <div className="not-found">Uh oh. {path} doesnt exist.</div>;
