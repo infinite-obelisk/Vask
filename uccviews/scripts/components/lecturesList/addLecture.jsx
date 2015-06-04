@@ -26,6 +26,22 @@ var AddLecture = React.createClass({
     }
   },
 
+  componentDidMount: function(){
+    lecturesStore.addChangeListener(this._onChange);
+  },
+
+  componentWillUnmount: function(){
+    lecturesStore.removeChangeListener(this._onChange);
+  },
+
+  _onChange: function(){
+    console.log('New response from the server! Lecture may be added');
+    this.setState({
+      posted: lecturesStore.getLectureResp()
+    });
+  },
+
+
   handleButtonClick: function(){
     console.log('opening dialog');
     this.refs.dialog.show();
@@ -39,9 +55,8 @@ var AddLecture = React.createClass({
       url: this.refs.form.state.url
     }
 
-    this.setState({
-      posted: lectureActions.addLecture(lecture)
-    });
+    lectureActions.addLecture(lecture);
+
     console.log('Title', this.refs.form.state.title); 
     console.log('Course', this.refs.form.state.course); 
     console.log('Description', this.refs.form.state.desc); 

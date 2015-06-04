@@ -29,9 +29,16 @@ module.exports = {
 		});
 	},
 
+	setLectureResp: function(response){
+		Dispatcher.handleViewAction({
+			actionType: lecturesConstants.SET_LECTURE_RESP,
+			response: response
+		});
+	},
+
 	addLecture: function(lecture){
 		var self = this,
-			  url = '/addlecture';
+			  url = '/addlecture'
 		// Request the API for the data (lectures)
 		request.post(url)
 				 .send(lecture)
@@ -47,13 +54,15 @@ module.exports = {
 			   		// get the data from the response
 			   		// var serverResp = res.body.result;
 			   		// send the data to dispatcher
-			   		// self.setLectures(lectures);
+			   		self.setLectureResp(true);
 
 			   	} else {
 			   		// thow the error
 			   		console.log('Response is not ok');
 			   	}
 			   });
+
+			return result;
 	},
 
 	getLectures: function(){
