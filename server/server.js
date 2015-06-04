@@ -8,6 +8,7 @@ var session = require('express-session');
 var questionHandler = require('./handlers/question-handler');
 var userHandler = require('./handlers/user-handler');
 var contentHandler = require('./handlers/content-handler');
+var courseHandler = require('./handlers/course-handler');
 var util = require('./utilities');
 var cors = require('cors');
 
@@ -45,6 +46,7 @@ app.post('/voteanswer', questionHandler.voteAnswer);
 app.get('/getquestions', questionHandler.getQuestions);
 
 app.get('/getlectures', contentHandler.getLectures);
+app.get('/getcourses', courseHandler.getCourses);
 
 app.post('/signup', userHandler.signUpUser);
 app.post('/login', userHandler.login);
