@@ -61,7 +61,7 @@ var AddContent = React.createClass({
               </Dialog>
 
               <RaisedButton 
-                label="+ Add Content"
+                label="+ Add Course"
                 onClick={this.handleButtonClick}                
                 onTouchTap={this.handleButtonClick} 
                 secondary={true} 
