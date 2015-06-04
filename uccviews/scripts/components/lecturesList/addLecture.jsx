@@ -9,7 +9,7 @@ var React         = require('react'),
 	  MaterialMixin = require('../../mixins/material-ui.js');
 
 
-var AddContent = React.createClass({
+var AddLecture = React.createClass({
 
 	mixins: [MaterialMixin],
 
@@ -61,7 +61,7 @@ var AddContent = React.createClass({
               </Dialog>
 
               <RaisedButton 
-                label="+ Add Content"
+                label="+ Add Lecture"
                 onClick={this.handleButtonClick}                
                 onTouchTap={this.handleButtonClick} 
                 secondary={true} 
@@ -71,4 +71,4 @@ var AddContent = React.createClass({
   }
 });
 
-module.exports = AddContent;
+module.exports = AddLecture;

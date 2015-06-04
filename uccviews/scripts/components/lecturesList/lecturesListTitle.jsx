@@ -3,7 +3,7 @@
 var React         = require('react'),
 	mui           = require('material-ui'),
 	RaisedButton  = mui.RaisedButton,
-	AddContent    = require('./addContent.jsx'),
+	AddLecture    = require('./addLecture.jsx'),
 	MaterialMixin = require('../../mixins/material-ui.js');
 
 var LectureListTitle = React.createClass({
@@ -18,7 +18,7 @@ var LectureListTitle = React.createClass({
 		  	</div>
 		  	
 		  	<div className="col-lg-6 col-md-6 col-sm-6" style={{"paddingTop": "10px"}}>
-		  	  <AddContent/>
+		  	  <AddLecture/>
 		  	</div>
 		  </div>
 		);

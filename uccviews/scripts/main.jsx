@@ -17,8 +17,8 @@ var App = React.createClass({
         '/': 'coursesList',
         '/courses': 'coursesList',
         '/lectures': 'lecturesList',
-        '/courses/create': 'newCourse',
-        '/lectures/create': 'newLecture',
+        // '/courses/create': 'newCourse',
+        // '/lectures/create': 'newLecture',
         '/lectures/:url': 'lectureView'
     },
 
