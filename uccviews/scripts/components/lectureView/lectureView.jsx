@@ -26,7 +26,7 @@ var LectureView = React.createClass({
     // We use _ onChange because it's a method
     lecturesStore.addChangeListener(this._onChange);
     this.setState({
-      questions: lectureActions.getQuestions(this.props.videoId)
+      questions: lectureActions.getQuestions(this.props.shortUrl)
     });
 
     window.player = this.refs.player;
@@ -56,15 +56,30 @@ var LectureView = React.createClass({
     return this.refs.player._internalPlayer.getCurrentTime();
   },
 
+  getPlayerState: function(){
+    if(this.refs.player._internalPlayer){
+      return this.refs.player._internalPlayer.getPlayerState();
+    } else {
+      return false;
+    }
+  },
+
+  playerIsLoaded: function(){
+    return !!this.refs.player;
+  },
+
   render: function(){
     console.log('State of the questions -->', this.state);
-    var questions, questionList;
+    var questions;
     if(!!this.state.questions){
       questions = (<div>
-                    <PopupQuestion />
+                    <PopupQuestion
+                      getPlayerState={this.getPlayerState}
+                      getVideoTime={this.getVideoTime}
+                      playerIsLoaded={this.playerIsLoaded} />
                     {this.state.questions.map(function(question){
                       return (<ViewQuestionDialog
-                                question={question}/>);
+                                question={question} />);
                     })}
                     </div>);
     }
@@ -91,7 +106,8 @@ var LectureView = React.createClass({
                       className="row">
                         <AskQuestionDialog
                           stopVideo={this.stopVideo}
-                          getVideoTime={this.getVideoTime}/>
+                          getVideoTime={this.getVideoTime}
+                          videoId = {this.props.shortUrl}/>
                         {questions}
                         <ViewQuestionsDialog
                           questions={this.state.questions}/>
