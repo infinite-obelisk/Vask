@@ -1,11 +1,11 @@
 'use strict'
 
 var React             = require('react'),
-    courseActions    = require('../../actions/lectures'),
-    coursesStore     = require('../../stores/lectures'),
+    courseActions     = require('../../actions/lectures'),
+    coursesStore      = require('../../stores/lectures'),
     Loader            = require('../loader/loader.jsx'),
-    CoursesListTitle = require('./coursesListTitle.jsx'),
-    CourseRow        = require('./courseRow.jsx'),
+    CoursesListTitle  = require('./coursesListTitle.jsx'),
+    CourseRow         = require('./courseRow.jsx'),
     MaterialMixin     = require('../../mixins/material-ui.js');
 
 var LecturesList = React.createClass({
