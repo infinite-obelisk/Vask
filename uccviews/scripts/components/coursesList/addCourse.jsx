@@ -54,7 +54,7 @@ var AddContent = React.createClass({
             <div>
               <Dialog
                 ref="dialog"
-                title="Send your content"
+                title="Add Course"
                 actions={customActions}
                 modal={this.state.modal}>
                 <ContentForm/>
