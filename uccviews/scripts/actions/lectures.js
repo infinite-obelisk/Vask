@@ -13,6 +13,13 @@ module.exports = {
 			actionType: lecturesConstants.SET_LECTURES,
 			lectures: lectures
 		});
+	},	
+
+	setCourses: function(courses){
+		Dispatcher.handleViewAction({
+			actionType: lecturesConstants.SET_COURSES,
+			courses: courses
+		});
 	},
 
 	setQuestions: function(questions){
@@ -30,7 +37,7 @@ module.exports = {
 			   .set('Accept', 'application/json')
 			   .end(function(err, res){
 			   	if (err) {
-			   		console.log('Failed fetching the server');
+			   		console.log('Failed fetching the server: lectures');
 			   		throw err;
 			   	}
 			   	console.log('response from the server', res);
@@ -39,6 +46,31 @@ module.exports = {
 			   		var lectures = res.body.result;
 			   		// send the data to dispatcher
 			   		self.setLectures(lectures);
+
+			   	} else {
+			   		// thow the error
+			   		console.log('Response is not ok');
+			   	}
+			   });
+	},
+
+	getCourses: function(){
+		var self = this,
+			url = '/getcourses';
+		// Request the API for the data (lectures)
+		request.get(url)
+			   .set('Accept', 'application/json')
+			   .end(function(err, res){
+			   	if (err) {
+			   		console.log('Failed fetching the server: courses');
+			   		throw err;
+			   	}
+			   	console.log('response from the server', res);
+			   	if(res.ok){
+			   		// get the data from the response
+			   		var courses = res.body.result;
+			   		// send the data to dispatcher
+			   		self.setCourses(courses);
 
 			   	} else {
 			   		// thow the error

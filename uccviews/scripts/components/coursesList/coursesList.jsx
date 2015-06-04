@@ -35,7 +35,7 @@ var LecturesList = React.createClass({
   _onChange: function(){
     this.setState({
       loaded: true,
-      lectures: coursesStore.getLectures()
+      lectures: coursesStore.getCourses()
     });
   },
 
