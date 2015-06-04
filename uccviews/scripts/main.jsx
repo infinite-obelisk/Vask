@@ -3,9 +3,13 @@ var React           = require('react'),
     LecturesList    = require('./components/lecturesList/lecturesList.jsx'),
     CoursesList    = require('./components/coursesList/coursesList.jsx'),
     mui             = require('material-ui'),
-    AppBar          = mui.AppBar,
+    NavBar            = require('./components/navBar/navBar.jsx'),
+    // AppBar          = mui.AppBar,
     MaterialMixin   = require('./mixins/material-ui.js'),
-    LectureView     = require('./components/lectureView/LectureView.jsx');
+    LectureView     = require('./components/lectureView/LectureView.jsx'),
+    injectTapEventPlugin = require("react-tap-event-plugin");
+
+    injectTapEventPlugin();
 
 var App = React.createClass({
 
@@ -23,7 +27,7 @@ var App = React.createClass({
     lecturesList: function() {
         return (
             <div>
-                <AppBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+                <NavBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
                 <LecturesList/>
             </div>
         );
@@ -32,7 +36,7 @@ var App = React.createClass({
     coursesList: function() {
         return (
             <div>
-                <AppBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+                <NavBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
                 <CoursesList/>
             </div>
         );
