@@ -6,7 +6,9 @@ var React         = require('react'),
     RaisedButton  = mui.RaisedButton,
     Dialog        = mui.Dialog,
     AddLectureForm   = require('./addLectureForm.jsx'),
-	  MaterialMixin = require('../../mixins/material-ui.js');
+	  MaterialMixin = require('../../mixins/material-ui.js'),
+    lectureActions    = require('../../actions/lectures'),
+    lecturesStore     = require('../../stores/lectures');
 
 
 var AddLecture = React.createClass({
