@@ -14,7 +14,7 @@ var LectureListTitle = React.createClass({
 		return (
 		  <div className="lectureTitleBox row">
 		  	<div className="col-lg-6 col-md-6 col-sm-6">
-		  	  <h3>Lectures</h3>
+		  	  <h3>Courses</h3>
 		  	</div>
 		  	
 		  	<div className="col-lg-6 col-md-6 col-sm-6" style={{"paddingTop": "10px"}}>
