@@ -3,7 +3,8 @@
 var React               = require('react'),
     lectureActions      = require('../../actions/lectures'),
     lecturesStore       = require('../../stores/lectures'),
-    AskQuestionDialog         = require('./askQuestionDialog.jsx'),
+    AskQuestionDialog   = require('./askQuestionDialog.jsx'),
+    PopupQuestion       = require('./viewQuestionElements/popupQuestion.jsx'),
     ViewQuestionDialog  = require('./viewQuestionDialog.jsx'),
     ViewQuestionsDialog = require('./viewQuestionsDialog.jsx'),
     Loader              = require('../loader/loader.jsx'),
@@ -39,7 +40,7 @@ var LectureView = React.createClass({
   _onChange: function(){
     this.setState({
       loaded: true,
-      lectures: lecturesStore.getQuestions(this.props.shortUrl)
+      questions: lecturesStore.getQuestions(this.props.shortUrl)
     });
   },
 
@@ -56,7 +57,17 @@ var LectureView = React.createClass({
   },
 
   render: function(){
-    console.log('State of the questions -->', this.state.questions);
+    console.log('State of the questions -->', this.state);
+    var questions, questionList;
+    if(!!this.state.questions){
+      questions = (<div>
+                    <PopupQuestion />
+                    {this.state.questions.map(function(question){
+                      return (<ViewQuestionDialog
+                                question={question}/>);
+                    })}
+                    </div>);
+    }
     return (
       <div
         className="container">
@@ -81,6 +92,9 @@ var LectureView = React.createClass({
                         <AskQuestionDialog
                           stopVideo={this.stopVideo}
                           getVideoTime={this.getVideoTime}/>
+                        {questions}
+                        <ViewQuestionsDialog
+                          questions={this.state.questions}/>
                     </div>
                 </div>
             </div>

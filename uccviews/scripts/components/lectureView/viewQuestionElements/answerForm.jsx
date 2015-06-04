@@ -1,21 +1,15 @@
 var React = require('react'),
+    MaterialMixin = require('./../../../mixins/material-ui.js'),
     mui = require('material-ui'),
     TextField = mui.TextField,
     FlatButton = mui.FlatButton;
 
 var AnswerForm = React.createClass({
+  mixins: [MaterialMixin],
   submitAnswer: function(){
     var answerText = this.refs.answerText.getValue();
     var questionId = this.props.questionId;
     addAnswer(questionId, answerText);
-  },
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-  getChildContext: function(){
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
   },
   render: function(){
     return (<div>

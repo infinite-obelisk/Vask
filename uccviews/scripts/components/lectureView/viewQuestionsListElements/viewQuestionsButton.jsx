@@ -1,18 +1,12 @@
 var React = require('react'),
+    MaterialMixin = require('./../../../mixins/material-ui.js'),
     mui = require('material-ui'),
     RaisedButton = mui.RaisedButton;
 
 var ViewQuestionsButton = React.createClass({
+  mixins: [MaterialMixin],
   handleButtonClick: function(){
     this.props.openModal();
-  },
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-  getChildContext: function(){
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
   },
   render: function(){
     return (<RaisedButton
