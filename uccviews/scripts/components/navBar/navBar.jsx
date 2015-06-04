@@ -19,8 +19,8 @@ var menuItems = [
   },  
   {
     type: MenuItem.Types.LINK,
-    payload: '/lessons',
-    text: 'Lessons'
+    payload: '/lectures',
+    text: 'Lectures'
   },
   // { route: '/profile', text: 'Profile' },
   // { route: '/search', text: 'Find a Course/Video' },
@@ -32,8 +32,8 @@ var menuItems = [
   },  
   { 
      type: MenuItem.Types.LINK, 
-     payload: '/lessons/add', 
-     text: 'Add a new lesson' 
+     payload: '/lectures/create', 
+     text: 'Add a new lecture' 
   },
   // { 
   //    text: 'Disabled', 
@@ -55,14 +55,20 @@ var NavBar = React.createClass({
     console.log('nav bar clicked');
     this.refs.leftNav.toggle();
   },
+  _handleChange: function(e, selectedIndex, menuItem){
+    console.log('e',e);
+    console.log('selectedIndex',selectedIndex);
+    console.log('menuItem',menuItem);
+    console.log('LeftNav', this.refs);
+  },
   render: function(){
     return (
       <div>
-        <LeftNav 
+        <LeftNav
           ref="leftNav" 
           menuItems={menuItems} 
           docked={false}
-          selectedIndex={3} 
+          onChange={this._handleChange}
           header={<HeaderLeftMenu/>}/>
         <div>
           <AppBar onLeftIconButtonTouchTap={this._handleClick} title="Vask" ref="topBar" />
