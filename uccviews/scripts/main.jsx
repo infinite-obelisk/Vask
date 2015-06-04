@@ -1,6 +1,7 @@
 var React           = require('react'),
     RouterMixin     = require('react-mini-router').RouterMixin,
     LecturesList    = require('./components/lecturesList/lecturesList.jsx'),
+    CoursesList    = require('./components/coursesList/coursesList.jsx'),
     mui             = require('material-ui'),
     AppBar          = mui.AppBar,
     MaterialMixin   = require('./mixins/material-ui.js'),
@@ -9,7 +10,7 @@ var React           = require('react'),
 var App = React.createClass({
 
     routes: {
-        '/': 'lecturesList',
+        '/': 'coursesList',
         '/lectures/:url': 'lectureView'
     },
 
@@ -24,6 +25,15 @@ var App = React.createClass({
             <div>
                 <AppBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
                 <LecturesList/>
+            </div>
+        );
+    },    
+
+    coursesList: function() {
+        return (
+            <div>
+                <AppBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+                <CoursesList/>
             </div>
         );
     },
