@@ -29,6 +29,33 @@ module.exports = {
 		});
 	},
 
+	addLecture: function(lecture){
+		var self = this,
+			  url = '/addlecture';
+		// Request the API for the data (lectures)
+		request.post(url)
+				 .send(lecture)
+			   .set('Accept', 'application/json')
+			   .end(function(err, res){
+			   	if (err) {
+			   		console.log('Failed fetching the server: lectures');
+			   		throw err;
+			   	}
+			   	console.log('response from the server', res);
+			   	if(res.ok){
+			   		console.log('Workkkkk');
+			   		// get the data from the response
+			   		// var serverResp = res.body.result;
+			   		// send the data to dispatcher
+			   		// self.setLectures(lectures);
+
+			   	} else {
+			   		// thow the error
+			   		console.log('Response is not ok');
+			   	}
+			   });
+	},
+
 	getLectures: function(){
 		var self = this,
 			url = '/getlectures';

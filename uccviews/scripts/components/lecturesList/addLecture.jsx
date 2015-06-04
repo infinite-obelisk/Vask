@@ -5,7 +5,7 @@ var React         = require('react'),
     FlatButton    = mui.FlatButton,
     RaisedButton  = mui.RaisedButton,
     Dialog        = mui.Dialog,
-    ContentForm   = require('./contentForm.jsx'),
+    AddLectureForm   = require('./addLectureForm.jsx'),
 	  MaterialMixin = require('../../mixins/material-ui.js');
 
 
@@ -15,7 +15,12 @@ var AddLecture = React.createClass({
 
   getInitialState: function(){
     return {
-      modal: true
+      modal: true,
+      course: undefined,
+      title: undefined,
+      desc: undefined,
+      url: undefined,
+      posted: false
     }
   },
 
@@ -25,14 +30,29 @@ var AddLecture = React.createClass({
   },
 
   _handleCustomDialogSubmit: function(){
-    console.log('saving content');
+    var lecture = {
+      title: this.refs.form.state.title,
+      course: this.refs.form.state.course,
+      description: this.refs.form.state.desc,
+      url: this.refs.form.state.url
+    }
+
+    this.setState({
+      posted: lectureActions.addLecture(lecture)
+    });
+    console.log('Title', this.refs.form.state.title); 
+    console.log('Course', this.refs.form.state.course); 
+    console.log('Description', this.refs.form.state.desc); 
+    console.log('Url', this.refs.form.state.url); 
     this.refs.dialog.dismiss();
-    // TBD
   },
   
   _handleCustomDialogCancel: function(){
     console.log('dialog closed');
     this.refs.dialog.dismiss();
+  },
+
+  updateState: function(){
   },
   
   render: function(){
@@ -54,10 +74,10 @@ var AddLecture = React.createClass({
             <div>
               <Dialog
                 ref="dialog"
-                title="Send your content"
+                title="Add Lecture"
                 actions={customActions}
                 modal={this.state.modal}>
-                <ContentForm/>
+                <AddLectureForm ref="form" />
               </Dialog>
 
               <RaisedButton 

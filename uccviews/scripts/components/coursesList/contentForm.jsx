@@ -25,24 +25,18 @@ var ContentForm = React.createClass({
     return (
             <div>
               <TextField
-                floatingLabelText="Content Title"
+                floatingLabelText="Course Title"
                 style={{"width": "95%", "height": "110px"}}
                 errorText={this.state.error2Text}
                 onChange={this._handleError2InputChange}
                 defaultValue="" />
               <TextField
-                floatingLabelText="Content Description"
+                floatingLabelText="Course Description"
                 multiLine={true}
                 style={{"width": "95%", "height": "110px"}}
                 errorText={this.state.error2Text}
                 onChange={this._handleError2InputChange}
                 defaultValue="" />              
-              <TextField
-                floatingLabelText="Video URL"
-                style={{"width": "95%", "height": "110px"}}
-                errorText={this.state.error2Text}
-                onChange={this._handleError2InputChange}
-                defaultValue="" />
             </div>
            );
   }
