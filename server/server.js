@@ -40,6 +40,7 @@ app.use('/lecture/:id', function(req, res){
 app.get('/favicon.ico', util.stub);
 
 app.post('/addquestion', questionHandler.addQuestion);
+app.post('/addlecture', contentHandler.addLecture);
 app.post('/addanswer', questionHandler.addAnswer);
 app.post('/votequestion', questionHandler.voteQuestion);
 app.post('/voteanswer', questionHandler.voteAnswer);
