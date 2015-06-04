@@ -47,6 +47,6 @@ var App = React.createClass({
 
 });
 
-React.render(<App history={true}/>, document.getElementById('app')
+React.render(<App history={false}/>, document.getElementById('app')
 );
 
