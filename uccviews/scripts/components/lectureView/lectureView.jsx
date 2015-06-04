@@ -51,6 +51,10 @@ var LectureView = React.createClass({
     this.refs.player._internalPlayer.stopVideo();
   },
 
+  getVideoTime: function(){
+    return this.refs.player._internalPlayer.getCurrentTime();
+  },
+
   render: function(){
     console.log('State of the questions -->', this.state.questions);
     return (
@@ -75,7 +79,8 @@ var LectureView = React.createClass({
                     <div
                       className="row">
                         <AskQuestionDialog
-                          stopVideo={this.stopVideo}/>
+                          stopVideo={this.stopVideo}
+                          getVideoTime={this.getVideoTime}/>
                     </div>
                 </div>
             </div>

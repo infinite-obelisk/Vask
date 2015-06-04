@@ -5,23 +5,21 @@ var React     = require('react'),
 
 var AskQuestionForm = React.createClass({
   mixins: [MaterialMixin],
+  componentDidMount: function(){
+    $("#question-title").appendTo($("#question-title").parent());
+    $("#question-text").parent().appendTo($("#question-text").parent().parent());
+  },
   render: function(){
     return (<div>
-              <div
-                className="question-field">
-                  <TextField
-                    floatingLabelText="What is your question?"
-                    id="question-title"/>
-              </div>
+              <TextField
+                id="question-title"
+                style={{"width": "80%"}}
+                floatingLabelText="What is your question?"/>
               <br />
-              <div
-                className="text-field">
-                  <TextField
-                    hintText="Type more details about your question here!"
-                    id="question-text"
-                    multiLine={true}
-                    style={{"width": "95%"}}/>
-              </div>
+              <TextField
+                id="question-text"
+                multiLine={true}
+                style={{"width": "95%"}}/>
             </div>);
   }
 });

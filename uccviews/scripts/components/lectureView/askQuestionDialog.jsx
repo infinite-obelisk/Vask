@@ -22,7 +22,31 @@ var AskQuestionDialog = React.createClass({
   submitQuestion: function(){
     console.log("Submit Question");
     console.log("Time question", Math.floor(window.player.getCurrentTime()));
-    addQuestion.bind(this)();
+    $.ajax({
+      url: "/addquestion",
+      method: "POST",
+      contentType: "application/json",
+      data: JSON.stringify({
+        video : 'test2',
+        text : window.$('#question-text').val(),
+        username : 'name',
+        time : Math.floor(this.props.getCurrentTime()),
+        title : window.$('#question-title').val()
+      }),
+      statusCode: {
+        201: function (data) {
+          console.log('win');
+          console.log(data);
+          self.clearForm();
+          self.closeDialog();
+        },
+        500: function (err) {
+          console.log('lose')
+        }
+      }
+    });
+    this.clearForm();
+    this.closeDialog();
   },
   render: function(){
     var actions = [
