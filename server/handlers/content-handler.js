@@ -60,7 +60,7 @@ exports.getLectures = function (req, res) {
   Content.find({}, function(err, contents) {
     if (!err) {
       if (contents.length) res.status(200).send({
-        result: countUsers(filterContents(contents,search,size))
+        result: filterContents(contents,search,size)
       });
       else res.status(200).send({result: fakeVideos}); 
     } else {
