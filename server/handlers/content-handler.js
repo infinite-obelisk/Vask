@@ -59,7 +59,9 @@ exports.getLectures = function (req, res) {
   var size = req.query.size;
   Content.find({}, function(err, contents) {
     if (!err) {
-      if (contents.length) res.status(200).send({result: filterContents(contents,search,size)});
+      if (contents.length) res.status(200).send({
+        result: countUsers(filterContents(contents,search,size))
+      });
       else res.status(200).send({result: fakeVideos}); 
     } else {
       console.log(err);
@@ -74,7 +76,9 @@ exports.addLecture = function (req, res) {
   var qs = urlParse.query.split('&');
   qs.forEach(function(q){
     if (q.length>2 && q[0]==='v' && q[1]==='=') info.shortUrl = q.slice(2);
-  })
+  }),
+  info.questionCount = 0;
+  info.userCount = 0;
   console.log('addLecture ',info);
   var newLecture = new Content(info);
   newLecture.save(function (err) {
@@ -87,4 +91,8 @@ exports.addLecture = function (req, res) {
       res.status(201).send({msg : 'you posted a lecture to the db'});
     }
   })
+}
+
+exports.relatedLectures = function (req, res) {
+  var video = req.query.video;
 }

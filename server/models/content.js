@@ -7,7 +7,9 @@ var contentSchema = mongoose.Schema({
   subtitle : { type : String},
   description : { type : String},
   course : { type : String },
-  author : { type : mongoose.Schema.Types.ObjectId }
+  author : { type : mongoose.Schema.Types.ObjectId },
+  questionCount : { type: Number},
+  userCount : { type: Number}
 });
 
 var Content = mongoose.model('Content', contentSchema);
