@@ -1,5 +1,6 @@
 var url = require('url');
 var Content = require('../models/content');
+var searchEng = require('../search');
 
 var fakeVideos = [
   {
@@ -37,7 +38,17 @@ var fakeVideos = [
 ];
 
 var filterContents = function(contents, search) {
-  return contents;
+  search = search || '';
+  contents.forEach(function(content) {
+    var cArr = [];
+    cArr.push({ weight : 1.4, words : content.course});
+    cArr.push({ weight : 1.0, words : content.title});
+    cArr.push({ weight : 0.6, words : content.description});
+    content.rank = searchEng.search(search,cArr);
+    console.log(content.rank);
+  });
+  contents.sort(function(a,b){return b.rank-a.rank});
+  return contents.filter(function(c,idx){ return idx < 10});
 }
 
 exports.getLectures = function (req, res) {

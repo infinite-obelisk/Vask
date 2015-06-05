@@ -40,7 +40,7 @@ var distanceVal = function (dis) {
 // sWords [101 javascript hack reactor]
 // cWords [{weight: 1.0, words[]}]
 
-var search = function(search, cWords) {
+exports.search = function(search, cWords) {
 	var result = 0.0;
 	var sWords = search.split(' ');
     for (var i = 0; i < sWords.length; i++) {
@@ -70,4 +70,4 @@ var content = [
   {weight : 0.3, words : 'javascript hack reactor algorithms'}
 ]
 
-console.log(search('do', content));
+console.log(exports.search('do', content));
