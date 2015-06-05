@@ -1,5 +1,6 @@
 var url = require('url');
 var Question = require('../models/question');
+var Content = require('../models/content');
 
 exports.addQuestion = function (req, res) {
 	var info = req.body;
@@ -22,6 +23,12 @@ exports.addQuestion = function (req, res) {
       else {
         console.log('added question');
         res.status(201).send({msg : 'you posted to the database'});
+        Content.update({shortUrl : video}, {'$inc':{'questionCount': 1}}, function (err, data){
+          if (!err) {
+            console.log(err);
+          }
+        });
+
       }
 	});
 
