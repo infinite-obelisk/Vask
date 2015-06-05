@@ -45,7 +45,7 @@ exports.search = function(search, cWords) {
 	var sWords = search.split(' ');
     for (var i = 0; i < sWords.length; i++) {
     	var sword = sWords[i];
-    	console.log(sword);
+    	//console.log(sword);
     	for (var a = 0; a < cWords.length; a++) {
     		var content = cWords[a];
     		var weight = content.weight || 1.0;
@@ -71,4 +71,4 @@ var content = [
   {weight : 0.3, words : 'javascript hack reactor algorithms'}
 ]
 
-console.log(exports.search('do', content));
+//console.log(exports.search('do', content));
