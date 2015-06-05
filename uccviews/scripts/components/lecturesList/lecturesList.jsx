@@ -23,7 +23,6 @@ var LecturesList = React.createClass({
       lectures: lectureActions.getLectures()
     });
     // Add the listener
-    // We use _ onChange because it's a method
     lecturesStore.addChangeListener(this._onChange);
   },
 
