@@ -1,5 +1,6 @@
 var url = require('url');
 var Content = require('../models/content');
+var searchEng = require('../search');
 
 var fakeVideos = [
   {
@@ -36,12 +37,28 @@ var fakeVideos = [
   },
 ];
 
+var filterContents = function(contents, search, size) {
+  search = search || '';
+  size = size || 10;
+  contents.forEach(function(content) {
+    var cArr = [];
+    cArr.push({ weight : 1.4, words : content.course});
+    cArr.push({ weight : 1.0, words : content.title});
+    cArr.push({ weight : 0.6, words : content.description});
+    content.rank = searchEng.search(search,cArr);
+    //console.log(content.rank);
+  });
+  contents.sort(function(a,b){return b.rank-a.rank});
+  return contents.filter(function(c,idx){ return idx < size});
+}
+
 exports.getLectures = function (req, res) {
 	//res.status(200).send({result : fakeVideos});
   var search = req.query.search;
+  var size = req.query.size;
   Content.find({}, function(err, contents) {
     if (!err) {
-      if (contents.length) res.status(200).send({result: contents});
+      if (contents.length) res.status(200).send({result: filterContents(contents,search,size)});
       else res.status(200).send({result: fakeVideos}); 
     } else {
       console.log(err);
@@ -52,6 +69,11 @@ exports.getLectures = function (req, res) {
 
 exports.addLecture = function (req, res) {
   var info = req.body;
+  var urlParse = url.parse(info.url);
+  var qs = urlParse.query.split('&');
+  qs.forEach(function(q){
+    if (q.length>2 && q[0]==='v' && q[1]==='=') info.shortUrl = q.slice(2);
+  })
   console.log('addLecture ',info);
   var newLecture = new Content(info);
   newLecture.save(function (err) {
