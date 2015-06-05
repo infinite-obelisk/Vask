@@ -18,6 +18,7 @@ var AskQuestionForm = React.createClass({
               <br />
               <TextField
                 id="question-text"
+                hintText="Type more details about your question here!"
                 multiLine={true}
                 style={{"width": "95%"}}/>
             </div>);

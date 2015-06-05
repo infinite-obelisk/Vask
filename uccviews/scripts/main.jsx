@@ -48,9 +48,11 @@ var App = React.createClass({
 
     lectureView: function(url) {
         console.log('URL',url);
-        return (
-            <LectureView shortUrl={url}/>
-            )
+        return (<div>
+                    <AppBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+                    <LectureView shortUrl={url}/>
+                </div>
+            );
 	    // var list = this.state.lists.reduce(function(found, list) {
 		   //  if (list.id == id) { return list; }
 		   //  return found;

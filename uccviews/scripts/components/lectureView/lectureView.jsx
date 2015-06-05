@@ -3,7 +3,8 @@
 var React               = require('react'),
     lectureActions      = require('../../actions/lectures'),
     lecturesStore       = require('../../stores/lectures'),
-    AskQuestionDialog         = require('./askQuestionDialog.jsx'),
+    AskQuestionDialog   = require('./askQuestionDialog.jsx'),
+    PopupQuestion       = require('./viewQuestionElements/popupQuestion.jsx'),
     ViewQuestionDialog  = require('./viewQuestionDialog.jsx'),
     ViewQuestionsDialog = require('./viewQuestionsDialog.jsx'),
     Loader              = require('../loader/loader.jsx'),
@@ -25,7 +26,7 @@ var LectureView = React.createClass({
     // We use _ onChange because it's a method
     lecturesStore.addChangeListener(this._onChange);
     this.setState({
-      questions: lectureActions.getQuestions(this.props.videoId)
+      questions: lectureActions.getQuestions(this.props.shortUrl)
     });
 
     window.player = this.refs.player;
@@ -39,7 +40,7 @@ var LectureView = React.createClass({
   _onChange: function(){
     this.setState({
       loaded: true,
-      lectures: lecturesStore.getQuestions(this.props.shortUrl)
+      questions: lecturesStore.getQuestions(this.props.shortUrl)
     });
   },
 
@@ -52,11 +53,39 @@ var LectureView = React.createClass({
   },
 
   getVideoTime: function(){
-    return this.refs.player._internalPlayer.getCurrentTime();
+    if(this.refs.player._internalPlayer && this.refs.player._internalPlayer.getCurrentTime){
+      return this.refs.player._internalPlayer.getCurrentTime();
+    }
+  },
+
+  getPlayerState: function(){
+    if(this.refs.player._internalPlayer){
+      return this.refs.player._internalPlayer.getPlayerState();
+    } else {
+      return false;
+    }
+  },
+
+  playerIsLoaded: function(){
+    return !!this.refs.player;
   },
 
   render: function(){
-    console.log('State of the questions -->', this.state.questions);
+    console.log('State of the questions -->', this.state);
+    var questions;
+    if(!!this.state.questions){
+      questions = (<div>
+                    <PopupQuestion
+                      getPlayerState={this.getPlayerState}
+                      getVideoTime={this.getVideoTime}
+                      playerIsLoaded={this.playerIsLoaded}
+                      questions={this.state.questions} />
+                    {this.state.questions.map(function(question){
+                      return (<ViewQuestionDialog
+                                question={question} />);
+                    })}
+                    </div>);
+    }
     return (
       <div
         className="container">
@@ -80,7 +109,11 @@ var LectureView = React.createClass({
                       className="row">
                         <AskQuestionDialog
                           stopVideo={this.stopVideo}
-                          getVideoTime={this.getVideoTime}/>
+                          getVideoTime={this.getVideoTime}
+                          videoId = {this.props.shortUrl}/>
+                        {questions}
+                        <ViewQuestionsDialog
+                          questions={this.state.questions}/>
                     </div>
                 </div>
             </div>

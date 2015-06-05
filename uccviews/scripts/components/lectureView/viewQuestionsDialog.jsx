@@ -1,4 +1,5 @@
 var React = require('react'),
+    MaterialMixin = require('./../../mixins/material-ui.js'),
     ViewQuestionsList = require('./viewQuestionsListElements/viewQuestionsList.jsx'),
     ViewQuestionsButton = require('./viewQuestionsListElements/viewQuestionsButton.jsx'),
     mui = require('material-ui'),
@@ -6,16 +7,9 @@ var React = require('react'),
     Dialog = mui.Dialog;
 
 var ViewQuestionsDialog = React.createClass({
+  mixins: [MaterialMixin],
   openModal: function(){
     this.refs.ViewQuestionsDialog.show();
-  },
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-  getChildContext: function(){
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
   },
   closeDialog: function(){
     console.log("Ask Question Dialog Close");
@@ -42,7 +36,8 @@ var ViewQuestionsDialog = React.createClass({
                     title="Questions for this lecture"
                     actions={actions} >
                       <ViewQuestionsList
-                        parentDiagClose={this.closeDialog}/>
+                        parentDiagClose={this.closeDialog}
+                        questions={this.props.questions}/>
                   </Dialog>
                   <ViewQuestionsButton
                     openModal={this.openModal} />

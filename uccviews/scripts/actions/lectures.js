@@ -119,6 +119,7 @@ module.exports = {
 					   	}
 					   	console.log('response from the server', res);
 					   	if(res.ok){
+
 					   		var questions = res.body.result;
 					   		thiz.setQuestions(questions);
 					   	} else {

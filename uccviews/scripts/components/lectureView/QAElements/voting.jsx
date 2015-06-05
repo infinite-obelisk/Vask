@@ -1,6 +1,11 @@
-var React = require('react');
+var React = require('react'),
+    MaterialMixin = require('./../../../mixins/material-ui.js'),
+    mui = require('material-ui'),
+    IconButton = mui.IconButton;
+
 
 var Voting = React.createClass({
+  mixins: [MaterialMixin],
   voteUp: function(){
     console.log("vote up");
     var isAnswer = !!this.props.answerIndex;
@@ -30,14 +35,6 @@ var Voting = React.createClass({
   },
   getInitialState: function(){
     return {votes: this.props.votes};
-  },
-  childContextTypes: {
-    muiTheme: React.PropTypes.object
-  },
-  getChildContext: function(){
-    return {
-      muiTheme: ThemeManager.getCurrentTheme()
-    };
   },
   render: function(){
     return (<div
