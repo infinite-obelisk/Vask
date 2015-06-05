@@ -29,13 +29,13 @@ var ContentRow = React.createClass({
                 <svg style={{"width":"42px","height":"42px"}} viewBox="0 0 24 24">
                   <path fill="#0099DD" d="M20,2A2,2 0 0,1 22,4V16A2,2 0 0,1 20,18H6L2,22V4C2,2.89 2.9,2 4,2H20M5,5V7H19V5H5M5,9V11H13V9H5M5,13V15H15V13H5Z" />
                 </svg>
-                <p>35</p>
+                <p>{this.props.data.questionCount}</p>
               </div>
               <div className="col-sm-6 col-xs-6 text-center ct-stats-box2">
                 <svg style={{"width":"50px","height":"50px"}} viewBox="0 0 24 24">
                     <path fill="#0099DD" d="M12,4A4,4 0 0,1 16,8A4,4 0 0,1 12,12A4,4 0 0,1 8,8A4,4 0 0,1 12,4M12,14C16.42,14 20,15.79 20,18V20H4V18C4,15.79 7.58,14 12,14Z" />
                 </svg>
-                <p>35</p>
+                <p>{this.props.data.userCount}</p>
               </div>
             </div>
           </div>
