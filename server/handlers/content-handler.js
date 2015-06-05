@@ -38,8 +38,8 @@ var fakeVideos = [
 ];
 
 var filterContents = function(contents, search, size) {
-  search = search || '';
   size = size || 10;
+  if (!search) return contents.reverse().filter(function(c,idx){ return idx < size});
   contents.forEach(function(content) {
     var cArr = [];
     cArr.push({ weight : 1.4, words : content.course});
