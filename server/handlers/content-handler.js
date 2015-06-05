@@ -37,8 +37,9 @@ var fakeVideos = [
   },
 ];
 
-var filterContents = function(contents, search) {
+var filterContents = function(contents, search, size) {
   search = search || '';
+  size = size || 10;
   contents.forEach(function(content) {
     var cArr = [];
     cArr.push({ weight : 1.4, words : content.course});
@@ -48,15 +49,16 @@ var filterContents = function(contents, search) {
     console.log(content.rank);
   });
   contents.sort(function(a,b){return b.rank-a.rank});
-  return contents.filter(function(c,idx){ return idx < 10});
+  return contents.filter(function(c,idx){ return idx < size});
 }
 
 exports.getLectures = function (req, res) {
 	//res.status(200).send({result : fakeVideos});
   var search = req.query.search;
+  var size = req.query.size;
   Content.find({}, function(err, contents) {
     if (!err) {
-      if (contents.length) res.status(200).send({result: filterContents(contents,search)});
+      if (contents.length) res.status(200).send({result: filterContents(contents,search,size)});
       else res.status(200).send({result: fakeVideos}); 
     } else {
       console.log(err);
