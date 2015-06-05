@@ -55,9 +55,14 @@ module.exports = {
 
 	},
 
-	getLectures: function(){
+	getLectures: function(search){
 		var self = this,
-			url = '/getlectures';
+			  url = '/getlectures';
+
+			  // if it's a search request, add the query to the get request
+				url = search ? url + search : url;
+				console.log('URL',url);
+
 		// Request the API for the data (lectures)
 		request.get(url)
 			   .set('Accept', 'application/json')
