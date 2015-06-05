@@ -62,21 +62,19 @@ LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
 	switch(action.actionType) {
 		case lecturesConstants.SET_LECTURES:
 			_lectures = action.lectures;
-			LecturesStore.emitChange();
 			break;		
 		case lecturesConstants.SET_COURSES:
 			_courses = action.courses;
-			LecturesStore.emitChange();
 			break;
 		case lecturesConstants.SET_QUESTIONS:
 			_questions = action.questions;
-			LecturesStore.emitChange();
 			break;		
 		case lecturesConstants.SET_LECTURE_RESP:
 			_addlecture = action.response;
-			LecturesStore.emitChange();
 			break;
 	}
+
+	LecturesStore.emitChange();
 });
 
 module.exports = LecturesStore;

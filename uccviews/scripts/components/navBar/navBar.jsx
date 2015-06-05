@@ -25,11 +25,11 @@ var menuItems = [
   // { route: '/profile', text: 'Profile' },
   // { route: '/search', text: 'Find a Course/Video' },
   // { type: MenuItem.Types.SUBHEADER, text: 'Create' },
-  // { 
-  //    type: MenuItem.Types.LINK, 
-  //    payload: '/courses/create', 
-  //    text: 'Create a course' 
-  // },  
+  { 
+     type: MenuItem.Types.LINK, 
+     payload: '/dashboard', 
+     text: 'Dashboard' 
+  },  
   // { 
   //    type: MenuItem.Types.LINK, 
   //    payload: '/lectures/create', 

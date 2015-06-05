@@ -21,33 +21,16 @@ var AddLecture = React.createClass({
       course: undefined,
       title: undefined,
       desc: undefined,
-      url: undefined,
-      posted: false
+      url: undefined
     }
   },
 
-  componentDidMount: function(){
-    lecturesStore.addChangeListener(this._onChange);
-  },
-
-  componentWillUnmount: function(){
-    lecturesStore.removeChangeListener(this._onChange);
-  },
-
-  _onChange: function(){
-    console.log('New response from the server! Lecture may be added');
-    this.setState({
-      posted: lecturesStore.getLectureResp()
-    });
-  },
-
-
   handleButtonClick: function(){
-    console.log('opening dialog');
     this.refs.dialog.show();
   },
 
   _handleCustomDialogSubmit: function(){
+    // object with the new lecture info
     var lecture = {
       title: this.refs.form.state.title,
       course: this.refs.form.state.course,
@@ -55,23 +38,19 @@ var AddLecture = React.createClass({
       url: this.refs.form.state.url
     }
 
+    // close the dialog
+    this.refs.dialog.dismiss();
+
+    // dispatch the data to be stored in the server
     lectureActions.addLecture(lecture);
 
-    console.log('Title', this.refs.form.state.title); 
-    console.log('Course', this.refs.form.state.course); 
-    console.log('Description', this.refs.form.state.desc); 
-    console.log('Url', this.refs.form.state.url); 
-    this.refs.dialog.dismiss();
   },
   
   _handleCustomDialogCancel: function(){
-    console.log('dialog closed');
+    // close the modal
     this.refs.dialog.dismiss();
   },
 
-  updateState: function(){
-  },
-  
   render: function(){
     var self = this;
     // =============== Material Design Logic ================

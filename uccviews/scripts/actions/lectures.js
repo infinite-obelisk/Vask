@@ -29,16 +29,9 @@ module.exports = {
 		});
 	},
 
-	setLectureResp: function(response){
-		Dispatcher.handleViewAction({
-			actionType: lecturesConstants.SET_LECTURE_RESP,
-			response: response
-		});
-	},
-
 	addLecture: function(lecture){
 		var self = this,
-			  url = '/addlecture'
+			  url = '/addlecture';
 		// Request the API for the data (lectures)
 		request.post(url)
 				 .send(lecture)
@@ -50,11 +43,9 @@ module.exports = {
 			   	}
 			   	console.log('response from the server', res);
 			   	if(res.ok){
-			   		console.log('Workkkkk');
-			   		// get the data from the response
-			   		// var serverResp = res.body.result;
-			   		// send the data to dispatcher
-			   		self.setLectureResp(true);
+			   		
+			   		// update the list
+			   		self.getLectures();
 
 			   	} else {
 			   		// thow the error
@@ -62,7 +53,6 @@ module.exports = {
 			   	}
 			   });
 
-			return result;
 	},
 
 	getLectures: function(){
@@ -117,7 +107,7 @@ module.exports = {
 
 	getQuestions: function(videoId){
 		var thiz = this,
-			url = "/getquestions?video=" + videoId;
+				url = "/getquestions?video=" + videoId;
 
 		request.get(url)
 					 .set('Accept', 'application/json')
