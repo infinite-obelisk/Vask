@@ -215,10 +215,10 @@ var NavBar = React.createClass({
     };
   },
   componentDidMount: function() {
-    this.refs.topBar.addEventListener('click', function() {
-      console.log('clicked on nav bar to display the side bar');
-      this.refs.leftNav.toggleSide();
-    });
+    // this.refs.topBar.addEventListener('click', function() {
+    //   console.log('clicked on nav bar to display the side bar');
+    //   this.refs.leftNav.toggleSide();
+    // });
   },
   _handleClick: function(){
     console.log('nav bar clicked');
@@ -368,6 +368,16 @@ var ViewQuestionsDialog = React.createClass({
 });
 
 var AllQuestionDialogs = React.createClass({
+
+  childContextTypes: {
+    muiTheme: React.PropTypes.object
+  },
+  
+  getChildContext: function(){
+    return {
+      muiTheme: ThemeManager.getCurrentTheme()
+    };
+  },
 
   getInitialState: function(){
     return {};
@@ -775,9 +785,9 @@ React.render(<NavBar />,
   document.querySelector('.nav-bar')
 );
 
-React.render(<LeftNavBar />,
-  document.querySelector('.left-bar')
-);
+// React.render(<LeftNavBar />,
+//   document.querySelector('.left-bar')
+// );
 
 React.render(<AskQuestionDialog />,
   document.querySelector('.ask-question')

@@ -9,6 +9,8 @@ var Dispatcher        = require('../dispatcher/dispatcher'),
 // Define the object that will contain the data (lectures)
 var _lectures;
 var _questions;
+var _courses;
+var _addlecture;
 
 // Pattern to define the variable that will inform a new change
 var CHANGE_EVENT = 'change'
@@ -38,7 +40,17 @@ var LecturesStore = assign(EventEmitter.prototype, {
 
 	getQuestions: function(){
 		return _questions;
-	}
+	},
+
+	getCourses: function(){
+		return _courses;
+	},
+	
+	getLectureResp: function(){
+		return _addlecture;
+	},
+	
+
 });
 
 // Subscribe this store to recieve payloads from the dispatcher
@@ -50,13 +62,19 @@ LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
 	switch(action.actionType) {
 		case lecturesConstants.SET_LECTURES:
 			_lectures = action.lectures;
-			LecturesStore.emitChange();
+			break;		
+		case lecturesConstants.SET_COURSES:
+			_courses = action.courses;
 			break;
 		case lecturesConstants.SET_QUESTIONS:
 			_questions = action.questions;
-			LecturesStore.emitChange();
+			break;		
+		case lecturesConstants.SET_LECTURE_RESP:
+			_addlecture = action.response;
 			break;
 	}
+
+	LecturesStore.emitChange();
 });
 
 module.exports = LecturesStore;

@@ -25,6 +25,13 @@
   .signup {
     display: none;
   }
+  .loginHeader {
+    background-color: #00bcd4;
+    padding: 20px;
+    color: #fff;
+    margin-top: 0;
+    border-radius: 5px 5px 0 0;
+  }
   .inline {
     display: inline;
   }
@@ -45,12 +52,23 @@
     background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/4273/polina.jpg) no-repeat;
     background-size: cover;
     }
+    .box {
+      width: 400px;
+      height: 400px;
+      background-color: rgba(255,255,255,0.95);
+      border-radius: 5px;
+      margin-top: 100px;
+      padding-top: 0px;
+      box-shadow: 0px 0px 8px #777;
+    }
+    .loginBt {
+      margin: 30px 0 20px 0;
+    }
   </style>
 </head>
   <body>
     <video autoplay loop poster="polina.jpg" id="bgvid">
-    <source src="http://demosthenes.info/assets/videos/polina.webm" type="video/webm">
-    <source src="http://demosthenes.info/assets/videos/polina.mp4" type="video/mp4">
+    <source src="/res/t1.mp4" type="video/mp4">
     </video>
     <div class="nav-bar"></div>
 
@@ -58,16 +76,20 @@
     <!-- Will be restyled once the video we actually want is added, so that we use the correct background, opacity, etc. -->
     <div class="container">
       <div class="row">
-        <div class="col-xs-12 col-sm-8 col-md-10 col-lg-10 col-sm-offset-3 col-md-offset-1 col-lg-offset-1">
+        <div class="col-lg-12 col-lg-offset-8">
+          <div class="box">
 
-          <h1 class="text-center login">Login</h1>
-          <h1 class="text-center signup">Sign Up</h1>
-          <div class="text-center signin-signup-form"></div>
-          <div class="text-center signup-extra signup"></div>
-          <div class="text-center buttons">
-            <div class="login-button form-button"></div>
-            <div class="signup-button form-button"></div>
-            <div class="switch-button form-button"></div>
+            <h1 class="text-center loginHeader">Login</h1>
+            <h1 class="text-center signup">Sign Up</h1>
+            <div class="text-center signin-signup-form"></div>
+            <div class="text-center signup-extra signup"></div>
+            <div class="loginBt"> 
+              <div class="text-center buttons">
+                <div class="login-button form-button"></div>
+                <div class="signup-button form-button"></div>
+                <div class="switch-button form-button"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
