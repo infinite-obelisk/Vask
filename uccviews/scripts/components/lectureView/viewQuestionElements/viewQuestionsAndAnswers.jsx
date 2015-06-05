@@ -5,6 +5,7 @@ var React = require('react'),
 
 var ViewQuestionAndAnswers = React.createClass({
   render: function(){
+    var qID = this.props.questionId;
     return (<div>
               <Question
                 votes={this.props.votes}
@@ -13,9 +14,9 @@ var ViewQuestionAndAnswers = React.createClass({
                 question={this.props.question}
                 videoTime={this.props.videoTime}
                 questionTime={this.props.questionTime}
-                questionId={this.props.questionId}/>
+                questionId={qID}/>
               <AnswerForm
-                questionId={this.props.questionId}/>
+                questionId={qID}/>
               {this.props.answers.map(function(answer, index){
                 return (<Answer
                           key={answer.key}
@@ -25,7 +26,7 @@ var ViewQuestionAndAnswers = React.createClass({
                           answer={answer.text}
                           answerTime={answer.answerTime}
                           answerIndex={index}
-                          questionId={answer.questionId}/>
+                          questionId={qID}/>
                         );
               })}
             </div>);
