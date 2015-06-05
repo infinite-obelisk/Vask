@@ -1,15 +1,24 @@
 var React           = require('react'),
     RouterMixin     = require('react-mini-router').RouterMixin,
     LecturesList    = require('./components/lecturesList/lecturesList.jsx'),
+    CoursesList    = require('./components/coursesList/coursesList.jsx'),
     mui             = require('material-ui'),
-    AppBar          = mui.AppBar,
+    NavBar            = require('./components/navBar/navBar.jsx'),
+    // AppBar          = mui.AppBar,
     MaterialMixin   = require('./mixins/material-ui.js'),
-    LectureView     = require('./components/lectureView/LectureView.jsx');
+    LectureView     = require('./components/lectureView/LectureView.jsx'),
+    injectTapEventPlugin = require("react-tap-event-plugin");
+
+    injectTapEventPlugin();
 
 var App = React.createClass({
 
     routes: {
-        '/': 'lecturesList',
+        '/': 'coursesList',
+        '/courses': 'coursesList',
+        '/lectures': 'lecturesList',
+        // '/courses/create': 'newCourse',
+        // '/lectures/create': 'newLecture',
         '/lectures/:url': 'lectureView'
     },
 
@@ -22,8 +31,17 @@ var App = React.createClass({
     lecturesList: function() {
         return (
             <div>
-                <AppBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+                <NavBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
                 <LecturesList/>
+            </div>
+        );
+    },    
+
+    coursesList: function() {
+        return (
+            <div>
+                <NavBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+                <CoursesList/>
             </div>
         );
     },
@@ -40,6 +58,19 @@ var App = React.createClass({
 
         // return <TodoList list={list} root={'/lists/' + id}/>;
     },
+
+    newCourse: function(){
+        return (
+            <h1>New COURSE page</h1>
+        );
+    },
+
+    newLecture: function(){
+        return (
+            <h1>New LECTURE page</h1>
+        );
+    },
+
 
     notFound: function(path) {
         return <div className="not-found">Uh oh. {path} doesnt exist.</div>;
