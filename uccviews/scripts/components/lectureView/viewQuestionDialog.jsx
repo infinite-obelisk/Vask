@@ -39,8 +39,8 @@ var ViewQuestionDialog = React.createClass({
                         question={this.state.question.title}
                         questionText={this.state.question.text}
                         questionId={this.state.question._id}
-                        videoTime={this.state.question.videoTime}
-                        questionTime={this.state.question.questionTime}
+                        videoTime={this.state.question.time}
+                        questionTime={this.state.question.createdAt}
                         answers={this.state.question.answers} />
                   </Dialog>
               </div>

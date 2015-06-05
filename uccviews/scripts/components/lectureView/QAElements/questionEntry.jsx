@@ -1,4 +1,5 @@
-var React = require('react');
+var React = require('react'),
+    moment = require('moment');
 
 var QuestionEntry = React.createClass({
   render: function(){
@@ -20,7 +21,7 @@ var QuestionEntry = React.createClass({
                     </span>&nbsp;|&nbsp;
                     <span
                       className="question-time">
-                         {this.props.questionTime}
+                         {moment(this.props.questionTime).fromNow()}
                     </span>
                   </small>
                 </p>
