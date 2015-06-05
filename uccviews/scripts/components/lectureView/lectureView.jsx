@@ -53,7 +53,9 @@ var LectureView = React.createClass({
   },
 
   getVideoTime: function(){
-    return this.refs.player._internalPlayer.getCurrentTime();
+    if(this.refs.player._internalPlayer && this.refs.player._internalPlayer.getCurrentTime){
+      return this.refs.player._internalPlayer.getCurrentTime();
+    }
   },
 
   getPlayerState: function(){
@@ -76,7 +78,8 @@ var LectureView = React.createClass({
                     <PopupQuestion
                       getPlayerState={this.getPlayerState}
                       getVideoTime={this.getVideoTime}
-                      playerIsLoaded={this.playerIsLoaded} />
+                      playerIsLoaded={this.playerIsLoaded}
+                      questions={this.state.questions} />
                     {this.state.questions.map(function(question){
                       return (<ViewQuestionDialog
                                 question={question} />);

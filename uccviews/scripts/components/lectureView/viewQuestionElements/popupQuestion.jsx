@@ -28,69 +28,68 @@ var PopupQuestion = React.createClass({
   },
 
   checkPlayerStats: function(){
-    if (this.props.getPlayerState() === -1) {
+    var state = this.props.getPlayerState();
+    if (state === -1) {
       // console.log('player paused');
       return 'paused'
-    } else if (this.props.getPlayerState() === 1) {
+    } else if (state === 1) {
       // console.log('player playing');
       return 'playing'
-    } else if (this.props.getPlayerState() === 3) {
+    } else if (state === 3) {
       // console.log('player buffering');
       return 'buffering'
     }
   },
 
   checkPopupQuestions: function(){
+    var thiz = this;
     var getPlayerCurrentTime = function(){
-      return Math.floor(this.props.getVideoTime());
+      return Math.floor(thiz.props.getVideoTime());
     };
 
     var checkQuestOnThisTime = function(reactScope){
       if(reactScope.state.playerLoaded){
         var currentTime = getPlayerCurrentTime();
-        var questions = window.qObject;
-        if(questions){
-          for (var question in questions) {
-            var questionTime = window.qObject[question].time;
-            // console.log('questionTime',questionTime);
-            // console.log('currentTime',currentTime);
-            if (questionTime === currentTime) {
-              // checks if the player is playing
-              if (reactScope.checkPlayerStats() === 'playing') {
-                // check if the popup is opened
-                if (!reactScope.state.popupOpened) {
-                  console.log('refs Alert', reactScope.refs.alert);
-                  // update the state of the component (message)
-                  reactScope.setState({
-                    question: window.qObject[question].question,
-                    questionId: question,
-                    popupOpened: true
-                  });
-                  // show question popup!
-                  reactScope.refs.alert.show();
-                  // callback to close the popup and update the state
-                  var closePopup = function(){
-                    // closes the popup
-                    this.refs.alert.dismiss();
-                    // update the state
-                    this.setState({ popupOpened: false });
-                    // invoke the watcher to check new questions
-                    // console.log('watcher activated', this.state);
-                    this.popupWatcher();
-                  }
-                  // close the popup after 5 seconds passing the callback
-                  setTimeout(closePopup.bind(reactScope), 6000);
-                  // breake the loop
-                  return;
+        var questions = thiz.props.questions;
+        for (var i = 0; i < questions.length; i++) {
+          var questionTime = questions[i].time;
+          // console.log('questionTime',questionTime);
+          // console.log('currentTime',currentTime);
+          if (questionTime === currentTime) {
+            // checks if the player is playing
+            if (reactScope.checkPlayerStats() === 'playing') {
+              // check if the popup is opened
+              if (!reactScope.state.popupOpened) {
+                console.log('refs Alert', reactScope.refs.alert);
+                // update the state of the component (message)
+                reactScope.setState({
+                  question: questions[i].title,
+                  questionId: questions[i]._id,
+                  popupOpened: true
+                });
+                // show question popup!
+                reactScope.refs.alert.show();
+                // callback to close the popup and update the state
+                var closePopup = function(){
+                  // closes the popup
+                  this.refs.alert.dismiss();
+                  // update the state
+                  this.setState({ popupOpened: false });
+                  // invoke the watcher to check new questions
+                  // console.log('watcher activated', this.state);
+                  this.popupWatcher();
                 }
+                // close the popup after 5 seconds passing the callback
+                setTimeout(closePopup.bind(reactScope), 6000);
+                // breake the loop
+                return;
               }
-
             }
-          };
-          // if theres no question at this point, invoke the watcher
-          setTimeout(reactScope.popupWatcher.bind(this), 850);
 
-        }
+          }
+        };
+        // if theres no question at this point, invoke the watcher
+        setTimeout(reactScope.popupWatcher.bind(this), 850);
       }
     };
 
@@ -103,14 +102,14 @@ var PopupQuestion = React.createClass({
       // checks if the player object is loaded
       if (thiz.props.playerIsLoaded()) {
         // checks if the player API is loaded
-        if (thiz.props.getVideoTime === undefined) {
+        if (thiz.props.getVideoTime() === undefined) {
           console.log('API is not ready yet');
           // if it's not, try again
           setTimeout(playerIsLoaded.bind(this, reactScope), 500);
         } else {
           // Update the state of the component
           console.log('readyyy');
-          reactScope.setState({
+          thiz.setState({
             playerLoaded: true,
             playerState: reactScope.checkPlayerStats()
           });
