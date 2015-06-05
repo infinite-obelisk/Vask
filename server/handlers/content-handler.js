@@ -46,7 +46,7 @@ var filterContents = function(contents, search, size) {
     cArr.push({ weight : 1.0, words : content.title});
     cArr.push({ weight : 0.6, words : content.description});
     content.rank = searchEng.search(search,cArr);
-    console.log(content.rank);
+    //console.log(content.rank);
   });
   contents.sort(function(a,b){return b.rank-a.rank});
   return contents.filter(function(c,idx){ return idx < size});
@@ -69,6 +69,11 @@ exports.getLectures = function (req, res) {
 
 exports.addLecture = function (req, res) {
   var info = req.body;
+  var urlParse = url.parse(info.url);
+  var qs = urlParse.query.split('&');
+  qs.forEach(function(q){
+    if (q.length>2 && q[0]==='v' && q[1]==='=') info.shortUrl = q.slice(2);
+  })
   console.log('addLecture ',info);
   var newLecture = new Content(info);
   newLecture.save(function (err) {

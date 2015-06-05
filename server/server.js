@@ -22,6 +22,8 @@ app.use(session({
   //cookie: { secure : true} // requires https
 }));
 
+app.use(bodyParser.urlencoded({extended:true}));
+
 app.get('/', function(req, res){
   res.sendFile(path.resolve(__dirname + '/../client/views/main.html'));
 });
