@@ -49,7 +49,7 @@ var App = React.createClass({
     lectureView: function(url) {
         console.log('URL',url);
         return (<div>
-                    <AppBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
+                    <NavBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
                     <LectureView shortUrl={url}/>
                 </div>
             );

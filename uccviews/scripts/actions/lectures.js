@@ -70,7 +70,7 @@ module.exports = {
 			   	if(res.ok){
 			   		console.log(res.body.result);
 			   		// get the data from the response
-			   		var lectures = res.body.result.reverse();
+			   		var lectures = res.body.result;
 			   		// send the data to dispatcher
 			   		self.setLectures(lectures);
 
