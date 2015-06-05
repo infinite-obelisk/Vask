@@ -48,7 +48,8 @@ exports.search = function(search, cWords) {
     	console.log(sword);
     	for (var a = 0; a < cWords.length; a++) {
     		var content = cWords[a];
-    		var weight = content.weight;
+    		var weight = content.weight || 1.0;
+        content.words = content.words || '';
     		var words = content.words.split(' ');
     		var max = 0;
     		for (var c = 0; c < words.length; c++) {
