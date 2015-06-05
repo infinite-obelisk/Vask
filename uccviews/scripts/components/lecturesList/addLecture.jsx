@@ -44,6 +44,12 @@ var AddLecture = React.createClass({
     // dispatch the data to be stored in the server
     lectureActions.addLecture(lecture);
 
+    // Clean the input fields
+    this.refs.form.state.title = '';
+    this.refs.form.state.course = '';
+    this.refs.form.state.desc = '';
+    this.refs.form.state.url = '';
+
   },
   
   _handleCustomDialogCancel: function(){
