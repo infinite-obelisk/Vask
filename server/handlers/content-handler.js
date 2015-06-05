@@ -38,8 +38,9 @@ var fakeVideos = [
 ];
 
 var filterContents = function(contents, search, size) {
-  search = search || '';
   size = size || 30;
+  // if no search, just return top result, reversing to get latest content first
+  if (!search) return contents.reverse().filter(function(c,idx){ return idx < size});
   contents.forEach(function(content) {
     var cArr = [];
     cArr.push({ weight : 1.4, words : content.course});
