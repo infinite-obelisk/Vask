@@ -1,10 +1,10 @@
 # Vask
 
-Vask is an educational video platform that allows viewers to ask questions at any point while watching videos.
-Viewers are able to see and answer all questions.  The questions are not only related to the videos in general, but tied to a defined moment inside the video.  This allows to raise very specific questions.
+Vask is an educational video platform that allows viewers to ask questions while watching video lectures.
+Viewers are able to see and answer all questions. The questions are not only related to the videos in general, but tied to a defined moment inside the video, allowing for questions to pop up for other users as they watch the video. Students can then view answers for that question or answer it themselves.
 
-In an educational environment an instructor can check up on the questions and gauge their understanding of the content.
-It is benefical for all students to see what questions came up while watching a video.  Reflecting and understanding questions and answers around a certain topic, solidifies the subject matter.
+In an educational environment, an instructor can check up on students' questions and gauge their understanding of the content.
+It is benefical for all students to see what questions other students had while watching the same lecture. Reflecting and understanding questions and answers around a certain topic solidifies students' understanding of the subject matter.
 
 # How it works (from a technical point of view):
 
@@ -19,10 +19,8 @@ Video url: "/?video=(youtube-video-url-ending)"
 
 Make sure you're in the root directory.
 
-bower install
-
+```
 npm install
-
-grunt reactifies
-
+bower install
 gulp compile
+```
