@@ -1,12 +1,12 @@
 var React           = require('react'),
     RouterMixin     = require('react-mini-router').RouterMixin,
-    LecturesList    = require('components/lecturesList/lecturesList.jsx'),
-    CoursesList    = require('components/coursesList/coursesList.jsx'),
+    LecturesList    = require('./components/lecturesList/lecturesList.jsx'),
+    CoursesList    = require('./components/coursesList/coursesList.jsx'),
     mui             = require('material-ui'),
-    NavBar            = require('components/navBar/navBar.jsx'),
+    NavBar            = require('./components/navBar/navBar.jsx'),
     // AppBar          = mui.AppBar,
-    MaterialMixin   = require('mixins/material-ui.js'),
-    LectureView     = require('components/lectureView/LectureView.jsx'),
+    MaterialMixin   = require('./mixins/material-ui.js'),
+    LectureView     = require('./components/lectureView/lectureView.jsx'),
     injectTapEventPlugin = require("react-tap-event-plugin");
 
     injectTapEventPlugin();
