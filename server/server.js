@@ -47,7 +47,7 @@ app.post('/addanswer', questionHandler.addAnswer);
 app.post('/votequestion', questionHandler.voteQuestion);
 app.post('/voteanswer', questionHandler.voteAnswer);
 app.get('/getquestions', questionHandler.getQuestions);
-
+app.get('/getrelated', contentHandler.relatedLectures);
 app.get('/getlectures', contentHandler.getLectures);
 app.get('/getcourses', courseHandler.getCourses);
 
