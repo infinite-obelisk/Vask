@@ -31,6 +31,7 @@
     "mongoose": "~4.0.2",
     "multer": "^0.1.8",
     "node-libs-browser": "^0.5.2",
+    "object-assign": "^2.0.0",
     "react": "^0.13.3",
     "react-mini-router": "^1.1.5",
     "react-tap-event-plugin": "^0.1.7",
