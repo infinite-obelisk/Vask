@@ -70,15 +70,26 @@ exports.getLectures = function (req, res) {
   })
 }
 
+var cleanCourse = function (content) {
+  var line = content.course;
+  content.courseNum = 0;
+  if (line.indexOf('-')<0) return;
+  var items = line.split('-');
+  content.course = items[0].trim();
+  content.courseNum = parseInt(items[1].trim());
+}
+
 exports.addLecture = function (req, res) {
   var info = req.body;
   var urlParse = url.parse(info.url);
   var qs = urlParse.query.split('&');
   qs.forEach(function(q){
     if (q.length>2 && q[0]==='v' && q[1]==='=') info.shortUrl = q.slice(2);
-  }),
+  });
+  cleanCourse(info);
   info.questionCount = 0;
   info.userCount = 0;
+  info.imgUrl = 'http://img.youtube.com/vi/'+info.shortUrl+'/mqdefault.jpg';
   console.log('addLecture ',info);
   var newLecture = new Content(info);
   newLecture.save(function (err) {
@@ -94,5 +105,23 @@ exports.addLecture = function (req, res) {
 }
 
 exports.relatedLectures = function (req, res) {
-  var video = req.query.video;
+  var video = req.query.video.trim();
+  console.log('getRelated', video);
+  Content.findOne({shortUrl : video}, function(err, content){
+    if (err) {
+      res.status(200).send({result : []});
+      return; 
+    }
+    //console.log(content);
+    var courseName = content.course;
+    Content.find({course : courseName}, function (err, contents){
+      if (err) {
+        res.status(200).send({result : []});
+        return;
+      }
+      contents.sort(function(a,b){return a.courseNum-b.courseNum});
+      res.status(200).send({result : contents});
+    })
+  });
+
 }
