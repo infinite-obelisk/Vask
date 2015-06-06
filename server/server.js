@@ -72,7 +72,7 @@ app.get('/getUserInfo', userHandler.checkUser, util.getUserInfo);
 //   response.sendFile(__dirname + '/../client/index.html');
 // });
 
-var port = 3000;
+var port = process.env.PORT || 3000;
 app.listen(port, function() {
   console.log('Listening on ' + port);
 });
