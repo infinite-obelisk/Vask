@@ -132,4 +132,27 @@ module.exports = {
 					   	}
 				   });
 	}
+
+	getPlaylist: function(videoId){
+		var thiz = this,
+				url = "/getrelated?id=" + videoId;
+
+		request.get(url)
+					 .set('Accept', 'application/json')
+				   .end(function(err, res){
+					   	if (err) {
+					   		console.log('Failed fetching the server');
+					   		throw err;
+					   	}
+					   	console.log('response from the server', res);
+					   	if(res.ok){
+
+					   		var playlist = res.body.result;
+					   		// thiz.setQuestions(questions);
+					   		console.log('Playlist received:', playlist);
+					   	} else {
+					   		console.log('Response is not ok');
+					   	}
+				   });
+	}
 }

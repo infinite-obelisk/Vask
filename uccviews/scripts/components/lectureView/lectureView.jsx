@@ -27,7 +27,8 @@ var LectureView = React.createClass({
     // We use _ onChange because it's a method
     lecturesStore.addChangeListener(this._onChange);
     this.setState({
-      questions: lectureActions.getQuestions(this.props.shortUrl)
+      questions: lectureActions.getQuestions(this.props.shortUrl),
+      playlist: lectureActions.getPlaylist()
     });
 
     window.player = this.refs.player;
@@ -41,7 +42,8 @@ var LectureView = React.createClass({
   _onChange: function(){
     this.setState({
       loaded: true,
-      questions: lecturesStore.getQuestions(this.props.shortUrl)
+      questions: lecturesStore.getQuestions(this.props.shortUrl),
+      playlist: lectureActions.getPlaylist(this.props.shortUrl)
     });
   },
 
