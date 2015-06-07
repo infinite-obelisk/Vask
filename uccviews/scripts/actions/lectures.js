@@ -131,11 +131,12 @@ module.exports = {
 					   		console.log('Response is not ok');
 					   	}
 				   });
-	}
+	},
 
 	getPlaylist: function(videoId){
+		console.log('videoId',videoId);
 		var thiz = this,
-				url = "/getrelated?id=" + videoId;
+				url = "/getrelated?video=" + videoId;
 
 		request.get(url)
 					 .set('Accept', 'application/json')
