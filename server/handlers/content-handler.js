@@ -132,6 +132,7 @@ exports.relatedLectures = function (req, res) {
         var obj = { 
           watching : false, 
           watched : false,
+          wstatus : 'notwatched',
           _id : c._id,
           title : c.title,
           course : c.course,
@@ -143,8 +144,14 @@ exports.relatedLectures = function (req, res) {
           userCount : c.userCount,
           imgUrl : c.imgUrl
         };
-        if (obj.shortUrl===video) obj.watching = true;
-        if (obj.courseNum < courseNum) obj.watched = true;
+        if (obj.shortUrl===video) {
+          obj.watching = true;
+          obj.wstatus = 'watching'
+        }
+        if (obj.courseNum < courseNum) {
+          obj.watched = true;
+          obj.wstatus = 'watched'
+        } 
         //console.log(obj);
         return obj;
         
