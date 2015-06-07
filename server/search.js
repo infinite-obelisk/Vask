@@ -44,7 +44,7 @@ exports.search = function(search, cWords) {
 	var result = 0.0;
 	var sWords = search.split(' ');
     for (var i = 0; i < sWords.length; i++) {
-    	var sword = sWords[i];
+    	var sword = sWords[i].toLowerCase();
     	//console.log(sword);
     	for (var a = 0; a < cWords.length; a++) {
     		var content = cWords[a];
@@ -55,7 +55,7 @@ exports.search = function(search, cWords) {
     		for (var c = 0; c < words.length; c++) {
     			var cword = words[c];
     			//console.log(cword);
-    			var temp = weight * distanceVal( getEditDistance(sword,cword) / cword.length);
+    			var temp = weight * distanceVal( getEditDistance(sword,cword.toLowerCase) / cword.length);
     			if (temp > max) max = temp;
 
     		}
@@ -68,7 +68,7 @@ exports.search = function(search, cWords) {
 var content = [
   {weight : 1.0, words : 'hello world'},
   {weight : 0.5, words : 'this is an example how to implement hello world'},
-  {weight : 0.3, words : 'javascript hack reactor algorithms'}
+  {weight : 0.3, words : 'javascript Hack reactor algorithms'}
 ]
 
-//console.log(exports.search('do', content));
+//console.log(exports.search('hack', content));

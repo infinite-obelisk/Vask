@@ -105,21 +105,50 @@ exports.addLecture = function (req, res) {
 }
 
 exports.relatedLectures = function (req, res) {
-  var video = req.query.video.trim();
-  console.log('getRelated', video);
-  Content.findOne({shortUrl : video}, function(err, content){
+  var videoUrl = req.query.video;
+  var title = req.query.title;
+  var id = req.query.id;
+  var searchObj = {};
+  if (videoUrl) searchObj.shortUrl = videoUrl;
+  if (title) searchObj.title = title;
+  if (id) searchObj._id = id;
+  console.log('getRelated', videoUrl, title);
+  Content.findOne(searchObj, function(err, content){
     if (err) {
       res.status(200).send({result : []});
       return; 
     }
     //console.log(content);
     var courseName = content.course;
+    var courseNum = content.courseNum;
+    var video = content.shortUrl;
     Content.find({course : courseName}, function (err, contents){
       if (err) {
         res.status(200).send({result : []});
         return;
       }
       contents.sort(function(a,b){return a.courseNum-b.courseNum});
+      contents = contents.map(function(c) {
+        var obj = { 
+          watching : false, 
+          watched : false,
+          _id : c._id,
+          title : c.title,
+          course : c.course,
+          courseNum : c.courseNum,
+          description : c.description,
+          url : c.url,
+          shortUrl : c.shortUrl,
+          questionCount : c.questionCount,
+          userCount : c.userCount,
+          imgUrl : c.imgUrl
+        };
+        if (obj.shortUrl===video) obj.watching = true;
+        if (obj.courseNum < courseNum) obj.watched = true;
+        //console.log(obj);
+        return obj;
+        
+      })
       res.status(200).send({result : contents});
     })
   });
