@@ -88,34 +88,56 @@ var LectureView = React.createClass({
     }
     return (
       <div
-        className="container">
+        className="container-fluid">
           <Loader loaded={this.state.loaded}>
-            <div
-              className="row">
-                <div
-                  className="col-xs-12 col-sm-8 col-md-10 col-lg-10 col-sm-offset-2 col-md-offset-1 col-lg-offset-1">
-                    <div
-                      className="ytcont">
-                        <div
-                          className="player">
-                            <YouTube
-                              url={'http://www.youtube.com/watch?v=' + this.props.shortUrl}
-                              id="player"
-                              ref="player"
-                              onReady={this.onPlayerReady} />
-                        </div>
-                    </div>
-                    <div
-                      className="row">
-                        <AskQuestionDialog
-                          stopVideo={this.stopVideo}
-                          getVideoTime={this.getVideoTime}
-                          videoId = {this.props.shortUrl}/>
-                        {questions}
-                        <ViewQuestionsDialog
-                          questions={this.state.questions}/>
-                    </div>
+            <div className="row">
+              <div className="col-lg-8">
+                <div className="lectureTitle"><h2>Lecture Title</h2></div>
+                <div className="box-player">
+                  <div
+                    className="row">
+                      <div
+                        className="col-xs-12 col-sm-8 col-md-10 col-lg-10 col-sm-offset-2 col-md-offset-1 col-lg-offset-1">
+                          <div
+                            className="ytcont">
+                              <div
+                                className="player">
+                                  <YouTube
+                                    url={'http://www.youtube.com/watch?v=' + this.props.shortUrl}
+                                    id="player"
+                                    ref="player"
+                                    onReady={this.onPlayerReady} />
+                              </div>
+                          </div>
+                          <div
+                            className="row">
+                              <AskQuestionDialog
+                                stopVideo={this.stopVideo}
+                                getVideoTime={this.getVideoTime}
+                                videoId = {this.props.shortUrl}/>
+                              {questions}
+                              <ViewQuestionsDialog
+                                questions={this.state.questions}/>
+                          </div>
+                      </div>
+                  </div>
                 </div>
+              </div>
+              <div className="col-lg-4">
+                <div className="box-playlist">
+                  <div className="row">
+                    <div className="col-sm-4 pl pl-first">
+                      <img className="playlist-thumb" src="https://i3.ytimg.com/vi/t7eyMwlgOI0/mqdefault.jpg"/>
+                    </div>
+                    <div className="col-sm-7 pl">
+                      <div className="playlist-ct-title"><p>Lesson 1 - Introduction to Angular 2.0</p></div>
+                    </div>
+                    <div className="col-sm-1 pl">
+                      <div className="playlist-content-item-stats lct-played"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </Loader>
       </div>
