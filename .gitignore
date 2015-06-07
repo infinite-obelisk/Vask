@@ -3,6 +3,9 @@
 node_modules
 build
 
+# local Heroku deployment
+.env
+
 # Logs
 logs
 *.log

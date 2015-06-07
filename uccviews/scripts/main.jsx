@@ -6,7 +6,7 @@ var React           = require('react'),
     NavBar            = require('./components/navBar/navBar.jsx'),
     // AppBar          = mui.AppBar,
     MaterialMixin   = require('./mixins/material-ui.js'),
-    LectureView     = require('./components/lectureView/LectureView.jsx'),
+    LectureView     = require('./components/lectureView/lectureView.jsx'),
     injectTapEventPlugin = require("react-tap-event-plugin");
 
     injectTapEventPlugin();
@@ -35,7 +35,7 @@ var App = React.createClass({
                 <LecturesList/>
             </div>
         );
-    },    
+    },
 
     coursesList: function() {
         return (

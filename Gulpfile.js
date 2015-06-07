@@ -21,8 +21,10 @@ gulp.task('server', shell.task([
 
 gulp.task('watch', ['scripts'], function(){
   gulp.watch('./uccviews/scripts/components/**/*.jsx', ['scripts']);
-}); 
+});
 
-gulp.task('default', ['scripts', 'server', 'watch']); 
+gulp.task('default', ['scripts', 'server', 'watch']);
 
-gulp.task('compile', ['scripts', 'server']); 
+gulp.task('compile', ['scripts', 'server']);
+
+gulp.task('production', ['scripts']);
