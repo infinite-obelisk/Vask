@@ -42,9 +42,11 @@ var LectureView = React.createClass({
   _onChange: function(){
     this.setState({
       loaded: true,
-      questions: lecturesStore.getQuestions(this.props.shortUrl),
-      playlist: lectureActions.getPlaylist(this.props.shortUrl)
+      questions: lecturesStore.getQuestions(),
+      playlist: lecturesStore.getPlaylist()
     });
+
+    console.log('****State update after the playlist!', this.state);
   },
 
   onPlayerReady: function(event){
@@ -127,7 +129,7 @@ var LectureView = React.createClass({
                 </div>
               </div>
               <div className="col-lg-4">
-                <Playlist/>
+                <Playlist related={this.state.playlist}/>
               </div>
             </div>
           </Loader>

@@ -11,6 +11,7 @@ var _lectures;
 var _questions;
 var _courses;
 var _addlecture;
+var _playlist;
 
 // Pattern to define the variable that will inform a new change
 var CHANGE_EVENT = 'change'
@@ -49,6 +50,10 @@ var LecturesStore = assign(EventEmitter.prototype, {
 	getLectureResp: function(){
 		return _addlecture;
 	},
+		
+	getPlaylist: function(){
+		return _playlist;
+	},
 	
 
 });
@@ -57,7 +62,7 @@ var LecturesStore = assign(EventEmitter.prototype, {
 LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
 	// Grab the action
 	var action = payload.action;
-
+	console.log('NEW DISPATCH!!!', action);
 	// Check whether the action can be used by the store
 	switch(action.actionType) {
 		case lecturesConstants.SET_LECTURES:
@@ -71,6 +76,10 @@ LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
 			break;		
 		case lecturesConstants.SET_LECTURE_RESP:
 			_addlecture = action.response;
+			break;		
+		case lecturesConstants.SET_PLAYLIST:
+			_playlist = action.playlist;
+			console.log('_playlist worked!!', _playlist );
 			break;
 	}
 

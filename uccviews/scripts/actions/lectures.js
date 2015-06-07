@@ -29,6 +29,13 @@ module.exports = {
 		});
 	},
 
+	setPlaylist: function(playlist){
+		Dispatcher.handleViewAction({
+			actionType: lecturesConstants.SET_PLAYLIST,
+			playlist: playlist
+		});
+	},
+
 	addLecture: function(lecture){
 		var self = this,
 			  url = '/addlecture';
@@ -135,7 +142,7 @@ module.exports = {
 
 	getPlaylist: function(videoId){
 		console.log('videoId',videoId);
-		var thiz = this,
+		var self = this,
 				url = "/getrelated?video=" + videoId;
 
 		request.get(url)
@@ -149,7 +156,7 @@ module.exports = {
 					   	if(res.ok){
 
 					   		var playlist = res.body.result;
-					   		// thiz.setQuestions(questions);
+					   		self.setPlaylist(playlist);
 					   		console.log('Playlist received:', playlist);
 					   	} else {
 					   		console.log('Response is not ok');

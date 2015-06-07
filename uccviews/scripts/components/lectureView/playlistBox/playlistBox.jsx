@@ -1,24 +1,27 @@
 var React = require('react');
+var PlaylistRow = require('./playlistRow.jsx');
 
 var Playlist = React.createClass({
+
+
   render: function() {
+    console.log('related playlistBox state PROPS',this.props.related);
+    console.log('related playlistBox state STATE',this.state);
+    
+    var rows = [];
+    if (this.props.related !== undefined) {
+      rows = this.props.related.map(function(lect, i){
+        return <PlaylistRow title={lect.title} thumb={lect.imgUrl} status={lect.watched} key={i}/>
+      });
+    }
+
     return (
-      <div className="box-playlist">
-        <div className="row">
-          <div className="col-sm-4 pl pl-first">
-            <img className="playlist-thumb" src="https://i3.ytimg.com/vi/t7eyMwlgOI0/mqdefault.jpg"/>
-          </div>
-          <div className="col-sm-7 pl">
-            <div className="playlist-ct-title"><p>Lesson 1 - Introduction to Angular 2.0</p></div>
-          </div>
-          <div className="col-sm-1 pl">
-            <div className="playlist-content-item-stats lct-played"></div>
-          </div>
-        </div>
+      <div>
+        {rows}
       </div>
     );
   }
 });
 
-module.exports = Playlist
+module.exports = Playlist;
 ;
