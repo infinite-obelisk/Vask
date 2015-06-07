@@ -11,7 +11,7 @@ var Playlist = React.createClass({
     var rows = [];
     if (this.props.related !== undefined) {
       rows = this.props.related.map(function(lect, i){
-        return <PlaylistRow title={lect.title} thumb={lect.imgUrl} status={lect.watched} key={i}/>
+        return <PlaylistRow title={lect.title} thumb={lect.imgUrl} status={lect.wstatus} key={i}/>
       });
     }
 

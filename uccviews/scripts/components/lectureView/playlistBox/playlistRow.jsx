@@ -31,7 +31,7 @@ var PlaylistRow = React.createClass({
               <div className="playlist-ct-title"><p>{this.props.title}</p></div>
             </div>
             <div className="col-sm-1 pl">
-              <div className="playlist-content-item-stats " + status></div>
+              <div className={"playlist-content-item-stats " + status}></div>
             </div>
           </div>
         </div>
