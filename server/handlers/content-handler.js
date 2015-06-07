@@ -112,9 +112,9 @@ exports.relatedLectures = function (req, res) {
   if (videoUrl) searchObj.shortUrl = videoUrl;
   if (title) searchObj.title = title;
   if (id) searchObj._id = id;
-  console.log('getRelated', videoUrl, title);
+  console.log('getRelated', searchObj);
   Content.findOne(searchObj, function(err, content){
-    if (err) {
+    if (err  || !content || !content.course) {
       res.status(200).send({result : []});
       return; 
     }
