@@ -10,7 +10,7 @@ var React               = require('react'),
     Loader              = require('../loader/loader.jsx'),
     MaterialMixin       = require('../../mixins/material-ui.js'),
     YouTube             = require('react-youtube'),
-    Playlist            = require('./playlistBox/playlist.jsx');
+    Playlist            = require('./playlistBox/playlistBox.jsx');
 
 
 var LectureView = React.createClass({
