@@ -45,7 +45,7 @@ var LectureView = React.createClass({
       loaded: true,
       questions: lecturesStore.getQuestions(),
       playlist: lecturesStore.getPlaylist(),
-      info: lecturesStore.getLectureInfo()
+      title: lecturesStore.getLectureInfo().title
     });
 
     console.log('****State update after the playlist!', this.state);
@@ -79,7 +79,6 @@ var LectureView = React.createClass({
 
   render: function(){
     console.log('State of the questions -->', this.state);
-    console.log('State of the PROPS -->', this.props);
     var questions;
     if(!!this.state.questions){
       questions = (<div>
@@ -100,7 +99,7 @@ var LectureView = React.createClass({
           <Loader loaded={this.state.loaded}>
             <div className="row">
               <div className="col-lg-8">
-                <div className="lectureTitle"><h2>Lecture Title</h2></div>
+                <div className="lectureTitle"><h2>{this.state.title}</h2></div>
                 <div className="box-player">
                   <div
                     className="row">

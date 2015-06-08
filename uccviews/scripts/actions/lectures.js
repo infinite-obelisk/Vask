@@ -185,10 +185,9 @@ module.exports = {
 					   	}
 					   	console.log('response from the server', res);
 					   	if(res.ok){
-
 					   		var info = res.body.result;
 					   		self.setLectureInfo(info);
-					   		console.log('INFO received:', info);
+					   		
 					   	} else {
 					   		console.log('Response is not ok');
 					   	}

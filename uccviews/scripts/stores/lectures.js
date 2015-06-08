@@ -84,11 +84,10 @@ LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
 			break;		
 		case lecturesConstants.SET_PLAYLIST:
 			_playlist = action.playlist;
-			console.log('_playlist worked!!', _playlist );
 			break;		
 		case lecturesConstants.SET_LECTURE_INFO:
-			_lectureInfo = action.infp;
-			console.log('_playlist worked!!', _playlist );
+			_lectureInfo = action.info;
+			console.log('_lectureInfo worked!!', _lectureInfo );
 			break;
 	}
 
