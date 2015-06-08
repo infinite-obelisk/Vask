@@ -16,15 +16,16 @@ var app = express();
 app.use(cors());
 app.use(bodyParser.json());
 app.use(session({
-  secret: 'be very quiet its a secret, WOOO!',
-  resave: false, // session store needs touch method for this to be ok
-  saveUninitialized : false
+  secret: 'be very quiet its a secret, WOOO!'
+  //resave: false, // session store needs touch method for this to be ok
+  //saveUninitialized : false
   //cookie: { secure : true} // requires https
 }));
 
+
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.get('/', function(req, res){
+app.get('/', userHandler.checkUser, function(req, res){
   res.sendFile(path.resolve(__dirname + '/../client/views/main.html'));
 });
 
@@ -48,6 +49,7 @@ app.post('/votequestion', questionHandler.voteQuestion);
 app.post('/voteanswer', questionHandler.voteAnswer);
 app.get('/getquestions', questionHandler.getQuestions);
 app.get('/getrelated', contentHandler.relatedLectures);
+app.get('/getlectureinfo', contentHandler.getLectureInfo);
 app.get('/getlectures', contentHandler.getLectures);
 app.get('/getcourses', courseHandler.getCourses);
 
@@ -62,7 +64,7 @@ app.get('/login', function(req, res){
 app.get('/testvideo', userHandler.checkUser, function(req, res){
   res.sendFile(path.resolve(__dirname + '/../client/views/lectureView.html'));
 });
-app.get('/getUserInfo', userHandler.checkUser, util.getUserInfo);
+app.get('/getUserInfo', util.getUserInfo);
 
 // This isn't necessary right now because express.static automatically
 // searches for the index.html file in the specified directory that was

@@ -161,3 +161,24 @@ exports.relatedLectures = function (req, res) {
   });
 
 }
+
+exports.getLectureInfo = function (req, res) {
+  var videoUrl = req.query.video;
+  var title = req.query.title;
+  var id = req.query.id;
+  var searchObj = {};
+  if (videoUrl) searchObj.shortUrl = videoUrl;
+  if (title) searchObj.title = title;
+  if (id) searchObj._id = id;
+  console.log('getLectureInfo', searchObj);
+  Content.findOne(searchObj, function(err, content){
+    if (err  || !content || !content.course) {
+      res.status(200).send({result : []});
+      return; 
+    }
+    res.status(200).send({result : content});
+    //console.log(content);
+    
+  });
+
+}
