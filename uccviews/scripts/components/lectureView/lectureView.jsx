@@ -26,10 +26,8 @@ var LectureView = React.createClass({
     // Add the listener
     // We use _ onChange because it's a method
     lecturesStore.addChangeListener(this._onChange);
-    this.setState({
-      questions: lectureActions.getQuestions(this.props.shortUrl),
-      playlist: lectureActions.getPlaylist(this.props.shortUrl)
-    });
+    lectureActions.getQuestions(this.props.shortUrl);
+    lectureActions.getPlaylist(this.props.shortUrl);
 
     window.player = this.refs.player;
   },
