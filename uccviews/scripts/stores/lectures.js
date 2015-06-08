@@ -12,6 +12,7 @@ var _questions;
 var _courses;
 var _addlecture;
 var _playlist;
+var _lectureInfo;
 
 // Pattern to define the variable that will inform a new change
 var CHANGE_EVENT = 'change'
@@ -54,6 +55,10 @@ var LecturesStore = assign(EventEmitter.prototype, {
 	getPlaylist: function(){
 		return _playlist;
 	},
+
+	getLectureInfo: function(){
+		return _lectureInfo;
+	},
 	
 
 });
@@ -79,6 +84,10 @@ LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
 			break;		
 		case lecturesConstants.SET_PLAYLIST:
 			_playlist = action.playlist;
+			console.log('_playlist worked!!', _playlist );
+			break;		
+		case lecturesConstants.SET_LECTURE_INFO:
+			_lectureInfo = action.infp;
 			console.log('_playlist worked!!', _playlist );
 			break;
 	}

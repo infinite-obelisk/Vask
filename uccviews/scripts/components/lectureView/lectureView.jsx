@@ -28,6 +28,7 @@ var LectureView = React.createClass({
     lecturesStore.addChangeListener(this._onChange);
     lectureActions.getQuestions(this.props.shortUrl);
     lectureActions.getPlaylist(this.props.shortUrl);
+    lectureActions.getLectureInfo(this.props.shortUrl);
 
     window.player = this.refs.player;
 
@@ -43,7 +44,8 @@ var LectureView = React.createClass({
     this.setState({
       loaded: true,
       questions: lecturesStore.getQuestions(),
-      playlist: lecturesStore.getPlaylist()
+      playlist: lecturesStore.getPlaylist(),
+      info: lecturesStore.getLectureInfo()
     });
 
     console.log('****State update after the playlist!', this.state);
