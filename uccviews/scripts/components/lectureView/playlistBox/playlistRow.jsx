@@ -1,11 +1,35 @@
 var React = require('react');
+var lectureActions      = require('../../../actions/lectures');
 
 var PlaylistRow = React.createClass({
 
+  getInitialState: function(){
+    return {
+      status: 'notwatched'
+    }
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    console.log('ROW', 'nextProps', nextProps.status);
+    console.log('ROW', 'state', this.state.status);
+    if (this.state.status !== nextProps.status) {
+      this.setState({
+          status: nextProps.status
+        });
+    }
+  },
+
+  update: function(){
+    console.log('ROW shortUrl', this.props.shortUrl);
+    lectureActions.getPlaylist(this.props.shortUrl);
+  },
+
+
   render: function() {
-    console.log('title', this.props.title);
-    console.log('thumb', this.props.thumb);
-    console.log('status', this.props.status);
+    // console.log('title', this.props.title);
+    // console.log('thumb', this.props.thumb);
+    // console.log('status', this.props.status);
+    // console.log('status', this.props.shortUrl);
     
     var status;
     // Define the CSS class to be injected
@@ -25,7 +49,9 @@ var PlaylistRow = React.createClass({
         <div className="box-playlist">
           <div className="row">
             <div className="col-sm-4 pl pl-first">
-              <img className="playlist-thumb" src={this.props.thumb}/>
+              <a href={"/lectures/" + this.props.shortUrl} onClick={this.update}>
+                <img className="playlist-thumb" src={this.props.thumb}/>
+              </a>
             </div>
             <div className="col-sm-7 pl">
               <div className="playlist-ct-title"><p>{this.props.title}</p></div>

@@ -16,7 +16,7 @@ var LectureViewCtrl = React.createClass({
             <LectureView shortUrl={this.props.shortUrl}/>
           </div>
           <div className="col-lg-5">
-            <div className="ctrl-box-playlist"></div>
+            <Playlist related={this.state.playlist}/>
           </div>
         </div>
       </div>

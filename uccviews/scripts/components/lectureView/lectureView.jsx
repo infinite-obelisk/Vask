@@ -30,6 +30,8 @@ var LectureView = React.createClass({
     lectureActions.getPlaylist(this.props.shortUrl);
 
     window.player = this.refs.player;
+
+
   },
 
   componentWillUnmount: function(){
@@ -75,6 +77,7 @@ var LectureView = React.createClass({
 
   render: function(){
     console.log('State of the questions -->', this.state);
+    console.log('State of the PROPS -->', this.props);
     var questions;
     if(!!this.state.questions){
       questions = (<div>
@@ -127,7 +130,7 @@ var LectureView = React.createClass({
                 </div>
               </div>
               <div className="col-lg-4">
-                <Playlist related={this.state.playlist}/>
+                <Playlist related={this.state.playlist} playingNow={this.props.shortUrl}/>
               </div>
             </div>
           </Loader>

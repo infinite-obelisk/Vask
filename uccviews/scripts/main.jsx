@@ -51,7 +51,7 @@ var App = React.createClass({
         console.log('URL',url);
         return (<div>
                     <NavBar title='VASK' iconClassNameRight="muidocs-icon-navigation-expand-more"/>
-                    <LectureViewCtrl shortUrl={url} />
+                    <LectureView shortUrl={url} />
                 </div>
             );
 	    // var list = this.state.lists.reduce(function(found, list) {
