@@ -17,6 +17,10 @@ exports.getUserInfo = function(request, response) {
   // If the user doesn't request any specific info that they need,
   // we'll just send them some the default information that's
   // specified in defaultNeededInfo (i.e. their username)
+  if (!request.session || !request.session.user) {
+    response.send({});
+    return;
+  }
   var defaultNeededInfo = ['username'];
   var neededUserInfo = request.body.neededUserInfo || defaultNeededInfo;
   console.log('session username', request.session.user.username);

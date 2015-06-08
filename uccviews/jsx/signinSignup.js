@@ -83,6 +83,7 @@ var Login = React.createClass({
         201: function (data) {
           console.log('win');
           console.log(data);
+          window.location.assign("/");
         },
         500: function (err) {
           console.log('lose')

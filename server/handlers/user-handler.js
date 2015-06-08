@@ -3,7 +3,7 @@ var User = require('./../models/user');
 var utils = require('./../utilities');
 
 exports.isLoggedIn = function(request) {
-  console.log(request.session.user)
+  console.log('isLoggedIn ',request.session.user)
   if(request.session) {
     return !!request.session.user;
   }
