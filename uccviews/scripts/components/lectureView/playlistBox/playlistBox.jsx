@@ -1,5 +1,6 @@
 var React = require('react');
 var PlaylistRow = require('./playlistRow.jsx');
+var ProgressBar = require('react-bootstrap').ProgressBar;
 
 var Playlist = React.createClass({
 
@@ -41,6 +42,14 @@ var Playlist = React.createClass({
 
     return (
       <div>
+        <div className="row progressbar-box">
+          <div className="col-sm-9">
+            <ProgressBar now={50} style={{"width":"360px"}}/>
+          </div>
+          <div className="col-sm-3">
+            <div className="progressbar-value">50%</div>
+          </div>
+        </div>
         {rows}
       </div>
     );

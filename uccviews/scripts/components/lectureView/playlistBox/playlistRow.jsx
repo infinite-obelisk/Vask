@@ -22,7 +22,7 @@ var PlaylistRow = React.createClass({
   update: function(){
     console.log('ROW shortUrl', this.props.shortUrl);
     lectureActions.getPlaylist(this.props.shortUrl);
-    lectureActions.getLectureInfo(this.props.shortUrl);
+    lectureActions.getLectureInfo(this.props.shortUrl); 
   },
 
 
