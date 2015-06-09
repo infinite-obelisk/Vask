@@ -157,15 +157,15 @@ var Signup = React.createClass({
 
 var SwitchButton = React.createClass({
   getInitialState: function(){
-    return {buttonLabel: "Signup Instead"}
+    return {buttonLabel: "Create account?"}
   },
   switchState: function(){
-    if(this.state.buttonLabel === "Signup Instead"){
-      this.setState({buttonLabel: "Login Instead"});
+    if(this.state.buttonLabel === "Create account?"){
+      this.setState({buttonLabel: "Already have an account?"});
       $(".signup").show();
       $(".login").hide();
     } else {
-      this.setState({buttonLabel: "Signup Instead"});
+      this.setState({buttonLabel: "Create account?"});
       $(".signup").hide();
       $(".login").show();
     }
