@@ -128,7 +128,8 @@ exports.relatedLectures = function (req, res) {
         return;
       }
       contents.sort(function(a,b){return a.courseNum-b.courseNum});
-      contents = contents.map(function(c) {
+      var watchPos = 0;
+      contents = contents.map(function(c,idx) {
         var obj = { 
           watching : false, 
           watched : false,
@@ -146,7 +147,8 @@ exports.relatedLectures = function (req, res) {
         };
         if (obj.shortUrl===video) {
           obj.watching = true;
-          obj.wstatus = 'watching'
+          obj.wstatus = 'watching',
+          watchPos = idx + 1
         }
         if (obj.courseNum < courseNum) {
           obj.watched = true;
@@ -155,8 +157,9 @@ exports.relatedLectures = function (req, res) {
         //console.log(obj);
         return obj;
         
-      })
-      res.status(200).send({result : contents});
+      });
+      var perc = Math.floor((watchPos * 100 / contents.length)+0.5);
+      res.status(200).send({result : contents, progress : perc});
     })
   });
 
