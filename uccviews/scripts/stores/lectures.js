@@ -1,4 +1,4 @@
-'use strict'
+	'use strict'
 
 var Dispatcher        = require('../dispatcher/dispatcher'),
 	EventEmitter      = require('events').EventEmitter,
@@ -8,7 +8,6 @@ var Dispatcher        = require('../dispatcher/dispatcher'),
 
 // Define the object that will contain the data (lectures)
 var _lectures;
-var _questions;
 var _courses;
 var _addlecture;
 var _playlist;
@@ -41,21 +40,17 @@ var LecturesStore = assign(EventEmitter.prototype, {
 		return _lectures;
 	},
 
-	getQuestions: function(){
-		return _questions;
-	},
-
 	getCourses: function(){
 		return _courses;
 	},
-	
+
 	getLectureResp: function(){
 		return _addlecture;
 	},
-		
+
 	getPlaylist: function(){
 		return _playlist;
-	},	
+	},
 
 	getPlaylistProgress: function(){
 		return _progress;
@@ -63,8 +58,7 @@ var LecturesStore = assign(EventEmitter.prototype, {
 
 	getLectureInfo: function(){
 		return _lectureInfo;
-	},
-	
+	}
 
 });
 
@@ -77,20 +71,17 @@ LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
 	switch(action.actionType) {
 		case lecturesConstants.SET_LECTURES:
 			_lectures = action.lectures;
-			break;		
+			break;
 		case lecturesConstants.SET_COURSES:
 			_courses = action.courses;
 			break;
-		case lecturesConstants.SET_QUESTIONS:
-			_questions = action.questions;
-			break;		
 		case lecturesConstants.SET_LECTURE_RESP:
 			_addlecture = action.response;
-			break;		
+			break;
 		case lecturesConstants.SET_PLAYLIST:
 			_playlist = action.playlist.result;
 			_progress = action.playlist.progress;
-			break;		
+			break;
 		case lecturesConstants.SET_LECTURE_INFO:
 			_lectureInfo = action.info;
 			console.log('_lectureInfo worked!!', _lectureInfo );

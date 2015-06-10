@@ -13,7 +13,7 @@ module.exports = {
 			actionType: lecturesConstants.SET_LECTURES,
 			lectures: lectures
 		});
-	},	
+	},
 
 	setCourses: function(courses){
 		Dispatcher.handleViewAction({
@@ -22,19 +22,12 @@ module.exports = {
 		});
 	},
 
-	setQuestions: function(questions){
-		Dispatcher.handleViewAction({
-			actionType: lecturesConstants.SET_QUESTIONS,
-			questions: questions
-		});
-	},
-
 	setPlaylist: function(playlist){
 		Dispatcher.handleViewAction({
 			actionType: lecturesConstants.SET_PLAYLIST,
 			playlist: playlist
 		});
-	},	
+	},
 
 	setLectureInfo: function(info){
 		Dispatcher.handleViewAction({
@@ -57,7 +50,7 @@ module.exports = {
 			   	}
 			   	console.log('response from the server', res);
 			   	if(res.ok){
-			   		
+
 			   		// update the list
 			   		self.getLectures();
 
@@ -125,28 +118,6 @@ module.exports = {
 			   });
 	},
 
-	getQuestions: function(videoId){
-		var thiz = this,
-				url = "/getquestions?video=" + videoId;
-
-		request.get(url)
-					 .set('Accept', 'application/json')
-				   .end(function(err, res){
-					   	if (err) {
-					   		console.log('Failed fetching the server');
-					   		throw err;
-					   	}
-					   	console.log('response from the server', res);
-					   	if(res.ok){
-
-					   		var questions = res.body.result;
-					   		thiz.setQuestions(questions);
-					   	} else {
-					   		console.log('Response is not ok');
-					   	}
-				   });
-	},
-
 	getPlaylist: function(videoId){
 		console.log('videoId',videoId);
 		var self = this,
@@ -165,7 +136,7 @@ module.exports = {
 					   		var playlist = res.body;
 					   		console.log('Playlist received:', playlist);
 					   		self.setPlaylist(playlist);
-					   		
+
 					   	} else {
 					   		console.log('Response is not ok');
 					   	}
@@ -188,7 +159,7 @@ module.exports = {
 					   	if(res.ok){
 					   		var info = res.body.result;
 					   		self.setLectureInfo(info);
-					   		
+
 					   	} else {
 					   		console.log('Response is not ok');
 					   	}

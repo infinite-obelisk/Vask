@@ -34,6 +34,7 @@ var ViewQuestionDialog = React.createClass({
                     title="Question"
                     actions={actions} >
                       <ViewQuestionAndAnswers
+                        shortUrl={this.props.shortUrl}
                         votes={this.state.question.votes}
                         user={this.state.question.username}
                         question={this.state.question.title}

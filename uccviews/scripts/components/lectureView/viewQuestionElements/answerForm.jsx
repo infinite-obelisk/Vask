@@ -1,5 +1,6 @@
 var React = require('react'),
     MaterialMixin = require('./../../../mixins/material-ui.js'),
+    questionsActions    = require('../../../actions/questions'),
     mui = require('material-ui'),
     TextField = mui.TextField,
     FlatButton = mui.FlatButton;
@@ -10,6 +11,7 @@ var AnswerForm = React.createClass({
     $(".answer-form>div>textarea").parent().appendTo($(".answer-form"));
   },
   addAnswer: function (questionId, answerText) {
+    var thiz = this;
     $.ajax({
       url: "/addanswer",
       method: "POST",
@@ -22,6 +24,7 @@ var AnswerForm = React.createClass({
         201: function (data) {
           console.log('win');
           console.log(data);
+          questionsActions.getQuestions(thiz.props.shortUrl);
           //self.clearForm();
           //self.closeDialog();
         },
