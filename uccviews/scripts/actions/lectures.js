@@ -62,6 +62,33 @@ module.exports = {
 
 	},
 
+	addQuestion: function(question){
+		var self = this,
+			  url = '/addquestion';
+		// Request the API for the data (lectures)
+		request.post(url)
+				 .send(question)
+			   .set('Accept', 'application/json')
+			   .end(function(err, res){
+			   	if (err) {
+			   		console.log('Failed fetching the server: lectures');
+			   		throw err;
+			   	}
+			   	console.log('response from the server', res);
+			   	if(res.ok){
+			   		
+			   		// after successfuly saved, update the questions
+			   		// self.getLectures();
+			   		console.log('Ask question works!!!!!', res);
+
+			   	} else {
+			   		// thow the error
+			   		console.log('Ask question is not ok');
+			   	}
+			   });
+
+	},
+
 	getLectures: function(search){
 		var self = this,
 			  url = '/getlectures';
