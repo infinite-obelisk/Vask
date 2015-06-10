@@ -4,7 +4,8 @@ var React             = require('react'),
     MaterialMixin     = require('../../mixins/material-ui.js'),
     mui               = require('material-ui'),
     FlatButton        = mui.FlatButton,
-    Dialog            = mui.Dialog;
+    Dialog            = mui.Dialog,
+    lectureActions    = require('../../actions/lectures');
 
 var AskQuestionDialog = React.createClass({
   mixins: [MaterialMixin],
@@ -23,29 +24,16 @@ var AskQuestionDialog = React.createClass({
     console.log("Submit Question");
     console.log("Time question", Math.floor(this.props.getVideoTime()));
     var thiz = this;
-    $.ajax({
-      url: "/addquestion",
-      method: "POST",
-      contentType: "application/json",
-      data: JSON.stringify({
-        video : thiz.props.videoId,
-        text : window.$('#question-text').val(),
-        username : 'name',
-        time : Math.floor(thiz.props.getVideoTime()),
-        title : window.$('#question-title').val()
-      }),
-      statusCode: {
-        201: function (data) {
-          console.log('win');
-          console.log(data);
-          thiz.clearForm();
-          thiz.closeDialog();
-        },
-        500: function (err) {
-          console.log('lose')
-        }
-      }
-    });
+    var question = {
+      video : thiz.props.videoId,
+      text : window.$('#question-text').val(),
+      username : 'name',
+      time : Math.floor(thiz.props.getVideoTime()),
+      title : window.$('#question-title').val()
+    };
+    // Send the question to the server
+    lectureActions.addQuestion(question);
+
     this.clearForm();
     this.closeDialog();
   },
