@@ -16,6 +16,7 @@ var ViewQuestionAndAnswers = React.createClass({
                 questionTime={this.props.questionTime}
                 questionId={qID}/>
               <AnswerForm
+                shortUrl={this.props.shortUrl}
                 questionId={qID}/>
               {this.props.answers.map(function(answer, index){
                 return (<Answer

@@ -2,7 +2,9 @@
 
 var React               = require('react'),
     lectureActions      = require('../../actions/lectures'),
+    questionsActions    = require('../../actions/questions'),
     lecturesStore       = require('../../stores/lectures'),
+    questionsStore      = require('../../stores/questions'),
     AskQuestionDialog   = require('./askQuestionDialog.jsx'),
     PopupQuestion       = require('./viewQuestionElements/popupQuestion.jsx'),
     ViewQuestionDialog  = require('./viewQuestionDialog.jsx'),
@@ -19,16 +21,18 @@ var LectureView = React.createClass({
   getInitialState: function(){
     return {
       loaded: false
-    }
+    };
   },
 
   componentDidMount: function(){
     // Add the listener
     // We use _ onChange because it's a method
-    lecturesStore.addChangeListener(this._onChange);
-    lectureActions.getQuestions(this.props.shortUrl);
+    questionsStore.addChangeListener(this._onChange);
     lectureActions.getPlaylist(this.props.shortUrl);
     lectureActions.getLectureInfo(this.props.shortUrl);
+    this.setState({
+      questions: questionsActions.getQuestions(this.props.shortUrl)
+    });
 
     window.player = this.refs.player;
 
@@ -37,18 +41,18 @@ var LectureView = React.createClass({
 
   componentWillUnmount: function(){
     // Remove the listener
-    lecturesStore.removeChangeListener(this._onChange);
+    questionsStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function(){
+    var lectureInfo = lecturesStore.getLectureInfo();
     this.setState({
       loaded: true,
-      questions: lecturesStore.getQuestions(),
+      questions: questionsStore.getQuestions(),
       playlist: lecturesStore.getPlaylist(),
       progress: lecturesStore.getPlaylistProgress(),
-      title: lecturesStore.getLectureInfo().title
+      title: lectureInfo ? lectureInfo.title : null
     });
-
     console.log('****State update after the playlist!', this.state);
   },
 
@@ -81,6 +85,7 @@ var LectureView = React.createClass({
   render: function(){
     console.log('State of the questions -->', this.state);
     var questions;
+    var thiz = this;
     if(!!this.state.questions){
       questions = (<div>
                     <PopupQuestion
@@ -90,7 +95,8 @@ var LectureView = React.createClass({
                       questions={this.state.questions} />
                     {this.state.questions.map(function(question){
                       return (<ViewQuestionDialog
-                                question={question} />);
+                                question={question}
+                                shortUrl={thiz.props.shortUrl}/>);
                     })}
                     </div>);
     }
@@ -134,9 +140,9 @@ var LectureView = React.createClass({
                 </div>
               </div>
               <div className="col-lg-4">
-                <Playlist 
-                    related={this.state.playlist} 
-                    progress={this.state.progress} 
+                <Playlist
+                    related={this.state.playlist}
+                    progress={this.state.progress}
                     playingNow={this.props.shortUrl}/>
               </div>
             </div>
