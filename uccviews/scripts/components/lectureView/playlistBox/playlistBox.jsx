@@ -20,7 +20,7 @@ var Playlist = React.createClass({
 
   render: function() {
     // console.log('related playlistBox state PROPS',this.props.related);
-    // console.log('related playlistBox state STATE',this.state);
+    console.log('RELATEDDDDDDDDDDDDDD',this.props);
     // var self = this;
     
     var rows = [];
@@ -44,10 +44,10 @@ var Playlist = React.createClass({
       <div>
         <div className="row progressbar-box">
           <div className="col-sm-9">
-            <ProgressBar now={50} style={{"width":"360px"}}/>
+            <ProgressBar now={this.props.progress} style={{"width":"360px"}}/>
           </div>
           <div className="col-sm-3">
-            <div className="progressbar-value">50%</div>
+            <div className="progressbar-value">{this.props.progress}%</div>
           </div>
         </div>
         {rows}

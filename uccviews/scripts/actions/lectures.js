@@ -162,9 +162,10 @@ module.exports = {
 					   	console.log('response from the server', res);
 					   	if(res.ok){
 
-					   		var playlist = res.body.result;
-					   		self.setPlaylist(playlist);
+					   		var playlist = res.body;
 					   		console.log('Playlist received:', playlist);
+					   		self.setPlaylist(playlist);
+					   		
 					   	} else {
 					   		console.log('Response is not ok');
 					   	}

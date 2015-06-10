@@ -45,6 +45,7 @@ var LectureView = React.createClass({
       loaded: true,
       questions: lecturesStore.getQuestions(),
       playlist: lecturesStore.getPlaylist(),
+      progress: lecturesStore.getPlaylistProgress(),
       title: lecturesStore.getLectureInfo().title
     });
 
@@ -104,7 +105,7 @@ var LectureView = React.createClass({
                   <div
                     className="row">
                       <div
-                        className="col-xs-12 col-sm-8 col-md-10 col-lg-10 col-sm-offset-2 col-md-offset-1 col-lg-offset-1">
+                        className="col-lg-12 player-container">
                           <div
                             className="ytcont">
                               <div
@@ -118,20 +119,25 @@ var LectureView = React.createClass({
                           </div>
                           <div
                             className="row">
-                              <AskQuestionDialog
-                                stopVideo={this.stopVideo}
-                                getVideoTime={this.getVideoTime}
-                                videoId = {this.props.shortUrl}/>
-                              {questions}
-                              <ViewQuestionsDialog
-                                questions={this.state.questions}/>
+                              <div className="col-lg-12 bt-player-ctrls">
+                                <AskQuestionDialog
+                                  stopVideo={this.stopVideo}
+                                  getVideoTime={this.getVideoTime}
+                                  videoId = {this.props.shortUrl}/>
+                                {questions}
+                                <ViewQuestionsDialog
+                                  questions={this.state.questions}/>
+                              </div>
                           </div>
                       </div>
                   </div>
                 </div>
               </div>
               <div className="col-lg-4">
-                <Playlist related={this.state.playlist} playingNow={this.props.shortUrl}/>
+                <Playlist 
+                    related={this.state.playlist} 
+                    progress={this.state.progress} 
+                    playingNow={this.props.shortUrl}/>
               </div>
             </div>
           </Loader>
