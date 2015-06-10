@@ -25,7 +25,7 @@ app.use(session({
 
 app.use(bodyParser.urlencoded({extended:true}));
 
-app.get('/', userHandler.checkUser, function(req, res){
+app.get('/', userHandler.checkUser,function(req, res){
   res.sendFile(path.resolve(__dirname + '/../client/views/main.html'));
 });
 

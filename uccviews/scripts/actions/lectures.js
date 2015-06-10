@@ -29,6 +29,20 @@ module.exports = {
 		});
 	},
 
+	setPlaylist: function(playlist){
+		Dispatcher.handleViewAction({
+			actionType: lecturesConstants.SET_PLAYLIST,
+			playlist: playlist
+		});
+	},	
+
+	setLectureInfo: function(info){
+		Dispatcher.handleViewAction({
+			actionType: lecturesConstants.SET_LECTURE_INFO,
+			info: info
+		});
+	},
+
 	addLecture: function(lecture){
 		var self = this,
 			  url = '/addlecture';
@@ -127,6 +141,54 @@ module.exports = {
 
 					   		var questions = res.body.result;
 					   		thiz.setQuestions(questions);
+					   	} else {
+					   		console.log('Response is not ok');
+					   	}
+				   });
+	},
+
+	getPlaylist: function(videoId){
+		console.log('videoId',videoId);
+		var self = this,
+				url = "/getrelated?video=" + videoId;
+
+		request.get(url)
+					 .set('Accept', 'application/json')
+				   .end(function(err, res){
+					   	if (err) {
+					   		console.log('Failed fetching the server');
+					   		throw err;
+					   	}
+					   	console.log('response from the server', res);
+					   	if(res.ok){
+
+					   		var playlist = res.body;
+					   		console.log('Playlist received:', playlist);
+					   		self.setPlaylist(playlist);
+					   		
+					   	} else {
+					   		console.log('Response is not ok');
+					   	}
+				   });
+	},
+
+	getLectureInfo: function(videoId){
+		console.log('videoId',videoId);
+		var self = this,
+				url = "/getlectureinfo?video=" + videoId;
+
+		request.get(url)
+					 .set('Accept', 'application/json')
+				   .end(function(err, res){
+					   	if (err) {
+					   		console.log('Failed fetching the server');
+					   		throw err;
+					   	}
+					   	console.log('response from the server', res);
+					   	if(res.ok){
+					   		var info = res.body.result;
+					   		self.setLectureInfo(info);
+					   		
 					   	} else {
 					   		console.log('Response is not ok');
 					   	}

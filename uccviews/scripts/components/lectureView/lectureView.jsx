@@ -9,7 +9,8 @@ var React               = require('react'),
     ViewQuestionsDialog = require('./viewQuestionsDialog.jsx'),
     Loader              = require('../loader/loader.jsx'),
     MaterialMixin       = require('../../mixins/material-ui.js'),
-    YouTube             = require('react-youtube');
+    YouTube             = require('react-youtube'),
+    Playlist            = require('./playlistBox/playlistBox.jsx');
 
 
 var LectureView = React.createClass({
@@ -25,11 +26,13 @@ var LectureView = React.createClass({
     // Add the listener
     // We use _ onChange because it's a method
     lecturesStore.addChangeListener(this._onChange);
-    this.setState({
-      questions: lectureActions.getQuestions(this.props.shortUrl)
-    });
+    lectureActions.getQuestions(this.props.shortUrl);
+    lectureActions.getPlaylist(this.props.shortUrl);
+    lectureActions.getLectureInfo(this.props.shortUrl);
 
     window.player = this.refs.player;
+
+
   },
 
   componentWillUnmount: function(){
@@ -40,8 +43,13 @@ var LectureView = React.createClass({
   _onChange: function(){
     this.setState({
       loaded: true,
-      questions: lecturesStore.getQuestions(this.props.shortUrl)
+      questions: lecturesStore.getQuestions(),
+      playlist: lecturesStore.getPlaylist(),
+      progress: lecturesStore.getPlaylistProgress(),
+      title: lecturesStore.getLectureInfo().title
     });
+
+    console.log('****State update after the playlist!', this.state);
   },
 
   onPlayerReady: function(event){
@@ -88,34 +96,49 @@ var LectureView = React.createClass({
     }
     return (
       <div
-        className="container">
+        className="container-fluid">
           <Loader loaded={this.state.loaded}>
-            <div
-              className="row">
-                <div
-                  className="col-xs-12 col-sm-8 col-md-10 col-lg-10 col-sm-offset-2 col-md-offset-1 col-lg-offset-1">
-                    <div
-                      className="ytcont">
-                        <div
-                          className="player">
-                            <YouTube
-                              url={'http://www.youtube.com/watch?v=' + this.props.shortUrl}
-                              id="player"
-                              ref="player"
-                              onReady={this.onPlayerReady} />
-                        </div>
-                    </div>
-                    <div
-                      className="row">
-                        <AskQuestionDialog
-                          stopVideo={this.stopVideo}
-                          getVideoTime={this.getVideoTime}
-                          videoId = {this.props.shortUrl}/>
-                        {questions}
-                        <ViewQuestionsDialog
-                          questions={this.state.questions}/>
-                    </div>
+            <div className="row">
+              <div className="col-lg-8">
+                <div className="lectureTitle"><h2>{this.state.title}</h2></div>
+                <div className="box-player">
+                  <div
+                    className="row">
+                      <div
+                        className="col-lg-12 player-container">
+                          <div
+                            className="ytcont">
+                              <div
+                                className="player">
+                                  <YouTube
+                                    url={'http://www.youtube.com/watch?v=' + this.props.shortUrl}
+                                    id="player"
+                                    ref="player"
+                                    onReady={this.onPlayerReady} />
+                              </div>
+                          </div>
+                          <div
+                            className="row">
+                              <div className="col-lg-12 bt-player-ctrls">
+                                <AskQuestionDialog
+                                  stopVideo={this.stopVideo}
+                                  getVideoTime={this.getVideoTime}
+                                  videoId = {this.props.shortUrl}/>
+                                {questions}
+                                <ViewQuestionsDialog
+                                  questions={this.state.questions}/>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
                 </div>
+              </div>
+              <div className="col-lg-4">
+                <Playlist 
+                    related={this.state.playlist} 
+                    progress={this.state.progress} 
+                    playingNow={this.props.shortUrl}/>
+              </div>
             </div>
           </Loader>
       </div>
