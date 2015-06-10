@@ -7,7 +7,6 @@ var React           = require('react'),
     // AppBar          = mui.AppBar,
     MaterialMixin   = require('./mixins/material-ui.js'),
     LectureView     = require('./components/lectureView/lectureView.jsx'),
-    LectureViewCtrl     = require('./components/lectureView/lectureViewCtrl.jsx'),
     injectTapEventPlugin = require("react-tap-event-plugin");
 
     injectTapEventPlugin();
