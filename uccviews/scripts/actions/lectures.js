@@ -76,10 +76,10 @@ module.exports = {
 			   	}
 			   	console.log('response from the server', res);
 			   	if(res.ok){
+			   		console.log('Question successfuly added..');
+			   		// after successfuly saved, update the questions passing the video ID
+			   		self.getQuestions(question.video);
 			   		
-			   		// after successfuly saved, update the questions
-			   		// self.getLectures();
-			   		console.log('Ask question works!!!!!', res);
 
 			   	} else {
 			   		// thow the error
