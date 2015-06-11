@@ -22,7 +22,7 @@ var PopupQuestion = React.createClass({
       // console.log('check popup questions invoked',this.state.popupOpened);
       this.checkPopupQuestions()
     } else {
-      console.log('popup is open.. invoking the watcher in 0.5 seconds');
+      // console.log('popup is open.. invoking the watcher in 0.5 seconds');
       setTimeout(this.popupWatcher.bind(this), 500);
     }
   },
@@ -60,7 +60,7 @@ var PopupQuestion = React.createClass({
             if (reactScope.checkPlayerStats() === 'playing') {
               // check if the popup is opened
               if (!reactScope.state.popupOpened) {
-                console.log('refs Alert', reactScope.refs.alert);
+                // console.log('refs Alert', reactScope.refs.alert);
                 // update the state of the component (message)
                 reactScope.setState({
                   question: questions[i].title,
@@ -103,27 +103,27 @@ var PopupQuestion = React.createClass({
       if (thiz.props.playerIsLoaded()) {
         // checks if the player API is loaded
         if (thiz.props.getVideoTime() === undefined) {
-          console.log('API is not ready yet');
+          // console.log('API is not ready yet');
           // if it's not, try again
           setTimeout(playerIsLoaded.bind(this, reactScope), 500);
         } else {
           // Update the state of the component
-          console.log('readyyy');
+          // console.log('readyyy');
           thiz.setState({
             playerLoaded: true,
             playerState: reactScope.checkPlayerStats()
           });
           reactScope.checkPopupQuestions();
-          console.log('STATE UPDATED', reactScope.state);
+          // console.log('STATE UPDATED', reactScope.state);
         }
       } else {
         // if it's not, try again
-        console.log('Failed :( .. No player');
-        console.log('this REACT', this);
+        // console.log('Failed :( .. No player');
+        // console.log('this REACT', this);
         setTimeout(playerIsLoaded.bind(this, reactScope), 1000);
       }
     };
-    console.log('OUTSIDE FUNCTION', this);
+    // console.log('OUTSIDE FUNCTION', this);
     playerIsLoaded(this);
 
 

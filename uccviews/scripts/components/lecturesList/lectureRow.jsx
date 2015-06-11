@@ -4,7 +4,7 @@ var React = require('react');
 
 var ContentRow = React.createClass({
   render: function() {
-    console.log('ROW DATA',this.props.data.shortUrl);
+    // console.log('ROW DATA',this.props.data.shortUrl);
     var link = "/lectures/" + this.props.data.shortUrl;
     
     return (

@@ -4,7 +4,6 @@ var React               = require('react'),
     lectureActions      = require('../../actions/lectures'),
     questionsActions    = require('../../actions/questions'),
     lecturesStore       = require('../../stores/lectures'),
-    questionsStore      = require('../../stores/questions'),
     AskQuestionDialog   = require('./askQuestionDialog.jsx'),
     PopupQuestion       = require('./viewQuestionElements/popupQuestion.jsx'),
     ViewQuestionDialog  = require('./viewQuestionDialog.jsx'),
@@ -27,12 +26,11 @@ var LectureView = React.createClass({
   componentDidMount: function(){
     // Add the listener
     // We use _ onChange because it's a method
-    questionsStore.addChangeListener(this._onChange);
+    lecturesStore.addChangeListener(this._onChange);
+
     lectureActions.getPlaylist(this.props.shortUrl);
     lectureActions.getLectureInfo(this.props.shortUrl);
-    this.setState({
-      questions: questionsActions.getQuestions(this.props.shortUrl)
-    });
+    questions: questionsActions.getQuestions(this.props.shortUrl);
 
     window.player = this.refs.player;
 
@@ -41,19 +39,32 @@ var LectureView = React.createClass({
 
   componentWillUnmount: function(){
     // Remove the listener
-    questionsStore.removeChangeListener(this._onChange);
+    lecturesStore.removeChangeListener(this._onChange);
   },
 
   _onChange: function(){
-    var lectureInfo = lecturesStore.getLectureInfo();
+    // console.log('Onnn changeeeee...');
+    var lectureInfo = lecturesStore.getLectureInfo(),
+        playlistStatus = lecturesStore.getPlaylist(),
+        progressStatus = lecturesStore.getPlaylistProgress(),
+        questionStatus = lecturesStore.getQuestions(),
+        loaded = false;
+
+    if (playlistStatus !== undefined & questionStatus !== undefined) {
+      loaded = true;
+    }
+    // console.log('playlistStatus',playlistStatus); 
+    // console.log('progressStatus',progressStatus); 
+    // console.log('questionStatus',questionStatus); 
+    // console.log('loaded',loaded); 
+
     this.setState({
-      loaded: true,
-      questions: questionsStore.getQuestions(),
+      loaded: loaded,
       playlist: lecturesStore.getPlaylist(),
       progress: lecturesStore.getPlaylistProgress(),
-      title: lectureInfo ? lectureInfo.title : null
+      title: lectureInfo.title
     });
-    console.log('****State update after the playlist!', this.state);
+    // console.log('****State update after the playlist!', this.state);
   },
 
   onPlayerReady: function(event){
@@ -83,7 +94,11 @@ var LectureView = React.createClass({
   },
 
   render: function(){
-    console.log('State of the questions -->', this.state);
+    // console.log('PLAYLIST STATES -->', this.state.playlist);
+    // console.log('PLAYLIST STATES BOOLEAN-->', !!this.state.playlist);
+    // console.log('PLAYLIST STATES -->', this.state.progress);
+    // console.log('PLAYLIST STATES -->', this.props.shortUrl);
+
     var questions;
     var thiz = this;
     if(!!this.state.questions){
@@ -140,10 +155,10 @@ var LectureView = React.createClass({
                 </div>
               </div>
               <div className="col-lg-4">
-                <Playlist
-                    related={this.state.playlist}
-                    progress={this.state.progress}
-                    playingNow={this.props.shortUrl}/>
+                  <Playlist
+                      related={this.state.playlist}
+                      progress={this.state.progress}
+                      playingNow={this.props.shortUrl}/>
               </div>
             </div>
           </Loader>

@@ -45,10 +45,10 @@ module.exports = {
 			   .set('Accept', 'application/json')
 			   .end(function(err, res){
 			   	if (err) {
-			   		console.log('Failed fetching the server: lectures');
+			   		// console.log('Failed fetching the server: lectures');
 			   		throw err;
 			   	}
-			   	console.log('response from the server', res);
+			   	// console.log('response from the server', res);
 			   	if(res.ok){
 
 			   		// update the list
@@ -56,7 +56,7 @@ module.exports = {
 
 			   	} else {
 			   		// thow the error
-			   		console.log('Response is not ok');
+			   		// console.log('Response is not ok');
 			   	}
 			   });
 
@@ -68,19 +68,19 @@ module.exports = {
 
 			  // if it's a search request, add the query to the get request
 				url = search ? url + search : url;
-				console.log('URL',url);
+				// console.log('URL',url);
 
 		// Request the API for the data (lectures)
 		request.get(url)
 			   .set('Accept', 'application/json')
 			   .end(function(err, res){
 			   	if (err) {
-			   		console.log('Failed fetching the server: lectures');
+			   		// console.log('Failed fetching the server: lectures');
 			   		throw err;
 			   	}
-			   	console.log('response from the server', res);
+			   	// console.log('response from the server', res);
 			   	if(res.ok){
-			   		console.log(res.body.result);
+			   		// console.log(res.body.result);
 			   		// get the data from the response
 			   		var lectures = res.body.result;
 			   		// send the data to dispatcher
@@ -88,7 +88,7 @@ module.exports = {
 
 			   	} else {
 			   		// thow the error
-			   		console.log('Response is not ok');
+			   		// console.log('Response is not ok');
 			   	}
 			   });
 	},
@@ -101,10 +101,10 @@ module.exports = {
 			   .set('Accept', 'application/json')
 			   .end(function(err, res){
 			   	if (err) {
-			   		console.log('Failed fetching the server: courses');
+			   		// console.log('Failed fetching the server: courses');
 			   		throw err;
 			   	}
-			   	console.log('response from the server', res);
+			   	// console.log('response from the server', res);
 			   	if(res.ok){
 			   		// get the data from the response
 			   		var courses = res.body.result;
@@ -113,13 +113,13 @@ module.exports = {
 
 			   	} else {
 			   		// thow the error
-			   		console.log('Response is not ok');
+			   		// console.log('Response is not ok');
 			   	}
 			   });
 	},
 
 	getPlaylist: function(videoId){
-		console.log('videoId',videoId);
+		// console.log('videoId',videoId);
 		var self = this,
 				url = "/getrelated?video=" + videoId;
 
@@ -127,10 +127,10 @@ module.exports = {
 					 .set('Accept', 'application/json')
 				   .end(function(err, res){
 					   	if (err) {
-					   		console.log('Failed fetching the server');
+					   		// console.log('Failed fetching the server');
 					   		throw err;
 					   	}
-					   	console.log('response from the server', res);
+					   	// console.log('response from the server', res);
 					   	if(res.ok){
 
 					   		var playlist = res.body;
@@ -138,13 +138,13 @@ module.exports = {
 					   		self.setPlaylist(playlist);
 
 					   	} else {
-					   		console.log('Response is not ok');
+					   		// console.log('Response is not ok');
 					   	}
 				   });
 	},
 
 	getLectureInfo: function(videoId){
-		console.log('videoId',videoId);
+		// console.log('videoId',videoId);
 		var self = this,
 				url = "/getlectureinfo?video=" + videoId;
 
@@ -152,16 +152,17 @@ module.exports = {
 					 .set('Accept', 'application/json')
 				   .end(function(err, res){
 					   	if (err) {
-					   		console.log('Failed fetching the server');
+					   		// console.log('Failed fetching the server');
 					   		throw err;
 					   	}
-					   	console.log('response from the server', res);
+					   	
 					   	if(res.ok){
 					   		var info = res.body.result;
+					   		console.log('Lecture Info received:', info);
 					   		self.setLectureInfo(info);
 
 					   	} else {
-					   		console.log('Response is not ok');
+					   		// console.log('Response is not ok');
 					   	}
 				   });
 	}

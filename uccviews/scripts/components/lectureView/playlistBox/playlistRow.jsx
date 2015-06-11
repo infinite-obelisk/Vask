@@ -1,5 +1,5 @@
-var React = require('react');
-var lectureActions      = require('../../../actions/lectures');
+var React          = require('react');
+var lectureActions = require('../../../actions/lectures');
 
 var PlaylistRow = React.createClass({
 
@@ -10,8 +10,8 @@ var PlaylistRow = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
-    console.log('ROW', 'nextProps', nextProps.status);
-    console.log('ROW', 'state', this.state.status);
+    // console.log('ROW', 'nextProps', nextProps.status);
+    // console.log('ROW', 'state', this.state.status);
     if (this.state.status !== nextProps.status) {
       this.setState({
           status: nextProps.status
@@ -20,7 +20,7 @@ var PlaylistRow = React.createClass({
   },
 
   update: function(){
-    console.log('ROW shortUrl', this.props.shortUrl);
+    // console.log('update playlist -->', this.props.shortUrl);
     lectureActions.getPlaylist(this.props.shortUrl);
     lectureActions.getLectureInfo(this.props.shortUrl); 
   },
@@ -29,7 +29,7 @@ var PlaylistRow = React.createClass({
   render: function() {
     // console.log('title', this.props.title);
     // console.log('thumb', this.props.thumb);
-    // console.log('status', this.props.status);
+    // console.log('playlistRow status', this.props.status);
     // console.log('status', this.props.shortUrl);
     
     var status;

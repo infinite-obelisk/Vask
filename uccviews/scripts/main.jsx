@@ -7,7 +7,6 @@ var React           = require('react'),
     // AppBar          = mui.AppBar,
     MaterialMixin   = require('./mixins/material-ui.js'),
     LectureView     = require('./components/lectureView/lectureView.jsx'),
-    LectureViewCtrl     = require('./components/lectureView/lectureViewCtrl.jsx'),
     injectTapEventPlugin = require("react-tap-event-plugin");
 
     injectTapEventPlugin();
@@ -15,7 +14,7 @@ var React           = require('react'),
 var App = React.createClass({
 
     routes: {
-        '/': 'coursesList',
+        '/': 'lecturesList',
         '/courses': 'coursesList',
         '/lectures': 'lecturesList',
         // '/courses/create': 'newCourse',
@@ -54,12 +53,7 @@ var App = React.createClass({
                     <LectureView shortUrl={url} />
                 </div>
             );
-	    // var list = this.state.lists.reduce(function(found, list) {
-		   //  if (list.id == id) { return list; }
-		   //  return found;
-	    // });
 
-        // return <TodoList list={list} root={'/lists/' + id}/>;
     },
 
     newCourse: function(){

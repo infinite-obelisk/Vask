@@ -11,6 +11,7 @@ var Playlist = React.createClass({
   },
 
   componentWillReceiveProps: function(nextProps) {
+    // console.log('PLAYLIST RECEIVING PROPS', nextProps);
     if (this.state.playingNow !== nextProps.playingNow) {
       this.setState({
           playingNow: nextProps.playingNow
@@ -20,14 +21,14 @@ var Playlist = React.createClass({
 
   render: function() {
     // console.log('related playlistBox state PROPS',this.props.related);
-    console.log('RELATEDDDDDDDDDDDDDD',this.props);
+    // console.log('RELATEDDDDDDDDDDDDDD',this.props);
     // var self = this;
     
     var rows = [];
     var newState = {};
     if (this.props.related !== undefined) {
       rows = this.props.related.map(function(lect, i){
-        console.log('newState', newState, 'status', lect.wstatus);
+        // console.log('newState', newState, 'status', lect.wstatus);
         return <PlaylistRow 
                   title={lect.title} 
                   thumb={lect.imgUrl} 

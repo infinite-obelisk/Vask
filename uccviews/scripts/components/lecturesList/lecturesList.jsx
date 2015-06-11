@@ -40,7 +40,7 @@ var LecturesList = React.createClass({
 
 
   render: function() {
-    console.log('State of the lectures -->', this.state.lectures);
+    // console.log('State of the lectures -->', this.state.lectures);
     var rows = [];
     if (this.state.lectures !== undefined) {
       rows = this.state.lectures.map(function(lecture, i){

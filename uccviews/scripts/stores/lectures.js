@@ -4,10 +4,12 @@ var Dispatcher        = require('../dispatcher/dispatcher'),
 	EventEmitter      = require('events').EventEmitter,
 	assign            = require('object-assign'),
 	lecturesConstants = require('../constants/lectures'),
+	questionsConstants = require('../constants/questions'),
 	mui               = require('material-ui');
 
 // Define the object that will contain the data (lectures)
 var _lectures;
+var _questions;
 var _courses;
 var _addlecture;
 var _playlist;
@@ -29,6 +31,7 @@ var LecturesStore = assign(EventEmitter.prototype, {
 	},
 
 	addChangeListener:function(callback){
+		console.log('Lectures Listener! invoking cb!', callback);
 	  this.on(CHANGE_EVENT, callback)
 	},
 
@@ -58,6 +61,10 @@ var LecturesStore = assign(EventEmitter.prototype, {
 
 	getLectureInfo: function(){
 		return _lectureInfo;
+	},
+
+	getQuestions: function(){
+	  return _questions;
 	}
 
 });
@@ -66,7 +73,7 @@ var LecturesStore = assign(EventEmitter.prototype, {
 LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
 	// Grab the action
 	var action = payload.action;
-	console.log('NEW DISPATCH!!!', action);
+	// console.log('NEW DISPATCH!!!', action);
 	// Check whether the action can be used by the store
 	switch(action.actionType) {
 		case lecturesConstants.SET_LECTURES:
@@ -84,8 +91,10 @@ LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
 			break;
 		case lecturesConstants.SET_LECTURE_INFO:
 			_lectureInfo = action.info;
-			console.log('_lectureInfo worked!!', _lectureInfo );
 			break;
+		case questionsConstants.SET_QUESTIONS:
+      _questions = action.questions;
+      break;
 	}
 
 	LecturesStore.emitChange();
