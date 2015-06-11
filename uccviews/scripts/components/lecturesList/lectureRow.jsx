@@ -4,14 +4,14 @@ var React = require('react');
 
 var ContentRow = React.createClass({
   render: function() {
-    // console.log('ROW DATA',this.props.data.shortUrl);
+    console.log('ROW DATA',this.props.data);
     var link = "/lectures/" + this.props.data.shortUrl;
     
     return (
       <div className="contentBox row">
           <hr/>
           <div className="col-lg-2 col-md-3 col-sm-4">
-            <img className="ct-thumb thumbnail" src="https://i3.ytimg.com/vi/t7eyMwlgOI0/mqdefault.jpg"/>
+            <img className="ct-thumb thumbnail" src={this.props.data.imgUrl}/>
           </div>
           <div className="col-lg-7 col-md-5">
             <div className="ct-title">
