@@ -15,9 +15,10 @@ var ViewQuestionsList = React.createClass({
   },
 
   render: function(){
+    console.log('this.props.question viewQuestionsList', this.props.questions);
     var questions = lecturesStore.getQuestions();
     var thiz = this;
-    if(questions){
+    if(this.props.questions.length){
       return (<div>
                 {questions.map(function(question){
                   return (<div>
