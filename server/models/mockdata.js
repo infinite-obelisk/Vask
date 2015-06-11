@@ -17,9 +17,9 @@ exports.mockContents = [
     userCount : '35'
   },
   {
-    url: 'https://www.youtube.com/watch?v=TkJ_WgruM2',
-    shortUrl: 'TkJ_WgruM2',
-    imgUrl : 'http://img.youtube.com/vi/TkJ_WgruM2/mqdefault.jpg',
+    url: 'https://www.youtube.com/watch?v=TkJ_WgruM2g',
+    shortUrl: 'TkJ_WgruM2g',
+    imgUrl : 'http://img.youtube.com/vi/TkJ_WgruM2g/mqdefault.jpg',
     title : '2. Experimental Facts of Life',
     subtitle : '',
     description : 'In this lecture, Prof. Adams gives a panoramic view on various experimental evidence that indicates the inadequacy of pre-quantum physics. He concludes the lecture with a short discussion on Bells inequality.',
