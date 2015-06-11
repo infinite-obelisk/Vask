@@ -21,6 +21,13 @@ var ContentForm = React.createClass({
     }
   },
 
+  componentDidMount: function(){
+    $("#new-lecture-course").appendTo($("#new-lecture-course").parent());
+    $("#new-lecture-title").appendTo($("#new-lecture-title").parent());
+    $("#new-lecture-description").parent().appendTo($("#new-lecture-description").parent().parent());
+    $("#new-lecture-url").appendTo($("#new-lecture-url").parent());
+  },
+
   _handleError2InputChange: function(event){
     console.log('Changing');
     console.log('STATE', this.state);
@@ -32,34 +39,38 @@ var ContentForm = React.createClass({
             <div>
               <TextField
                 ref="course"
-                valueLink={this.linkState('course')} 
+                id="new-lecture-course"
+                valueLink={this.linkState('course')}
                 floatingLabelText="Related Course"
-                style={{"width": "95%", "height": "110px"}}
+                style={{"width": "95%"}}
                 errorText={this.state.error2Text}
                 onChange={this._handleError2InputChange}
                 defaultValue="" />
               <TextField
                 ref="title"
-                valueLink={this.linkState('title')} 
+                id="new-lecture-title"
+                valueLink={this.linkState('title')}
                 floatingLabelText="Lecture Title"
-                multiLine={true}
-                style={{"width": "95%", "height": "110px"}}
+                style={{"width": "95%"}}
                 errorText={this.state.error2Text}
                 onChange={this._handleError2InputChange}
-                defaultValue="" />              
+                defaultValue="" />
               <TextField
                 ref="desc"
-                valueLink={this.linkState('desc')} 
+                id="new-lecture-description"
+                valueLink={this.linkState('desc')}
                 floatingLabelText="Lecture Description"
-                style={{"width": "95%", "height": "110px"}}
+                multiLine={true}
+                style={{"width": "95%"}}
                 errorText={this.state.error2Text}
                 onChange={this._handleError2InputChange}
-                defaultValue="" />             
+                defaultValue="" />
               <TextField
                 ref="url"
-                valueLink={this.linkState('url')} 
+                id="new-lecture-url"
+                valueLink={this.linkState('url')}
                 floatingLabelText="Lecture URL"
-                style={{"width": "95%", "height": "110px"}}
+                style={{"width": "95%"}}
                 errorText={this.state.error2Text}
                 onChange={this._handleError2InputChange}
                 defaultValue="" />
