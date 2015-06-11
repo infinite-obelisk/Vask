@@ -7,6 +7,18 @@ var Dispatcher        = require('../dispatcher/dispatcher'),
 	questionsConstants = require('../constants/questions'),
 	mui               = require('material-ui');
 
+// METHODS
+
+function parseDescription(lectures, size){	  
+  var parsed = lectures.map(function(lecture, i){
+  	if (lecture.description.length > size) {
+  		lecture.description = lecture.description.slice(0,size) + "..";
+  	}
+  	return lecture;
+  });
+  return parsed;
+}
+
 // Define the object that will contain the data (lectures)
 var _lectures;
 var _questions;
@@ -77,7 +89,7 @@ LecturesStore.dispatcherToken = Dispatcher.register(function(payload){
 	// Check whether the action can be used by the store
 	switch(action.actionType) {
 		case lecturesConstants.SET_LECTURES:
-			_lectures = action.lectures;
+			_lectures = parseDescription(action.lectures, 235);
 			break;
 		case lecturesConstants.SET_COURSES:
 			_courses = action.courses;
