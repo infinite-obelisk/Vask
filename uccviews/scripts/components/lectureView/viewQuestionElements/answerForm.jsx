@@ -46,7 +46,7 @@ var AnswerForm = React.createClass({
                 hintText="Type your answer here..."
                 ref="answerText"
                 className="answer-form"
-                multiLine={true}
+                multiline={true}
                 style={{"width": "95%"}}/>
               <FlatButton
                 label="Submit"
