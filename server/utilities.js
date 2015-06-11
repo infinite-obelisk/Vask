@@ -13,6 +13,11 @@ exports.createSession = function(request, response, user) {
   });
 };
 
+exports.getUserName = function(request) {
+  if (!request.session || !request.session.user) return 'anonymous';
+  return request.session.user.username;
+}
+
 exports.getUserInfo = function(request, response) {
   // If the user doesn't request any specific info that they need,
   // we'll just send them some the default information that's

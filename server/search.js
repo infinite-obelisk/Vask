@@ -45,17 +45,18 @@ exports.search = function(search, cWords) {
 	var sWords = search.split(' ');
     for (var i = 0; i < sWords.length; i++) {
     	var sword = sWords[i].toLowerCase();
-    	//console.log(sword);
+    	//console.log('searching!!!',sword);
     	for (var a = 0; a < cWords.length; a++) {
     		var content = cWords[a];
     		var weight = content.weight || 1.0;
         content.words = content.words || '';
     		var words = content.words.split(' ');
     		var max = 0;
+        //console.log(weight, '--' ,words);
     		for (var c = 0; c < words.length; c++) {
     			var cword = words[c];
     			//console.log(cword);
-    			var temp = weight * distanceVal( getEditDistance(sword,cword.toLowerCase) / cword.length);
+    			var temp = weight * distanceVal( getEditDistance(sword,cword.toLowerCase()) / cword.length);
     			if (temp > max) max = temp;
 
     		}
@@ -71,4 +72,5 @@ var content = [
   {weight : 0.3, words : 'javascript Hack reactor algorithms'}
 ]
 
-//console.log(exports.search('hack', content));
+//console.log(exports.search('hack', content)
+//console.log('JJ'.toLowerCase());

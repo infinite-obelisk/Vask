@@ -1,6 +1,8 @@
 var url = require('url');
 var Content = require('../models/content');
+var Question = require('../models/question');
 var searchEng = require('../search');
+var mockdata = require('../models/mockdata');
 
 var fakeVideos = [
   {
@@ -41,6 +43,7 @@ var filterContents = function(contents, search, size) {
   size = size || 30;
   // if no search, just return top result, reversing to get latest content first
   if (!search) return contents.reverse().filter(function(c,idx){ return idx < size});
+  //console.log('searching ',search);
   contents.forEach(function(content) {
     var cArr = [];
     cArr.push({ weight : 1.4, words : content.course});
@@ -50,6 +53,7 @@ var filterContents = function(contents, search, size) {
     //console.log(content.rank);
   });
   contents.sort(function(a,b){return b.rank-a.rank});
+  //console.log(contents[0]);
   return contents.filter(function(c,idx){ return idx < size});
 }
 
@@ -183,5 +187,35 @@ exports.getLectureInfo = function (req, res) {
     //console.log(content);
     
   });
+}
 
+exports.addMockData = function (req, res) {
+    mockdata.mockContents.forEach(function(mockC) {
+      var newLecture = new Content(mockC);
+      console.log('saving ', mockC.title);
+      newLecture.save(function(err){
+        if (err) console.log(err);
+      });  
+    })
+
+    mockdata.mockQuestions.forEach(function(mockQ){
+      var newQuestion = Question(mockQ);
+      console.log('saving ', mockQ.title);
+      newQuestion.save(function(err) {
+        if (err) console.log(err);
+      })
+    })
+    res.status(200).send({msg: 'mockdata added'});
+
+}
+
+exports.addMockAnswers = function (req, res) {
+  mockdata.mockAnswers.forEach(function(mockA){
+    var url = mockA.video;
+    delete mockA.video;
+    Question.update({video : url}, {'$push':{'answers': mockA}}, function (err, data){
+      if (err) console.log(err);
+    });  
+  })
+  res.status(200).send({msg: 'mockdata added'});
 }

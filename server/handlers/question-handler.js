@@ -1,13 +1,14 @@
 var url = require('url');
 var Question = require('../models/question');
 var Content = require('../models/content');
+var util = require('../utilities');
 
 exports.addQuestion = function (req, res) {
 	var info = req.body;
   console.log('addQuestion ',info)
 	var newQuestion = new Question({
        video: info.video ,
-       username: info.username,
+       username: util.getUserName(req),
        time: info.time,
        text: info.text,
        title: info.title,
@@ -22,11 +23,14 @@ exports.addQuestion = function (req, res) {
       }
       else {
         console.log('added question');
-        res.status(201).send({msg : 'you posted to the database'});
         Content.update({shortUrl : info.video}, {'$inc':{'questionCount': 1}}, function (err, data){
           if (!err) {
             console.log(err);
           }
+          updateUserCount(info.video, function() {
+            res.status(201).send({msg : 'you posted to the database'});  
+          })
+          
         });
 
       }
@@ -34,10 +38,34 @@ exports.addQuestion = function (req, res) {
 
 };
 
+var updateUserCount = function (shortUrl, callback) {
+  console.log('updateUserCount ', shortUrl);
+  Question.find({video : shortUrl}, function (err, questions) {
+     if (err) console.log(err);
+     if (!err) {
+      var allUser = {};
+      console.log('found questions ', questions.length);
+      questions.forEach(function(question) {
+        allUser[question.userName] = true;
+        question.answers.forEach(function(answer){
+          allUser[answer.userName] = true;
+        })
+      })
+      var c = 0;
+      for (var k in allUser) c++;
+      console.log('alluser ',allUser, c);
+      Content.update({shortUrl : shortUrl}, {userCount : c}, function(){
+        callback();
+      })
+
+     }
+  })
+}
+
 exports.addAnswer = function(req, res) {
   var info = req.body;
-  console.log('adding answer ', info);
-  var answer = { text : info.text, votes : 0, createdAt : new Date().getTime()};
+  var answer = { text : info.text, votes : 0, createdAt : new Date().getTime(), userName : util.getUserName(req)};
+  console.log('adding answer ', answer);
   Question.update({_id : info._id}, {'$push':{'answers': answer}}, function (err, data){
     if (!err) {
       res.status(201).send({msg : 'answered'});
