@@ -9,7 +9,7 @@ var contentSchema = mongoose.Schema({
   description : { type : String},
   course : { type : String },
   courseNum : { type : Number},
-  author : { type : mongoose.Schema.Types.ObjectId },
+  author : { type : String },
   questionCount : { type: Number},
   userCount : { type: Number}
 });

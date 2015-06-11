@@ -53,6 +53,9 @@ app.get('/getlectureinfo', contentHandler.getLectureInfo);
 app.get('/getlectures', contentHandler.getLectures);
 app.get('/getcourses', courseHandler.getCourses);
 
+app.get('/addmockdata', contentHandler.addMockData);
+app.get('/addmockanswers', contentHandler.addMockAnswers);
+
 app.post('/signup', userHandler.signUpUser);
 app.post('/login', userHandler.login);
 app.get('/signup', function(req, res){
@@ -66,13 +69,6 @@ app.get('/testvideo', userHandler.checkUser, function(req, res){
 });
 app.get('/getUserInfo', util.getUserInfo);
 
-// This isn't necessary right now because express.static automatically
-// searches for the index.html file in the specified directory that was
-// passed in as an argument.
-// app.get('/', function(request, response) {
-//   console.log('APP GET');
-//   response.sendFile(__dirname + '/../client/index.html');
-// });
 
 var port = process.env.PORT || 3000;
 app.listen(port, function() {
