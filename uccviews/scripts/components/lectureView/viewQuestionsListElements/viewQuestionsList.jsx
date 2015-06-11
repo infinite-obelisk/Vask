@@ -1,32 +1,25 @@
 var React = require('react'),
     MaterialMixin = require('./../../../mixins/material-ui.js'),
     questionsActions  = require('../../../actions/questions'),
-    questionsStore  = require('../../../stores/questions'),
+    lecturesStore  = require('../../../stores/lectures'),
     ViewQuestionsListItem = require('./viewQuestionsListItem.jsx');
 
 var ViewQuestionsList = React.createClass({
+  
   mixins: [MaterialMixin],
+  
   getInitialState: function(){
     return {
               loaded: false
            };
   },
-  _onChange: function(){
-    this.setState({
-      loaded: true,
-      questions: questionsStore.getQuestions()
-    });
-  },
-  componentDidMount: function(){
-    // Add the listener
-    // We use _ onChange because it's a method
-    questionsStore.addChangeListener(this._onChange);
-  },
+
   render: function(){
+    var questions = lecturesStore.getQuestions();
     var thiz = this;
-    if(this.state.questions){
+    if(questions){
       return (<div>
-                {this.state.questions.map(function(question){
+                {questions.map(function(question){
                   return (<div>
                             <ViewQuestionsListItem
                               votes={question.votes}

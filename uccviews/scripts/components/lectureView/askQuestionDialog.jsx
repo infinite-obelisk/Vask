@@ -5,7 +5,7 @@ var React             = require('react'),
     mui               = require('material-ui'),
     FlatButton        = mui.FlatButton,
     Dialog            = mui.Dialog,
-    lectureActions    = require('../../actions/lectures');
+    questionActions    = require('../../actions/questions');
 
 var AskQuestionDialog = React.createClass({
   mixins: [MaterialMixin],
@@ -32,7 +32,7 @@ var AskQuestionDialog = React.createClass({
       title : window.$('#question-title').val()
     };
     // Send the question to the server
-    lectureActions.addQuestion(question);
+    questionActions.addQuestion(question);
 
     this.clearForm();
     this.closeDialog();
