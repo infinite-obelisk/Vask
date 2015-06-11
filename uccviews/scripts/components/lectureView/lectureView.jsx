@@ -62,7 +62,8 @@ var LectureView = React.createClass({
       loaded: loaded,
       playlist: lecturesStore.getPlaylist(),
       progress: lecturesStore.getPlaylistProgress(),
-      title: lectureInfo.title
+      title: lectureInfo.title,
+      questions: questionStatus
     });
     // console.log('****State update after the playlist!', this.state);
   },
@@ -103,12 +104,7 @@ var LectureView = React.createClass({
     var thiz = this;
     if(!!this.state.questions){
       questions = (<div>
-                    <PopupQuestion
-                      getPlayerState={this.getPlayerState}
-                      getVideoTime={this.getVideoTime}
-                      playerIsLoaded={this.playerIsLoaded}
-                      questions={this.state.questions} />
-                    {this.state.questions.map(function(question){
+                    {this.state.questions.map(function(question, i){
                       return (<ViewQuestionDialog
                                 question={question}
                                 shortUrl={thiz.props.shortUrl}/>);
@@ -119,6 +115,11 @@ var LectureView = React.createClass({
       <div
         className="container-fluid">
           <Loader loaded={this.state.loaded}>
+            <PopupQuestion
+              getPlayerState={this.getPlayerState}
+              getVideoTime={this.getVideoTime}
+              playerIsLoaded={this.playerIsLoaded}
+              questions={this.state.questions} />
             <div className="row">
               <div className="col-lg-8">
                 <div className="lectureTitle"><h2>{this.state.title}</h2></div>
