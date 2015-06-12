@@ -67,7 +67,47 @@ exports.mockContents = [
     author : 'Adams',
     questionCount : '14',
     userCount : '17'
-  }
+  },
+
+  {
+    url: 'https://www.youtube.com/watch?v=GOEPVM5OzJk',
+    shortUrl: 'GOEPVM5OzJk',
+    imgUrl : 'http://img.youtube.com/vi/GOEPVM5OzJk/mqdefault.jpg',
+    title : '1. Developing iOS 8 Apps with Swift',
+    subtitle : '',
+    description : 'Paul Hegarty provides an overview of the series and iOS. In this offering, you will learn how to build cool apps and do real-life Object-Oriented Programming.',
+    course : 'iOS 8',
+    courseNum : '1',
+    author : 'Hegarty',
+    questionCount : '7',
+    userCount : '56'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=QLJtT7eSykg',
+    shortUrl: 'QLJtT7eSykg',
+    imgUrl : 'http://img.youtube.com/vi/QLJtT7eSykg/mqdefault.jpg',
+    title : '2. Developing iOS 8 Apps with Swift',
+    subtitle : '',
+    description : 'Paul Hegarty continues his demo of the Calculator app, and introduces Model-View-Controller (MVC) design.',
+    course : 'iOS 8',
+    courseNum : '2',
+    author : 'Hegarty',
+    questionCount : '6',
+    userCount : '46'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=OJUsghbtbF8',
+    shortUrl: 'OJUsghbtbF8',
+    imgUrl : 'http://img.youtube.com/vi/OJUsghbtbF8/mqdefault.jpg',
+    title : '3. Developing iOS 8 Apps with Swift',
+    subtitle : '',
+    description : 'Paul Hegarty provides a new calculator demo. He demonstrates the application of MVC to the Calculator app.',
+    course : 'iOS 8',
+    courseNum : '3',
+    author : 'Hegarty',
+    questionCount : '5',
+    userCount : '40'
+  },
 
 ];
 
