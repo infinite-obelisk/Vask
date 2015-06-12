@@ -62,6 +62,7 @@ var LectureView = React.createClass({
       playlist: lecturesStore.getPlaylist(),
       progress: lecturesStore.getPlaylistProgress(),
       title: lectureInfo.title,
+      headerTitle: lectureInfo.course,
       questions: questionStatus
     });
     // console.log('****State update after the playlist!', this.state);
@@ -119,6 +120,7 @@ var LectureView = React.createClass({
               getVideoTime={this.getVideoTime}
               playerIsLoaded={this.playerIsLoaded}
               questions={this.state.questions} />
+            <h2 className="header-title">{this.state.headerTitle}</h2>
             <div className="row">
               <div className="col-lg-8">
                 <div className="lectureTitle">

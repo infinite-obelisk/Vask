@@ -20,8 +20,11 @@ var ContentRow = React.createClass({
               </svg>
               <a href={link}>{this.props.data.title}</a>
             </div>
-            <div className="ct-subtitle">{this.props.data.subtitle}</div>
             <div className="ct-description">{this.props.data.description}</div>
+            <div className="ct-subtitle">
+              <span className="lecture-list-sub-key">course: </span>
+              <span className="lecture-list-sub-value">{this.props.data.course}</span>
+            </div>
           </div>
           <div className="col-lg-2 col-md-3 col-sm-4 ct-stats">
             <div className="row">
