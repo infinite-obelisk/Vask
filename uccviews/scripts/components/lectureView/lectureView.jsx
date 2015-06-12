@@ -53,11 +53,10 @@ var LectureView = React.createClass({
     if (playlistStatus !== undefined & questionStatus !== undefined) {
       loaded = true;
     }
-    // console.log('playlistStatus',playlistStatus); 
-    // console.log('progressStatus',progressStatus); 
-    // console.log('questionStatus',questionStatus); 
-    // console.log('loaded',loaded); 
-
+    // console.log('playlistStatus',playlistStatus);
+    // console.log('progressStatus',progressStatus);
+    // console.log('questionStatus',questionStatus);
+    // console.log('loaded',loaded);
     this.setState({
       loaded: loaded,
       playlist: lecturesStore.getPlaylist(),
@@ -122,7 +121,12 @@ var LectureView = React.createClass({
               questions={this.state.questions} />
             <div className="row">
               <div className="col-lg-8">
-                <div className="lectureTitle"><h2>{this.state.title}</h2></div>
+                <div className="lectureTitle">
+                  <h2
+                    style={{"fontFamily": '"Helvetica Neue",Helvetica,Arial,sans-serif'}}>
+                      {this.state.title}
+                  </h2>
+                </div>
                 <div className="box-player">
                   <div
                     className="row">
