@@ -73,10 +73,6 @@ var Voting = React.createClass({
                   className="votes">
                     <span>{this.state.votes}</span>
                 </p>
-                <IconButton
-                  iconClassName="mdi mdi-chevron-down vote-button"
-                  tooltip="Vote Down"
-                  onClick={this.voteDown} />
             </div>
             );
   }
