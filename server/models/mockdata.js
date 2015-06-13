@@ -1,5 +1,34 @@
+var request = require('request');
 
+function addMockVideo(url, course, courseNum, author) {
+  var shortUrl = url.match(/v=([^\/]+)$/)[0];
+  var imgUrl = 'http://img.youtube.com/vi/' + shortUrl + '/mqdefault.jpg';
+  var title;
+  var description;
+  var questionCount = Math.floor(Math.random() * 10) + 3; 
+  var userCount = Math.floor(Math.random() * 60) + 20;
 
+  request('https://www.youtube.com/watch?v=UPDeXCbix3w', function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      title = body.match(/<title>(.+)<\/title>/)[1].match(/^(.+) - YouTube$/)[1];
+      description = body.match(/<p id="eow-description" >(.+)<\/p>/)[1].replace(/<[^>]+>/g, '').replace(/\&[^\;]+\;/g, '');
+    }
+  });
+
+  exports.mockContents.push({
+    url: url,
+    shortUrl: shortUrl,
+    imgUrl: imgUrl,
+    title: title,
+    subtitle: '',
+    description: description,
+    course: course || 'Math',
+    courseNum: courseNum || (Math.floor(Math.random() * 100) + 1),
+    author: author || 'Johnson',
+    questionCount: questionCount,
+    userCount: userCount
+  });
+}
 
 exports.mockContents = [
 
@@ -161,7 +190,7 @@ exports.mockQuestions = [
 
   }
 
-]
+];
 
 
 exports.mockAnswers = [ 
@@ -190,4 +219,5 @@ exports.mockAnswers = [
 
     }
 
-]
+];
+
