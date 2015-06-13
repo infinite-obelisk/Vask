@@ -108,6 +108,32 @@ exports.mockContents = [
     questionCount : '5',
     userCount : '40'
   },
+  {
+    url: 'https://www.youtube.com/watch?v=KSkPE_-gBkc',
+    shortUrl: 'KSkPE_-gBkc',
+    imgUrl : 'http://img.youtube.com/vi/KSkPE_-gBkc/mqdefault.jpg',
+    title : '4. Developing iOS 8 Apps with Swift',
+    subtitle : '',
+    description : 'Paul Hegarty continues his presentation on Swift and then introduces the Foundation Framework.',
+    course : 'iOS 8',
+    courseNum : '4',
+    author : 'Hegarty',
+    questionCount : '6',
+    userCount : '49'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=UPDeXCbix3w',
+    shortUrl: 'UPDeXCbix3w',
+    imgUrl : 'http://img.youtube.com/vi/UPDeXCbix3w/mqdefault.jpg',
+    title : '5. Developing iOS 8 Apps with Swift',
+    subtitle : '',
+    description : 'Paul Hegarty covers Objective-C compatibility and bridging with Swift. He then introduces Property Lists and views.',
+    course : 'iOS 8',
+    courseNum : '5',
+    author : 'Hegarty',
+    questionCount : '4',
+    userCount : '29'
+  },
 
 ];
 
