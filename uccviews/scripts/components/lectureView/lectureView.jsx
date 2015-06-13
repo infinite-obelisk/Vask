@@ -6,8 +6,8 @@ var React               = require('react'),
     lecturesStore       = require('../../stores/lectures'),
     AskQuestionDialog   = require('./askQuestionDialog.jsx'),
     PopupQuestion       = require('./viewQuestionElements/popupQuestion.jsx'),
-    ViewQuestionDialog  = require('./viewQuestionDialog.jsx'),
     ViewQuestionsDialog = require('./viewQuestionsDialog.jsx'),
+    AllQuestionsDialogs = require('./allQuestionsDialogs.jsx'),
     Loader              = require('../loader/loader.jsx'),
     MaterialMixin       = require('../../mixins/material-ui.js'),
     YouTube             = require('react-youtube'),
@@ -102,15 +102,6 @@ var LectureView = React.createClass({
 
     var questions;
     var thiz = this;
-    if(!!this.state.questions){
-      questions = (<div>
-                    {this.state.questions.map(function(question, i){
-                      return (<ViewQuestionDialog
-                                question={question}
-                                shortUrl={thiz.props.shortUrl}/>);
-                    })}
-                    </div>);
-    }
     return (
       <div
         className="container-fluid">
@@ -152,7 +143,8 @@ var LectureView = React.createClass({
                                   stopVideo={this.stopVideo}
                                   getVideoTime={this.getVideoTime}
                                   videoId = {this.props.shortUrl}/>
-                                {questions}
+                                <AllQuestionsDialogs
+                                  shortUrl={this.props.shortUrl} />
                                 <ViewQuestionsDialog
                                   questions={this.state.questions}/>
                               </div>
