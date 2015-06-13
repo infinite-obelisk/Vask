@@ -9,6 +9,7 @@
     "body-parser": "~1.12.3",
     "bookshelf": "^0.8.1",
     "bower": "^1.4.1",
+    "browserify": "^10.2.4",
     "browserify-directory": "^1.0.0",
     "chai": "^2.3.0",
     "cors": "^2.6.0",
@@ -16,7 +17,12 @@
     "express-partials": "~0.3.0",
     "express-session": "^1.11.1",
     "flux": "^2.0.3",
-    "grunt": "^0.4.5",
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-less": "^1.0.1",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-uglify": "^0.9.1",
+    "grunt-contrib-watch": "^0.6.1",
     "grunt-cli": "^0.1.13",
     "grunt-exec": "^0.4.6",
     "gulp": "^3.9.0",
@@ -47,7 +53,7 @@
     "webpack": "^1.9.8"
   },
   "scripts": {
-    "postinstall": "bower install && gulp production"
+    "postinstall": "bower install && gulp production && grunt reactifies"
   },
   "browserify": {
     "transform": [
@@ -64,12 +70,6 @@
     "browserify": "^7.0.3",
     "events": "^1.0.2",
     "flux": "^2.0.3",
-    "grunt": "~0.4.5",
-    "grunt-contrib-jshint": "~0.10.0",
-    "grunt-contrib-less": "^1.0.1",
-    "grunt-contrib-nodeunit": "~0.4.1",
-    "grunt-contrib-uglify": "^0.9.1",
-    "grunt-contrib-watch": "^0.6.1",
     "gulp": "^3.8.10",
     "gulp-notify": "^2.1.0",
     "gulp-shell": "^0.4.2",
