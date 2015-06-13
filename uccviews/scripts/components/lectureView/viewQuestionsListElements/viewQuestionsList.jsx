@@ -5,9 +5,9 @@ var React = require('react'),
     ViewQuestionsListItem = require('./viewQuestionsListItem.jsx');
 
 var ViewQuestionsList = React.createClass({
-  
+
   mixins: [MaterialMixin],
-  
+
   getInitialState: function(){
     return {
               loaded: false
@@ -18,7 +18,10 @@ var ViewQuestionsList = React.createClass({
     console.log('this.props.question viewQuestionsList', this.props.questions);
     var questions = lecturesStore.getQuestions();
     var thiz = this;
-    if(this.props.questions.length){
+    if(questions.length){
+      questions.sort(function(a, b){
+        return b.votes - a.votes;
+      });
       return (<div>
                 {questions.map(function(question){
                   return (<div>
