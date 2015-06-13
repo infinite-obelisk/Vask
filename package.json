@@ -47,7 +47,7 @@
     "webpack": "^1.9.8"
   },
   "scripts": {
-    "postinstall": "bower install && gulp production"
+    "postinstall": "bower install && gulp production && grunt reactifies"
   },
   "browserify": {
     "transform": [
