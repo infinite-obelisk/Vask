@@ -23,6 +23,8 @@ var ViewQuestionsList = React.createClass({
                 {questions.map(function(question){
                   return (<div>
                             <ViewQuestionsListItem
+                              time={question.time}
+                              numAnswers={question.answers.length}
                               votes={question.votes}
                               question={question.title}
                               questionUrl={question.questionUrl}
