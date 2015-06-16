@@ -257,9 +257,9 @@ exports.mockContents = [
     userCount : '46'
   },
   {
-    url: 'https://www.youtube.com/watch?v=BIIWlZqWxKg',
-    shortUrl: 'BIIWlZqWxKg',
-    imgUrl : 'http://img.youtube.com/vi/BIIWlZqWxKg/mqdefault.jpg',
+    url: 'https://www.youtube.com/watch?v=QTb6YsxMbBY',
+    shortUrl: 'QTb6YsxMbBY',
+    imgUrl : 'http://img.youtube.com/vi/QTb6YsxMbBY/mqdefault.jpg',
     title : '4. Agarose Gel Electrophoresis, DNA Sequencing, PCR',
     subtitle : '',
     description : 'Different techniques for agarose gel electrophoresis, DNA sequencing, and PCR.',
