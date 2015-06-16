@@ -189,6 +189,86 @@ exports.mockContents = [
     questionCount : '7',
     userCount : '51'
   },
+  {
+    url: 'https://www.youtube.com/watch?v=9Jry5-82I68',
+    shortUrl: '9Jry5-82I68',
+    imgUrl : 'http://img.youtube.com/vi/9Jry5-82I68/mqdefault.jpg',
+    title : '5. Binary Search Trees, BST Sort',
+    subtitle : '',
+    description : 'In this lecture, binary search trees are introduced, and several operations are covered: insertion, finding a value, finding the minimum element.',
+    course : 'Intro to Algorithms',
+    courseNum : '5',
+    author : 'Devadas',
+    questionCount : '5',
+    userCount : '44'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=FNeL18KsWPc',
+    shortUrl: 'FNeL18KsWPc',
+    imgUrl : 'http://img.youtube.com/vi/FNeL18KsWPc/mqdefault.jpg',
+    title : '6. AVL Trees, AVL Sort',
+    subtitle : '',
+    description : 'This lecture covers AVL trees, including how to insert elements and rebalance the tree, and then discusses the difference between abstract data types and data structures.',
+    course : 'Intro to Algorithms',
+    courseNum : '6',
+    author : 'Devadas',
+    questionCount : '11',
+    userCount : '80'
+  },
+
+  // Fundamentals of Biology --------------------------------------------------
+  {
+    url: 'https://www.youtube.com/watch?v=TnpCMgtDPgk',
+    shortUrl: 'TnpCMgtDPgk',
+    imgUrl : 'http://img.youtube.com/vi/TnpCMgtDPgk/mqdefault.jpg',
+    title : '1. Alternative Approaches to Molecular Biology',
+    subtitle : '',
+    description : 'Fundamentals of Biology focuses on the basic principles of biochemistry, molecular biology, genetics, and recombinant DNA. These principles are necessary to understanding the basic mechanisms of life and anchor the biological knowledge that is required to understand many of the challenges in everyday life, from human health and disease to loss of biodiversity and environmental quality.',
+    course : 'Fundamentals of Biology',
+    courseNum : '1',
+    author : 'Lander',
+    questionCount : '12',
+    userCount : '113'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=1eGsdK1fPLM',
+    shortUrl: '1eGsdK1fPLM',
+    imgUrl : 'http://img.youtube.com/vi/1eGsdK1fPLM/mqdefault.jpg',
+    title : '2. Macromolecules: Lipids, Carbohydrates, Nucleic Acid',
+    subtitle : '',
+    description : 'We focus on macromolecules and delve into the specifics of lipids, carbohydrates, and nucleic acid.',
+    course : 'Fundamentals of Biology',
+    courseNum : '2',
+    author : 'Lander',
+    questionCount : '11',
+    userCount : '94'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=BIIWlZqWxKg',
+    shortUrl: 'BIIWlZqWxKg',
+    imgUrl : 'http://img.youtube.com/vi/BIIWlZqWxKg/mqdefault.jpg',
+    title : '3. Constructing and Screening a Recombinant DNA Library',
+    subtitle : '',
+    description : 'This lecture takes us through a demo of how to accomplish constructing and screening a recombinant DNA library.',
+    course : 'Fundamentals of Biology',
+    courseNum : '3',
+    author : 'Lander',
+    questionCount : '2',
+    userCount : '46'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=BIIWlZqWxKg',
+    shortUrl: 'BIIWlZqWxKg',
+    imgUrl : 'http://img.youtube.com/vi/BIIWlZqWxKg/mqdefault.jpg',
+    title : '4. Agarose Gel Electrophoresis, DNA Sequencing, PCR',
+    subtitle : '',
+    description : 'Different techniques for agarose gel electrophoresis, DNA sequencing, and PCR.',
+    course : 'Fundamentals of Biology',
+    courseNum : '4',
+    author : 'Lander',
+    questionCount : '3',
+    userCount : '41'
+  },
 ];
 
 exports.mockQuestions = [
