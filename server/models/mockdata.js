@@ -1,34 +1,5 @@
-var request = require('request');
 
-function addMockVideo(url, course, courseNum, author) {
-  var shortUrl = url.match(/v=([^\/]+)$/)[0];
-  var imgUrl = 'http://img.youtube.com/vi/' + shortUrl + '/mqdefault.jpg';
-  var title;
-  var description;
-  var questionCount = Math.floor(Math.random() * 10) + 3; 
-  var userCount = Math.floor(Math.random() * 60) + 20;
 
-  request('https://www.youtube.com/watch?v=UPDeXCbix3w', function(error, response, body) {
-    if (!error && response.statusCode === 200) {
-      title = body.match(/<title>(.+)<\/title>/)[1].match(/^(.+) - YouTube$/)[1];
-      description = body.match(/<p id="eow-description" >(.+)<\/p>/)[1].replace(/<[^>]+>/g, '').replace(/\&[^\;]+\;/g, '');
-    }
-  });
-
-  exports.mockContents.push({
-    url: url,
-    shortUrl: shortUrl,
-    imgUrl: imgUrl,
-    title: title,
-    subtitle: '',
-    description: description,
-    course: course || 'Math',
-    courseNum: courseNum || (Math.floor(Math.random() * 100) + 1),
-    author: author || 'Johnson',
-    questionCount: questionCount,
-    userCount: userCount
-  });
-}
 
 exports.mockContents = [
 
@@ -170,7 +141,7 @@ exports.mockQuestions = [
   {
     video: 'lMFgfqRZYoc',
     username: 'Steve',
-    time: 40,
+    time: 21,
     title : 'Is eigenvector similar to eigenfunction?',
     text: 'I got what eigenfunction is, but what is exactly eigenvector?',
     votes: 12,
@@ -180,8 +151,19 @@ exports.mockQuestions = [
   },
   {
     video: 'lMFgfqRZYoc',
+    username: 'Martin',
+    time: 12,
+    title : 'How is a system defined by a wave function?',
+    text: 'Any explaination please.',
+    votes: 6,
+    createdAt : 1433997590628,
+    answers : []
+
+  },
+  {
+    video: 'lMFgfqRZYoc',
     username: 'John',
-    time: 50,
+    time: 30,
     title : 'Why is the Schroedinger Wave Equation deterministic?',
     text: 'He stated that Schroedinger Wave Equation is deterministic.  I am cautious about accepting that but I would like to hear more about how it is deterministic.',
     votes: 7,
