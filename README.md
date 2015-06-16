@@ -2,9 +2,12 @@
 
 Vask is an educational video platform that allows viewers to ask questions while watching video lectures.
 
-1. [About](#Usage)
-1. [Demo](#Demo)
-1. [About](#About)
+# Summary
+
+1. [Intro](#vask)
+1. [Summary](#semo)
+1. [Demo](#demo)
+1. [About](#about)
     1. [Installing Dependencies](#installing-dependencies)
     1. [Start the server](#start-the-server)
     1. [Routes](#start-the-server)
@@ -56,36 +59,36 @@ gulp compile
 
 > Application routes:
 
-/addquestion
-  creates a new question in the database related to the user
-/addlecture
-  creates a new lecture in the database
-/addanswer
-  creates a new answer to a question
-/votequestion
-  increases the rank of a particular question
-/voteanswer
-  increases the rank of a particular answer
-/getquestions
-  returns an object with all questions and couple other infos
-/getrelated
-  this route is used the get the related lectures to a particular lecture. The playlist uses thos route to define the sequence of contents
-/getlectureinfo
-  return an object with a complete set information of a particular lecture, for instance, the lecture view uses this route to define the title of the lecture.
-/getlectures
-  returns an object that contains an array with all the lectures that belongs to a particular user.
-/getcourses
-  returns an array with all trhe courses
-/addmockdata
-  creates a mock data for the lectures list view. Demo purpose.
-/addmockanswers
-  creates a mock data for the answers of a lecture. Demo purpose.
-/getUserInfo
-  returns the user information
-/signup
-  add new user
-/login
-  perform user authentication
+- **/addquestion**
+    - creates a new question in the database related to the user
+- **/addlecture**
+    -  creates a new lecture in the database
+- **/addanswer**
+    -  creates a new answer to a question
+- **/votequestion**
+    - increases the rank of a particular question
+- **/voteanswer**
+    - increases the rank of a particular answer
+- **/getquestions**
+    - returns an object with all questions and couple other infos
+- **/getrelated**
+    - this route is used the get the related lectures to a particular lecture. The playlist uses thos route to define the sequence of contents
+- **/getlectureinfo**
+    - return an object with a complete set information of a particular lecture, for instance, the lecture view uses this route to define the title of the lecture.
+- **/getlectures**
+    - returns an object that contains an array with all the lectures that belongs to a particular user.
+- **/getcourses**
+    - returns an array with all trhe courses
+- **/addmockdata**
+    - creates a mock data for the lectures list view. Demo purpose.
+- **/addmockanswers**
+    - creates a mock data for the answers of a lecture. Demo purpose.
+- **/getUserInfo**
+    - returns the user information
+- **/signup**
+    - add new user
+- **/login**
+    - perform user authentication
 
 ## Requirements
 
