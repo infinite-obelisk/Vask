@@ -14,7 +14,7 @@ Vask is an educational video platform that allows viewers to ask questions while
 
 # Demo
 
-![Alt text](http://gph.is/1GptwnR "Vask Demo")
+![demo](docs/vask_demo.gif)
 
 # About
 Viewers are able to see and answer all questions. The questions are not only related to the videos in general, but tied to a defined moment inside the video, allowing for questions to pop up for other users as they watch the video. Students can then view answers for that question or answer it themselves.
