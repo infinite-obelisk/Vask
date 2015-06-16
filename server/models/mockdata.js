@@ -2,7 +2,7 @@
 
 
 exports.mockContents = [
-
+  // Quantum Physics ----------------------------------------------------------
   {
     url: 'https://www.youtube.com/watch?v=lZ3bPUKo5zc',
     shortUrl: 'lZ3bPUKo5zc',
@@ -69,6 +69,7 @@ exports.mockContents = [
     userCount : '17'
   },
 
+  // iOS 8 --------------------------------------------------------------------
   {
     url: 'https://www.youtube.com/watch?v=GOEPVM5OzJk',
     shortUrl: 'GOEPVM5OzJk',
@@ -135,6 +136,59 @@ exports.mockContents = [
     userCount : '29'
   },
 
+  // Intro to Algorithms ------------------------------------------------------
+  {
+    url: 'https://www.youtube.com/watch?v=HtSuA80QTyo',
+    shortUrl: 'HtSuA80QTyo',
+    imgUrl : 'http://img.youtube.com/vi/HtSuA80QTyo/mqdefault.jpg',
+    title : '1. Algorithmic Thinking, Peak Finding',
+    subtitle : '',
+    description : 'Introduction to Algorithms, Fall 2011. Srini Devadas introduces key ideas in algorithms and some crucial findings in algorithms that have shaped the world.',
+    course : 'Intro to Algorithms',
+    courseNum : '1',
+    author : 'Devadas',
+    questionCount : '6',
+    userCount : '54'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=Zc54gFhdpLA',
+    shortUrl: 'Zc54gFhdpLA',
+    imgUrl : 'http://img.youtube.com/vi/Zc54gFhdpLA/mqdefault.jpg',
+    title : '2. Models of Computation, Document Distance',
+    subtitle : '',
+    description : 'This lecture describes an algorithm as a computational procedure to solve a problem, covers the random access machine and pointer models of computation, and introduces the document distance problem.',
+    course : 'Intro to Algorithms',
+    courseNum : '2',
+    author : 'Devadas',
+    questionCount : '8',
+    userCount : '58'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=Kg4bqzAqRBM',
+    shortUrl: 'Kg4bqzAqRBM',
+    imgUrl : 'http://img.youtube.com/vi/Kg4bqzAqRBM/mqdefault.jpg',
+    title : '3. Insertion Sort, Merge Sort',
+    subtitle : '',
+    description : 'Sorting is introduced, and motivated by problems that become easier once the inputs are sorted. The lecture covers insertion sort, then discusses merge sort and analyzes its running time using a recursion tree.',
+    course : 'Intro to Algorithms',
+    courseNum : '3',
+    author : 'Devadas',
+    questionCount : '9',
+    userCount : '79'
+  },
+  {
+    url: 'https://www.youtube.com/watch?v=B7hVxCmfPtM',
+    shortUrl: 'B7hVxCmfPtM',
+    imgUrl : 'http://img.youtube.com/vi/B7hVxCmfPtM/mqdefault.jpg',
+    title : '4. Heaps and Heap Sort',
+    subtitle : '',
+    description : 'Priority queues are introduced as a motivation for heaps. The lecture then covers heap operations and concludes with a discussion of heapsort.',
+    course : 'Intro to Algorithms',
+    courseNum : '4',
+    author : 'Devadas',
+    questionCount : '7',
+    userCount : '51'
+  },
 ];
 
 exports.mockQuestions = [
