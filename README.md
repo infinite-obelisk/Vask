@@ -100,8 +100,8 @@ gulp compile
 
 ## Team
 
-  - __Product Owner__: Bryan
-  - __Scrum Master__: Kir
-  - __Frontend Development Lead__: Elvio Cavalcante 
-  - __Backend Development Lead__: David 
+  - __Product Owner__: [Bryan Jennings](https://github.com/bryanjenningz)
+  - __Scrum Master__: [Kirstin "Kir" Jarchow](https://github.com/MyNameIsKir)
+  - __Frontend Development Lead__: [Elvio Cavalcante](https://github.com/elviocb)
+  - __Backend Development Lead__: [David Kiesewetter](https://github.com/Webtation)
 
