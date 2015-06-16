@@ -25,7 +25,7 @@ Viewers are able to see and answer all questions. The questions are not only rel
 In an educational environment, an instructor can check up on students' questions and gauge their understanding of the content.
 It is benefical for all students to see what questions other students had while watching the same lecture. Reflecting and understanding questions and answers around a certain topic solidifies students' understanding of the subject matter.
 
-# How it works (from a technical point of view):
+# How it works:
 
 When a user is posting a new question, they make a POST to '/addquestion'.
 The user sends the question's video, video time, question text, and the username for the user who posted the question.
